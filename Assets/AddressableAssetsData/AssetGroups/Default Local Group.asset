@@ -375,6 +375,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65c4ef0f6df8f9442b5f69837100df20
+    m_Address: Assets/Objects/PuzzlePieces/SkinDB/27-Trippp/tripppGameplay.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 671d4fd9b305b7740bb144a7ee4a3d18
     m_Address: Assets/Objects/LegacyObjectsDONOTDELETE/env/actionGameAssets/SkythianCat/Hand_Painted_Nature_Kit_LITE/Meshes/Fern01.fbx
     m_ReadOnly: 0
@@ -415,6 +420,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 796f28bab45c49b4db9a1ea93677f9b8
     m_Address: Assets/Objects/PuzzlePieces/AssetModels/enemies/LavaMonster/ground_0027_ao_2k.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79b68a1d962a7b2489b4d08615cfdc39
+    m_Address: Assets/Objects/PuzzlePieces/SkinDB/27-Trippp/TripppFurMat.mat
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -765,6 +775,11 @@ MonoBehaviour:
   - m_GUID: f7f18dab1b893b34195121f0e7421bee
     m_Address: Assets/Objects/LegacyObjectsDONOTDELETE/env/Low Poly Environment Starter
       Kit/Source/Meshes/Rocks/Stone_7.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc18edcb8ff620448b11b173d1520ead
+    m_Address: Assets/Objects/PuzzlePieces/SkinDB/27-Trippp/trippp_fur_texture_v2.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
