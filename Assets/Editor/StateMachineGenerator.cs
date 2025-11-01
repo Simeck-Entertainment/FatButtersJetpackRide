@@ -23,7 +23,7 @@ namespace FSMGen
         string IdleSubStateText;
         string[] TemplateTexts;
 
-        [MenuItem("Tools/Create Finite State Machine")]
+        [MenuItem("FatButters Tools/Create Finite State Machine")]
         // Start is called before the first frame update
         public static void ShowStateMachineWindow(){
             GetWindow<StateMachineGenerator>("State Machine Generator");
