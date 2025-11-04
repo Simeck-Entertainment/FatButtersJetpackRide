@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FatButtersData
   m_EditorClassIdentifier: 
   BONES: 2
-  fuelUpgradeLevel: 2
+  fuelUpgradeLevel: 100
   thrustUpgradeLevel: 1
   treatsUpgradeLevel: 1
   HASBALL: 0
@@ -28,4 +28,4 @@ MonoBehaviour:
   OnScreenControlsEnabled: 0
   GraphicsQualityLevel: 1
   GameplayTestingMode: 0
-  ignoreSaveData: 0
+  ignoreSaveData: 1
