@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ccd4e9f7ad441a468400994f0d7db6e, type: 3}
   m_Name: FatButtersData
   m_EditorClassIdentifier: 
-  BONES: 5
+  BONES: 2
   fuelUpgradeLevel: 100
-  thrustUpgradeLevel: 10
+  thrustUpgradeLevel: 1
   treatsUpgradeLevel: 1
   HASBALL: 0
   killAds: 0
-  LevelBeaten: 010000000000000000000000000000000000000000
+  LevelBeaten: 010100000000000000000000000000000000000000
   CurrentSkin: 0
   HaveSkins: 01000000000000
   MasterVolumeLevel: 1
-  MusicVolumeLevel: 0.80999994
-  SFXVolumeLevel: 0.80999994
+  MusicVolumeLevel: 0.43046713
+  SFXVolumeLevel: 0.43046713
   HapticsEnabled: 0
   OnScreenControlsEnabled: 0
-  GraphicsQualityLevel: 0
+  GraphicsQualityLevel: 1
   GameplayTestingMode: 0
-  ignoreSaveData: 0
+  ignoreSaveData: 1
