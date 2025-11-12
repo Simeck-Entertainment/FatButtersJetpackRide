@@ -3,13 +3,14 @@ using UnityEngine;
 public class GasMeter : MonoBehaviour
 {
     [SerializeField] Rigidbody playerRigidbody;
-
-
+    [SerializeField] CorgiEffectHolder corgiEffectHolder;
     public float movementThreshold = 0.1f;  // Minimum velocity to be considered "moving"
     public float idleTimeLimit = 5f;        // Time (in seconds) before declaring "No movement"
 
     private float idleTimer = 0f;
     private bool isMoving = true;
+    [SerializeField] AudioSource growlAudioSource;
+    [SerializeField] AudioClip growlAudioClip;
 
     void FixedUpdate()
     {
@@ -35,7 +36,15 @@ public class GasMeter : MonoBehaviour
             {
                 Debug.Log("No movement");
                 playerRigidbody.GetComponent<Player>().fuel += 0.5f;
-                isMoving = false;
+                if (isMoving)
+                {
+                    growlAudioSource.clip = growlAudioClip;
+                    growlAudioSource.Play();
+                    corgiEffectHolder.StartMinusRotParticles();
+                    corgiEffectHolder.StartPlusRotParticles();
+                    isMoving = false;
+                }
+
             }
         }
     }
