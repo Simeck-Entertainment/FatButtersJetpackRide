@@ -385,6 +385,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 680b1a00f4f93c0419997ae8a4857522
+    m_Address: Assets/Objects/PuzzlePieces/prefabs/enemies/bears/SegwayBear.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6981df3e4d2272c459d81be89c700a2b
     m_Address: Assets/Objects/PuzzlePieces/AssetModels/Desert Village/Models/Cliffs
       and Rocks/Cliffs_3_Desert_Village.fbx
