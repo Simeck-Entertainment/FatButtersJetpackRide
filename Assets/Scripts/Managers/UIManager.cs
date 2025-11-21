@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.Mathematics;
 
 public class UIManager : MonoBehaviour
 {
@@ -158,19 +159,25 @@ public class UIManager : MonoBehaviour
     #region fuelStuff
     void fuelManager()
     {
+        
         //fuelGuage.m_FillAmount = player.fuel/player.maxFuel;
         fuelGuage.fillAmount = player.fuel / player.maxFuel;
         if (fuelGuage.fillAmount > 0.5f)
         {
+            fuelGuage.color = Color.Lerp(Color.white, Color.black, 0); // alpha PingPong.
+
             fuelGuage.sprite = FuelGuageColors[0];
         }
         if (fuelGuage.fillAmount <= 0.5f & fuelGuage.fillAmount > 0.25f)
         {
+             fuelGuage.color = Color.Lerp(Color.white, Color.black, 0); // alpha PingPong.
             fuelGuage.sprite = FuelGuageColors[1];
         }
         if (fuelGuage.fillAmount <= 0.25f)
         {
             fuelGuage.sprite = FuelGuageColors[2];
+            fuelGuage.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, .3f)); // alpha PingPong.
+
         }
 
     }
