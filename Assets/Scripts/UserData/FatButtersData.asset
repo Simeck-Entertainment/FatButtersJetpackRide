@@ -15,11 +15,11 @@ MonoBehaviour:
   BONES: 2
   fuelUpgradeLevel: 100
   thrustUpgradeLevel: 1
-  treatsUpgradeLevel: 1
+  treatsUpgradeLevel: 10
   HASBALL: 0
   killAds: 0
   LevelBeaten: 010100000000000000000000000000000000000000
-  CurrentSkin: 0
+  CurrentSkin: 1
   HaveSkins: 01000000000000
   MasterVolumeLevel: 1
   MusicVolumeLevel: 0.43046713
