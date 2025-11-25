@@ -26,6 +26,7 @@ public class InputDriver : MonoBehaviour
     public bool hasGyro;
     Quaternion referenceRotation = Quaternion.identity;
     [SerializeField] private bool touchThrust;
+    [SerializeField] public int touchCount;
 
     [Header("Gamepad/Keyboard input variables")]
     //Keyboard variables
@@ -53,6 +54,7 @@ public class InputDriver : MonoBehaviour
     void Start(){
         touched = false;
         gyroInitialized = false;
+        touchCount = 0;
         OSthrustAction.Enable();
         OSCWAction.Enable();
         OSCCWAction.Enable();
@@ -82,7 +84,8 @@ public class InputDriver : MonoBehaviour
         inputEnabled = false;
     }
     private bool FilterTouchInput(){
-        if(Input.touchCount == 0){return false;} //Don't run thrust if untouched
+        touchCount = Input.touchCount;
+        if(touchCount == 0){return false;} //Don't run thrust if untouched
         if(Time.timeScale == 0.0f){return false;} //Don't run thrust if paused
         //if (OSthrustAction.ReadValue<float>() == 1.0f){ return false;} //Don't run Thrust if on screen thrust is touched
         if (OSCWAction.ReadValue<float>() == 1.0f & Input.touchCount == 1){return false;} //Don't run thrust if only on screen CW is touched
