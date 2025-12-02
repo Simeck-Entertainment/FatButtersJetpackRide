@@ -16,13 +16,13 @@ public class Switch : MonoBehaviour
     private bool IsTimer => switchType == SwitchType.Timer;
 
     [SerializeField, ShowIf("IsTimer")] private float timer;
-    
+
     [SerializeField] private UnityEvent onSwitchActivated;
     [SerializeField, ShowIf("IsTimer")] private UnityEvent onSwitchDeactivated;
 
     private bool isActivated;
     private Coroutine timerCoroutine;
-  
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -79,5 +79,5 @@ public class Switch : MonoBehaviour
         Deactivate();
         timerCoroutine = null;
     }
-   
+
 }
