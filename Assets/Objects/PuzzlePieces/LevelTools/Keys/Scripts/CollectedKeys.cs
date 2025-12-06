@@ -6,6 +6,6 @@ public class CollectedKeys : MonoBehaviour
     [SerializeField] CollectibleData collectibleData;
     public void AddKey(int key)
     {
-        collectibleData.SetCollectedKeys(key);
+        collectibleData.Keys += key;
     }
 }

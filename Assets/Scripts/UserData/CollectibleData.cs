@@ -21,6 +21,9 @@ public class CollectibleData : ScriptableObject
     public bool HapticsEnabled;
     public bool OnScreenControlsEnabled;
     public int GraphicsQualityLevel;
+
+    [Header("In-level collectible Counters")]
+    public int Keys;
     
     [Header("Dev Options")]
     public bool GameplayTestingMode;
