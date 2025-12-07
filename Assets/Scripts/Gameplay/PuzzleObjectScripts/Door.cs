@@ -58,12 +58,12 @@ public class Door : MonoBehaviour
         counter = 0;
     }
 
-    void instaClose()
+    public void instaClose()
     {
         plusZPivot.rotation = Quaternion.Euler(Vector3.zero);
         minusZPivot.rotation = Quaternion.Euler(Vector3.zero);
     }
-    void instaOpen()
+    public void instaOpen()
     {
         pickTransform().rotation = pickDirection();
     }
