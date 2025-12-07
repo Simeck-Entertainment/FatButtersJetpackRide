@@ -45,13 +45,22 @@ public class Door : MonoBehaviour
         goalRot = 90.0f;
         ResetCounter();
     }
+    public void Open(float newTime)
+    {
+        openCloseTime = newTime;
+        Open();
+    }
 
     public void Close()
     {
         timedOpenCloseStartRot = pickTransform().rotation.eulerAngles.y;
         goalRot = 0.0f;
         ResetCounter();
-
+    }
+    public void Close(float newTime)
+    {
+        openCloseTime = newTime;
+        Close();
     }
     void ResetCounter()
     {
