@@ -8,8 +8,8 @@ public class KissyFish : MonoBehaviour
     [SerializeField] public KissyFishStateMachine stateMachine;
     [SerializeField] public Rigidbody rb;
     public KissyFishFlyState kissyFishFlyState { get; private set; }
-    public KissyFishCollideWIthPlayerState kissyFishCollideWIthPlayerState {get; private set;}
-    public KissyFishFlopState kissyFishFlopState  {get; private set;}
+    public KissyFishCollideWIthPlayerState kissyFishCollideWIthPlayerState { get; private set; }
+    public KissyFishFlopState kissyFishFlopState { get; private set; }
     //public Collider waterCollider;
 
     [SerializeField] public AudioSource fishAudio;
@@ -21,6 +21,7 @@ public class KissyFish : MonoBehaviour
     public bool touchedWater;
     public int lifeTime;
     int lifeTimeCounter;
+    public Player player;
 
 
     // Start is called before the first frame update
@@ -32,25 +33,36 @@ public class KissyFish : MonoBehaviour
         kissyFishCollideWIthPlayerState = new KissyFishCollideWIthPlayerState(this, stateMachine);
         kissyFishFlopState = new KissyFishFlopState(this, stateMachine);
         stateMachine.Initialize(kissyFishFlyState);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         lifeTimeCounter++;
-        if(lifeTimeCounter>lifeTime){
+        if (lifeTimeCounter > lifeTime)
+        {
             Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter(Collision other) {
-        switch(other.gameObject.tag){
+    private void OnCollisionEnter(Collision other)
+    {
+        switch (other.gameObject.tag)
+        {
             case "Water":
                 stateMachine.changeState(kissyFishFlopState);
                 //touchedWater = true;
                 break;
             case "Player":
                 stateMachine.changeState(kissyFishFlopState);
+
+                other.gameObject.GetComponent<Player>().playerHurtState.PlayerHurtKissyFish();
+                Destroy(this.gameObject);
+
+
+
+
                 break;
             default:
                 stateMachine.changeState(kissyFishFlopState);
