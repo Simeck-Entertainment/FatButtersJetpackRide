@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public abstract class Model : MonoBehaviour
 {
-    public UnityEvent OnModelChanged = new UnityEvent();
+    public UnityEvent OnModelChanged { get; set; } = new UnityEvent();
 
     protected void Refresh()
     {
