@@ -20,4 +20,14 @@ public class SettingsMenuModel : Model
     {
         CollectibleData.SFXVolumeLevel = value * VolumeMultiplier;
     }
+
+    public void ToggleHaptics(bool value)
+    {
+        CollectibleData.HapticsEnabled = value;
+    }
+
+    public void ToggleOnScreenControls(bool value)
+    {
+        CollectibleData.OnScreenControlsEnabled = value;
+    }
 }
