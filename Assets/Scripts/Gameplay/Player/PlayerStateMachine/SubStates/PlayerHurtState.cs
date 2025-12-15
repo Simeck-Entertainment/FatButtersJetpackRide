@@ -21,6 +21,19 @@ public class PlayerHurtState : PlayerAliveState
         PlayAnim(hurtAnims[Random.Range(0, 2)]);
         base.enter();
     }
+    public void PlayerHurtKissyFish()
+    {
+        stateAge = 0;
+        player.tummy -= player.HarmfulDamageAmount;
+        if (player.tummy <= 0.0f)
+        {
+            player.stateMachine.changeState(player.playerTummyDeathState);
+        }
+        player.UI.ActivateHurt();
+
+        PlayAnim(hurtAnims[Random.Range(0, 2)]);
+           base.enter();
+    }
 
     public override void Update(){
         base.Update();

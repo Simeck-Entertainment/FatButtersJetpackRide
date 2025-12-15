@@ -14,8 +14,13 @@ public class KissyFishSpawner : MonoBehaviour
     bool spawnFrame;
     [SerializeField] public int spawnChance;
     [SerializeField] public int maxSpawnedFish;
+
+    [Range(20,25)]
+    [SerializeField] public int maxUpForce;
+    int minUpForce = 21;
     Vector3 currentSpawnPoint;
     GameObject thisFish;
+    
 
     List<KissyFish> spawnedFish;
     // Start is called before the first frame update
@@ -55,6 +60,8 @@ public class KissyFishSpawner : MonoBehaviour
         float modifier = Random.Range(spawnPoint.position.x-spawnWidth,spawnPoint.position.x+spawnWidth);
         //Instantiating the fish.
         thisFish = Instantiate(fish,spawnPoint);
+  
+
         //populating data that is consistent upon all fish.
         KissyFish kf = thisFish.GetComponent<KissyFish>();
         spawnedFish.Add(kf);
@@ -63,6 +70,9 @@ public class KissyFishSpawner : MonoBehaviour
         thisFish.transform.position = new Vector3(modifier,spawnPoint.transform.position.y,spawnPoint.position.z);
         kf.ApexTargetCoords = new Vector3(spawnPowerBox.position.x+modifier,spawnPowerBox.position.y,spawnPowerBox.position.z);
         //be free, my pretties!
+        thisFish.GetComponent<Rigidbody>().AddForce( Vector3.up * Random.Range(minUpForce,maxUpForce), ForceMode.Impulse);
+        // var targetRotation = Quaternion.Euler(0, -90, 0); 
+        //        thisFish.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1);
 
 
         

@@ -51,6 +51,8 @@ public class KissyFish : MonoBehaviour
                 break;
             case "Player":
                 stateMachine.changeState(kissyFishFlopState);
+                other.gameObject.GetComponent<Player>().playerHurtState.PlayerHurtKissyFish();
+                Destroy(this.gameObject);
                 break;
             default:
                 stateMachine.changeState(kissyFishFlopState);
