@@ -33,6 +33,13 @@ public class SettingsMenuModel : Model
         Save();
     }
 
+    public void SetGraphicsSettings(int index)
+    {
+        QualitySettings.SetQualityLevel(index);
+        CollectibleData.GraphicsQualityLevel = index;
+        saveManager.Save();
+    }
+
     public void ToggleHaptics(bool value)
     {
         CollectibleData.HapticsEnabled = value;
