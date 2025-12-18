@@ -99,3 +99,6 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Unity Package Manager user settings
+/[Pp]roject[Ss]ettings/[Pp]ackages/
