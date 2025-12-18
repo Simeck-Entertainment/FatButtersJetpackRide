@@ -2,12 +2,12 @@
 {
     protected override void OnDropdownChanged(int index)
     {
-        Model.SetGraphicsSettings(index);
+        Model.GraphicsQuality = index;
     }
 
     protected override void OnModelChanged()
     {
         base.OnModelChanged();
-        Dropdown.value = Model.CollectibleData.GraphicsQualityLevel;
+        Dropdown.value = Model.GraphicsQuality;
     }
 }
