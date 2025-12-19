@@ -1,5 +1,4 @@
-﻿
-public class ShowOnAdSettingsPage : HideableViewModel<SettingsMenuModel>
+﻿public class ShowOnAdSettingsPage : HideableViewModel<SettingsMenuModel>
 {
     protected override bool IsVisible()
     {

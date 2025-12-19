@@ -116,6 +116,58 @@ public class SettingsMenuModel : Model
         }
     }
 
+    public bool LevelSelectAdsEnabled
+    {
+        get
+        {
+            return saveManager.userInfo.LevelSelectBanners;
+        }
+        set
+        {
+            saveManager.userInfo.LevelSelectBanners = value;
+            Save();
+        }
+    }
+
+    public bool PauseMenuAdsEnabled
+    {
+        get
+        {
+            return saveManager.userInfo.PauseMenuBanners;
+        }
+        set
+        {
+            saveManager.userInfo.PauseMenuBanners = value;
+            Save();
+        }
+    }
+
+    public bool PostLevelAdsEnabled
+    {
+        get
+        {
+            return saveManager.userInfo.InterstitialToggle;
+        }
+        set
+        {
+            saveManager.userInfo.InterstitialToggle = value;
+            Save();
+        }
+    }
+
+    public bool BoneDoublerVideoAdsEnabled
+    {
+        get
+        {
+            return saveManager.userInfo.BoneDoublerToggle;
+        }
+        set
+        {
+            saveManager.userInfo.BoneDoublerToggle = value;
+            Save();
+        }
+    }
+
     #endregion
 
     private void Start()
