@@ -1,4 +1,4 @@
-﻿public class ShowWhenPauseMenuAdsEnabled : HideableViewModel<SettingsMenuModel>
+﻿public class ShowWhenPauseMenuAdsEnabledViewModel : HideableViewModel<SettingsMenuModel>
 {
     protected override bool IsVisible()
     {

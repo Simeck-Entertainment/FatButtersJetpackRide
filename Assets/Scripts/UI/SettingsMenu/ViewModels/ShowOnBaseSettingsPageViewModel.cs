@@ -1,4 +1,4 @@
-﻿public class ShowOnBaseSettingsPage : HideableViewModel<SettingsMenuModel>
+﻿public class ShowOnBaseSettingsPageViewModel : HideableViewModel<SettingsMenuModel>
 {
     protected override bool IsVisible()
     {

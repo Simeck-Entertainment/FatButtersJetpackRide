@@ -1,4 +1,4 @@
-﻿public class ShowWhenBoneDoublerVideoAdsEnabled : HideableViewModel<SettingsMenuModel>
+﻿public class ShowWhenBoneDoublerVideoAdsEnabledViewModel : HideableViewModel<SettingsMenuModel>
 {
     protected override bool IsVisible()
     {

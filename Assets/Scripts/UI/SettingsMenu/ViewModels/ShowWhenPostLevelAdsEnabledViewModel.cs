@@ -1,4 +1,4 @@
-﻿public class ShowWhenPostLevelAdsEnabled : HideableViewModel<SettingsMenuModel>
+﻿public class ShowWhenPostLevelAdsEnabledViewModel : HideableViewModel<SettingsMenuModel>
 {
     protected override bool IsVisible()
     {
