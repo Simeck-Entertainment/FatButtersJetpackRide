@@ -56,7 +56,7 @@ public class GameplayButtonManager : MainMenuCommonData
         saveManager.Save();
         Levels.Load(Levels.LevelSelect);
     }
-    public void PauseGame()
+    public void PauseGame() // TODO Drake: Unused? Looks like it uses UIManager.ActivatePauseMenu() instead
     {
         pauseButton.SetActive(false);
         pauseMenu.SetActive(true);
@@ -66,7 +66,7 @@ public class GameplayButtonManager : MainMenuCommonData
         }
         uIManager.PauseGame();
     }
-    public void ResumeGame()
+    public void ResumeGame() // TODO Drake: Unused? Looks like it uses UIManager.DeActivatePauseMenu() instead
     {
         pauseButton.SetActive(true);
         pauseMenu.SetActive(false);
