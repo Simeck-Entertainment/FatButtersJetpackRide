@@ -33,7 +33,11 @@ public class UIManager : MonoBehaviour
     int hurtCounterThreshold = 20;
     [SerializeField] GameObject GameplayIndicators;
 
+    [SerializeField] private FailMenuModel failMenu;
+    [SerializeField] private SuccessMenuModel successMenu;
 
+    private UiState currentState;
+    private int numNewBones;
 
     // Start is called before the first frame update
     void Start()
@@ -63,8 +67,11 @@ public class UIManager : MonoBehaviour
             HurtRunner();
         }
     }
-    public void SetEndLevelStats(int newbones) {
-        endLevelStats.text = "You have found " + newbones + " new bones!";
+    public void SetEndLevelStats(int newbones)
+    {
+        numNewBones = newbones;
+
+        endLevelStats.text = "You have found " + newbones + " new bones!"; // TODO Drake: remove this
     }
     public void HurtRunner() {
         hurtCounter++;
@@ -84,24 +91,40 @@ public class UIManager : MonoBehaviour
             HurtIndicator.gameObject.SetActive(false);
         }
     }
+
     public void RunOneHitKill()
     {
-        DisableGameplayIndicators();
-        FailMenu.SetActive(true);
+        DisableGameplayIndicators(); // TODO: hideable view model based on currentState
         playerObj.gameObject.SetActive(false);
-        FailText.text = "You are no more.\nMaybe don't touch that again!";
+
+        currentState = UiState.Fail;
+        FailMenu.SetActive(true); // TODO: hideable view model based on currentState
+        failMenu.FailReason = FailReason.NoHealth;
     }
-    public void RunNoFuel() {
-        FailMenu.SetActive(true);
-        FailText.text = "You ran out of fuel!\nTry upgrading your fuel in the store!";
+
+    public void RunNoFuel()
+    {
+        DisableGameplayIndicators(); // TODO: hideable view model based on currentState
+
+        currentState = UiState.Fail;
+        FailMenu.SetActive(true); // TODO: hideable view model based on currentState
+        failMenu.FailReason = FailReason.NoFuel;
     }
-    public void ActivateWinMenu() {
+
+    public void ActivateWinMenu()
+    {
         DisableGameplayIndicators();
         WinMenu.SetActive(true);
+
+        currentState = UiState.Success;
     }
-    public void ActivateFailMenu() {
-        DisableGameplayIndicators();
+
+    public void ActivateFailMenu()
+    {
+        DisableGameplayIndicators(); // TODO: hideable view model based on currentState
         FailMenu.SetActive(true);
+
+        currentState = UiState.Fail;
     }
     public void PauseGame() {
         DisableGameplayIndicators();
@@ -145,16 +168,23 @@ public class UIManager : MonoBehaviour
         Helper.LoadToLevel(Levels.LevelSelect);
 
     }
-    public void ActivatePauseMenu() {
+    public void ActivatePauseMenu()
+    {
         PauseButton.SetActive(false);
         PauseMenu.SetActive(true);
         PauseGame();
+
+        currentState = UiState.Settings;
     }
-    public void DeActivatePauseMenu() {
+    public void DeActivatePauseMenu()
+    {
         PauseButton.SetActive(true);
         PauseMenu.SetActive(false);
         UnpauseGame();
+
+        currentState = UiState.Base;
     }
+
     #endregion
     #region fuelStuff
     void fuelManager()
