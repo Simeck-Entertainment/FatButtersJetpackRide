@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private FailMenuModel failMenu;
     [SerializeField] private SuccessMenuModel successMenu;
 
+    public FailReason FailReason { get; set; }
+
     private GameplayUIState CurrentState
     {
         get 
@@ -102,7 +104,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void RunOneHitKill()
+    public void RunOneHitKill() // TODO: Unused?
     {
         //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
         playerObj.gameObject.SetActive(false);
@@ -112,7 +114,7 @@ public class UIManager : MonoBehaviour
         failMenu.FailReason = FailReason.NoHealth;
     }
 
-    public void RunNoFuel()
+    public void RunNoFuel() // TODO: Unused?
     {
         //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
 
@@ -133,7 +135,7 @@ public class UIManager : MonoBehaviour
     {
         //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
         //FailMenu.SetActive(true);
-
+        failMenu.FailReason = FailReason;
         CurrentState = GameplayUIState.Fail;
     }
 

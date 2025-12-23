@@ -23,16 +23,14 @@ public class GameplayUIModel : Model
         get
         {
             // We'll refresh this each time we change UIState
-            return saveManager?.collectibleData.OnScreenControlsEnabled ?? false;
+            return saveManager.collectibleData.OnScreenControlsEnabled;
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
         saveManager.Load();
-
-        Refresh(); // Refresh after loading the saveManager so OnScreenControlsEnabled is initialized correctly
     }
 
     public void SetPaused(bool paused)

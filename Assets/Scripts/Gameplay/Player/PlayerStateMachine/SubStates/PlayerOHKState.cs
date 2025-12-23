@@ -13,8 +13,10 @@ public class PlayerOHKState : PlayerLevelLoseState
         
         //Old skin-setting code.
         //player.vfx.Skins[skindex].SetActive(false);
-        player.UI.FailText.text = "You are no more.\nMaybe don't touch that again!";
+        //player.UI.FailText.text = "You are no more.\nMaybe don't touch that again!"; // TODO Drake: Remove this
         MonoBehaviour.Destroy(player.GetComponent<Rigidbody>());
+
+        player.UI.FailReason = FailReason.NoHealth;
         base.enter();
     }
 

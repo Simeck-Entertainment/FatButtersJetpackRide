@@ -1,18 +1,12 @@
 using UnityEngine;
 
-public class SuccessMenuModel : Model
+public class SuccessMenuModel : EndLevelMenuModel
 {
-    private int _newBones;
-    public int NewBones
+    public override void ToLevelSelect()
     {
-        get 
-        {
-            return _newBones;
-        }
-        set 
-        {
-            _newBones = value;
-            Refresh();
-        }
+        saveManager.collectibleData.BONES = saveManager.collectibleData.BONES + NewBones;
+        saveManager.collectibleData.LevelBeaten[saveManager.sceneLoadData.LastLoadedLevelInt] = true;
+        
+        base.ToLevelSelect();
     }
 }

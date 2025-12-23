@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class SettingsMenuModel : Model
 {
-    // TODO Drake: make properties on this model for the fields used in the view models rather than letting them access collectible data
-
     [SerializeField] public float VolumeMultiplier = 0.9f;
-    [SerializeField] private CollectibleData collectibleData; // TODO: Consider eliminating this and making it work on the saveManager.collectibleData
 
     private SaveManager saveManager;
+
+    private CollectibleData collectibleData => saveManager.collectibleData;
 
     #region properties
 
@@ -161,7 +160,7 @@ public class SettingsMenuModel : Model
 
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
         saveManager.Load();
@@ -177,18 +176,10 @@ public class SettingsMenuModel : Model
         collectibleData.HASBALL = false;
         saveManager.Save();
 
-        // EnableGameplayIndicators(); // TODO: Make a separate model and hideable view model for this
-        Time.timeScale = 1.0f; // TODO: the pause, unpause function should be handled globally, not in a controller
+        Time.timeScale = 1.0f; // TODO: the pause, unpause function should be handled globally, not in a model
 
         Helper.LoadToLevel(Levels.LevelSelect);
     }
-
-    //public void ResumeGame()
-    //{
-    //    // TODO Drake: this feels like an antipattern.
-    //    // Maybe the resume button should be a part of the higher level UI model and live outside the settings menu prefab
-    //    uiManager.DeActivatePauseMenu();
-    //}
 
     private void Save()
     {
