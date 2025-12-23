@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using Unity.Mathematics;
 
 public class UIManager : MonoBehaviour
 {
@@ -65,10 +61,12 @@ public class UIManager : MonoBehaviour
     {
         SetUIIndicators();
     }
+
     public void ActivateHurt()
     {
         runningHurt = true;
     }
+
     public void SetUIIndicators() // TODO Drake: figure out how to make a view model for this
     {
         fuelManager();
@@ -79,12 +77,12 @@ public class UIManager : MonoBehaviour
             HurtRunner();
         }
     }
+
     public void SetEndLevelStats(int newbones)
     {
         successMenu.NewBones = newbones;
-
-        //endLevelStats.text = "You have found " + newbones + " new bones!"; // TODO Drake: remove this
     }
+
     public void HurtRunner() {
         hurtCounter++;
         Vector2 inTiling = Vector2.one;
@@ -106,41 +104,31 @@ public class UIManager : MonoBehaviour
 
     public void RunOneHitKill() // TODO: Unused?
     {
-        //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
         playerObj.gameObject.SetActive(false);
 
         CurrentState = GameplayUIState.Fail;
-        //FailMenu.SetActive(true); // TODO: hideable view model based on currentState
         failMenu.FailReason = FailReason.NoHealth;
     }
 
     public void RunNoFuel() // TODO: Unused?
     {
-        //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
-
         CurrentState = GameplayUIState.Fail;
-        //FailMenu.SetActive(true); // TODO: hideable view model based on currentState
         failMenu.FailReason = FailReason.NoFuel;
     }
 
     public void ActivateWinMenu()
     {
-        //DisableGameplayIndicators();
-        //WinMenu.SetActive(true);
-
         CurrentState = GameplayUIState.Success;
     }
 
     public void ActivateFailMenu()
     {
-        //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
-        //FailMenu.SetActive(true);
         failMenu.FailReason = FailReason;
         CurrentState = GameplayUIState.Fail;
     }
 
-    public void PauseGame() {
-        //DisableGameplayIndicators();
+    public void PauseGame()
+    {
         CurrentState = GameplayUIState.Settings;
         Time.timeScale = 0.0f;
     }
@@ -149,64 +137,12 @@ public class UIManager : MonoBehaviour
     {
         CurrentState = GameplayUIState.Base;
         saveManager.Save();
-        //EnableGameplayIndicators();
         Time.timeScale = 1.0f;
     }
 
-    //public void EnableGameplayIndicators()
-    //{
-    //    GameplayIndicators.SetActive(true);
-    //}
-    //public void DisableGameplayIndicators()
-    //{
-    //    GameplayIndicators.SetActive(false);
-    //}
-
-    #region buttonStuff
-    public void FailToLevelSelect() // TODO view models for these buttons
-    {
-        saveManager.collectibleData.BONES = saveManager.collectibleData.BONES + player.tempBones;
-        saveManager.collectibleData.HASBALL = false;
-        saveManager.Save();
-        //UnpauseGame();
-        Helper.LoadToLevel(Levels.LevelSelect);
-    }
-    public void PauseToLevelSelect() {
-        saveManager.collectibleData.HASBALL = false;
-        saveManager.Save();
-        UnpauseGame();
-        Helper.LoadToLevel(Levels.LevelSelect);
-    }
-    public void WinToLevelSelect() {
-        saveManager.collectibleData.BONES = saveManager.collectibleData.BONES + player.tempBones;
-        saveManager.collectibleData.HASBALL = false;
-        saveManager.collectibleData.LevelBeaten[saveManager.sceneLoadData.LastLoadedLevelInt] = true;
-        saveManager.Save();
-        Helper.LoadToLevel(Levels.LevelSelect);
-
-    }
-    //public void ActivatePauseMenu()
-    //{
-    //    PauseButton.SetActive(false);
-    //    PauseMenu.SetActive(true);
-    //    PauseGame();
-
-    //    CurrentState = GameplayUIState.Settings;
-    //}
-    //public void DeActivatePauseMenu()
-    //{
-    //    PauseButton.SetActive(true);
-    //    PauseMenu.SetActive(false);
-    //    UnpauseGame();
-
-    //    CurrentState = GameplayUIState.Base;
-    //}
-
-    #endregion
     #region fuelStuff
     void fuelManager()
     {
-        
         //fuelGuage.m_FillAmount = player.fuel/player.maxFuel;
         fuelGuage.fillAmount = player.fuel / player.maxFuel;
         if (fuelGuage.fillAmount > 0.5f)
@@ -224,9 +160,7 @@ public class UIManager : MonoBehaviour
         {
             fuelGuage.sprite = FuelGuageColors[2];
             fuelGuage.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, .3f)); // alpha PingPong.
-
         }
-
     }
-#endregion
+    #endregion
 }

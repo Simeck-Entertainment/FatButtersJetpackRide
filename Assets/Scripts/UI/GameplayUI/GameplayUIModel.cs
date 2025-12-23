@@ -38,12 +38,12 @@ public class GameplayUIModel : Model
         if (paused)
         {
             UIState = GameplayUIState.Settings;
-            Time.timeScale = 0.0f; // TODO Drake: Consider a global utility for pause and other game features like this
+            Time.timeScale = 0.0f; // TODO Drake: Consider a global utility for pause/resume
         }
         else
         {
             UIState = GameplayUIState.Base;
-            Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for resume
+            Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for pause/resume
         }
     }
 }

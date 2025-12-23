@@ -176,7 +176,7 @@ public class SettingsMenuModel : Model
         collectibleData.HASBALL = false;
         saveManager.Save();
 
-        Time.timeScale = 1.0f; // TODO: the pause, unpause function should be handled globally, not in a model
+        Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for pause/resume
 
         Helper.LoadToLevel(Levels.LevelSelect);
     }
