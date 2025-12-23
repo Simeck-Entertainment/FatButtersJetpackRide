@@ -33,11 +33,21 @@ public class UIManager : MonoBehaviour
     int hurtCounterThreshold = 20;
     [SerializeField] GameObject GameplayIndicators;
 
+    [SerializeField] private GameplayUIModel gameplayUI;
     [SerializeField] private FailMenuModel failMenu;
     [SerializeField] private SuccessMenuModel successMenu;
 
-    private UiState currentState;
-    private int numNewBones;
+    private GameplayUIState CurrentState
+    {
+        get 
+        {
+            return gameplayUI.UIState;
+        }
+        set
+        {
+            gameplayUI.UIState = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +67,7 @@ public class UIManager : MonoBehaviour
     {
         runningHurt = true;
     }
-    public void SetUIIndicators()
+    public void SetUIIndicators() // TODO Drake: figure out how to make a view model for this
     {
         fuelManager();
         bonesText.text = (player.saveManager.collectibleData.BONES + player.tempBones).ToString();
@@ -69,9 +79,9 @@ public class UIManager : MonoBehaviour
     }
     public void SetEndLevelStats(int newbones)
     {
-        numNewBones = newbones;
+        successMenu.NewBones = newbones;
 
-        endLevelStats.text = "You have found " + newbones + " new bones!"; // TODO Drake: remove this
+        //endLevelStats.text = "You have found " + newbones + " new bones!"; // TODO Drake: remove this
     }
     public void HurtRunner() {
         hurtCounter++;
@@ -94,59 +104,64 @@ public class UIManager : MonoBehaviour
 
     public void RunOneHitKill()
     {
-        DisableGameplayIndicators(); // TODO: hideable view model based on currentState
+        //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
         playerObj.gameObject.SetActive(false);
 
-        currentState = UiState.Fail;
-        FailMenu.SetActive(true); // TODO: hideable view model based on currentState
+        CurrentState = GameplayUIState.Fail;
+        //FailMenu.SetActive(true); // TODO: hideable view model based on currentState
         failMenu.FailReason = FailReason.NoHealth;
     }
 
     public void RunNoFuel()
     {
-        DisableGameplayIndicators(); // TODO: hideable view model based on currentState
+        //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
 
-        currentState = UiState.Fail;
-        FailMenu.SetActive(true); // TODO: hideable view model based on currentState
+        CurrentState = GameplayUIState.Fail;
+        //FailMenu.SetActive(true); // TODO: hideable view model based on currentState
         failMenu.FailReason = FailReason.NoFuel;
     }
 
     public void ActivateWinMenu()
     {
-        DisableGameplayIndicators();
-        WinMenu.SetActive(true);
+        //DisableGameplayIndicators();
+        //WinMenu.SetActive(true);
 
-        currentState = UiState.Success;
+        CurrentState = GameplayUIState.Success;
     }
 
     public void ActivateFailMenu()
     {
-        DisableGameplayIndicators(); // TODO: hideable view model based on currentState
-        FailMenu.SetActive(true);
+        //DisableGameplayIndicators(); // TODO: hideable view model based on currentState
+        //FailMenu.SetActive(true);
 
-        currentState = UiState.Fail;
+        CurrentState = GameplayUIState.Fail;
     }
+
     public void PauseGame() {
-        DisableGameplayIndicators();
+        //DisableGameplayIndicators();
+        CurrentState = GameplayUIState.Settings;
         Time.timeScale = 0.0f;
     }
-    public void UnpauseGame() {
+
+    public void UnpauseGame()
+    {
+        CurrentState = GameplayUIState.Base;
         saveManager.Save();
-        EnableGameplayIndicators();
+        //EnableGameplayIndicators();
         Time.timeScale = 1.0f;
     }
 
-    public void EnableGameplayIndicators()
-    {
-        GameplayIndicators.SetActive(true);
-    }
-    public void DisableGameplayIndicators()
-    {
-        GameplayIndicators.SetActive(false);
-    }
+    //public void EnableGameplayIndicators()
+    //{
+    //    GameplayIndicators.SetActive(true);
+    //}
+    //public void DisableGameplayIndicators()
+    //{
+    //    GameplayIndicators.SetActive(false);
+    //}
 
     #region buttonStuff
-    public void FailToLevelSelect()
+    public void FailToLevelSelect() // TODO view models for these buttons
     {
         saveManager.collectibleData.BONES = saveManager.collectibleData.BONES + player.tempBones;
         saveManager.collectibleData.HASBALL = false;
@@ -168,22 +183,22 @@ public class UIManager : MonoBehaviour
         Helper.LoadToLevel(Levels.LevelSelect);
 
     }
-    public void ActivatePauseMenu()
-    {
-        PauseButton.SetActive(false);
-        PauseMenu.SetActive(true);
-        PauseGame();
+    //public void ActivatePauseMenu()
+    //{
+    //    PauseButton.SetActive(false);
+    //    PauseMenu.SetActive(true);
+    //    PauseGame();
 
-        currentState = UiState.Settings;
-    }
-    public void DeActivatePauseMenu()
-    {
-        PauseButton.SetActive(true);
-        PauseMenu.SetActive(false);
-        UnpauseGame();
+    //    CurrentState = GameplayUIState.Settings;
+    //}
+    //public void DeActivatePauseMenu()
+    //{
+    //    PauseButton.SetActive(true);
+    //    PauseMenu.SetActive(false);
+    //    UnpauseGame();
 
-        currentState = UiState.Base;
-    }
+    //    CurrentState = GameplayUIState.Base;
+    //}
 
     #endregion
     #region fuelStuff

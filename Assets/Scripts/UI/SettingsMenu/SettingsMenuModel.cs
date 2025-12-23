@@ -6,9 +6,7 @@ public class SettingsMenuModel : Model
     // TODO Drake: make properties on this model for the fields used in the view models rather than letting them access collectible data
 
     [SerializeField] public float VolumeMultiplier = 0.9f;
-    [SerializeField] private GameObject OnScreenControlObj;
     [SerializeField] private CollectibleData collectibleData; // TODO: Consider eliminating this and making it work on the saveManager.collectibleData
-    [SerializeField] private UIManager uiManager;
 
     private SaveManager saveManager;
 
@@ -105,13 +103,6 @@ public class SettingsMenuModel : Model
         {
             collectibleData.OnScreenControlsEnabled = value;
 
-            if (OnScreenControlObj != null)
-            {
-                // TODO Drake: control this with a hideable controller, requires a higher level UI model on our "UIObject"
-                // This behavior does not belong in the settings model
-                OnScreenControlObj.SetActive(value);
-            }
-
             Save();
         }
     }
@@ -192,12 +183,12 @@ public class SettingsMenuModel : Model
         Helper.LoadToLevel(Levels.LevelSelect);
     }
 
-    public void ResumeGame()
-    {
-        // TODO Drake: this feels like an antipattern.
-        // Maybe the resume button should be a part of the higher level UI model and live outside the settings menu prefab
-        uiManager.DeActivatePauseMenu();
-    }
+    //public void ResumeGame()
+    //{
+    //    // TODO Drake: this feels like an antipattern.
+    //    // Maybe the resume button should be a part of the higher level UI model and live outside the settings menu prefab
+    //    uiManager.DeActivatePauseMenu();
+    //}
 
     private void Save()
     {

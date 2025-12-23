@@ -1,4 +1,4 @@
-﻿public enum UiState
+﻿public enum GameplayUIState
 {
     Base,
     Settings,
