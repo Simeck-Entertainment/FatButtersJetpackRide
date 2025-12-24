@@ -19,7 +19,7 @@ MonoBehaviour:
   HASBALL: 0
   killAds: 0
   LevelBeaten: 010100000000000000000000000000000000000000
-  CurrentSkin: 1
+  CurrentSkin: 0
   HaveSkins: 01000000000000
   MasterVolumeLevel: 1
   MusicVolumeLevel: 0.43046713
@@ -27,5 +27,6 @@ MonoBehaviour:
   HapticsEnabled: 0
   OnScreenControlsEnabled: 0
   GraphicsQualityLevel: 1
+  Keys: 0
   GameplayTestingMode: 0
   ignoreSaveData: 1
