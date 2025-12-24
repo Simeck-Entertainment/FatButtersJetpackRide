@@ -9,7 +9,7 @@ public class PlayerTummyDeathState : PlayerLevelLoseState
     }
 
     public override void enter(){
-        player.UI.FailText.text = "Your tummy is empty!\nTry upgrading your tummy in the store!";
+        player.UI.FailReason = FailReason.NoHealth;
         base.enter();
     }
 

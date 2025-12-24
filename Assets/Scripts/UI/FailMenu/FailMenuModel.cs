@@ -24,6 +24,7 @@ public class FailMenuModel : EndLevelMenuModel
 
 public enum FailReason
 {
+    OneHitKill,
     NoHealth,
     NoFuel
 }
