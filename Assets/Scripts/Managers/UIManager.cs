@@ -102,20 +102,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void RunOneHitKill() // TODO: Unused?
-    {
-        playerObj.gameObject.SetActive(false);
-
-        CurrentState = GameplayUIState.Fail;
-        failMenu.FailReason = FailReason.NoHealth;
-    }
-
-    public void RunNoFuel() // TODO: Unused?
-    {
-        CurrentState = GameplayUIState.Fail;
-        failMenu.FailReason = FailReason.NoFuel;
-    }
-
     public void ActivateWinMenu()
     {
         CurrentState = GameplayUIState.Success;
@@ -125,19 +111,6 @@ public class UIManager : MonoBehaviour
     {
         failMenu.FailReason = FailReason;
         CurrentState = GameplayUIState.Fail;
-    }
-
-    public void PauseGame()
-    {
-        CurrentState = GameplayUIState.Settings;
-        Time.timeScale = 0.0f;
-    }
-
-    public void UnpauseGame()
-    {
-        CurrentState = GameplayUIState.Base;
-        saveManager.Save();
-        Time.timeScale = 1.0f;
     }
 
     #region fuelStuff

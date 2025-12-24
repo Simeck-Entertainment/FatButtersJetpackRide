@@ -8,16 +8,12 @@ public class RobotDroneGuard: MonoBehaviour
     [SerializeField] public bool triggered;
     public GameObject player;
     public float speed = 5.0f;
-    DataHandler dataHandler;
-    void Start()
-    {
-        dataHandler = FindAnyObjectByType<DataHandler>();
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if(triggered && player  != null && !dataHandler.isDead){
+        if(triggered && player  != null)
+        {
              Vector3 direction = player.transform.position - transform.position;
              direction.Normalize();
              transform.position += direction * speed * Time.deltaTime;
