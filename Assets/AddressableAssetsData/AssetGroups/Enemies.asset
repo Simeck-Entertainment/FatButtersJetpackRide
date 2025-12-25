@@ -65,11 +65,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ff5cff5d14f165647a76bbbd4acf8dca
-    m_Address: Assets/Objects/PuzzlePieces/prefabs/enemies/SegwayBear.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 688ce2d51185d19489a5c75bf2019ce5, type: 2}
   m_SchemaSet:
