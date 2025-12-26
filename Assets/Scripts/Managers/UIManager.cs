@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using Unity.Mathematics;
 
 public class UIManager : MonoBehaviour
 {
@@ -33,7 +29,23 @@ public class UIManager : MonoBehaviour
     int hurtCounterThreshold = 20;
     [SerializeField] GameObject GameplayIndicators;
 
+    [SerializeField] private GameplayUIModel gameplayUI;
+    [SerializeField] private FailMenuModel failMenu;
+    [SerializeField] private SuccessMenuModel successMenu;
 
+    public FailReason FailReason { get; set; }
+
+    private GameplayUIState CurrentState
+    {
+        get 
+        {
+            return gameplayUI.UIState;
+        }
+        set
+        {
+            gameplayUI.UIState = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -49,11 +61,13 @@ public class UIManager : MonoBehaviour
     {
         SetUIIndicators();
     }
+
     public void ActivateHurt()
     {
         runningHurt = true;
     }
-    public void SetUIIndicators()
+
+    public void SetUIIndicators() // TODO Drake: figure out how to make a view model for this
     {
         fuelManager();
         bonesText.text = (player.saveManager.collectibleData.BONES + player.tempBones).ToString();
@@ -63,9 +77,12 @@ public class UIManager : MonoBehaviour
             HurtRunner();
         }
     }
-    public void SetEndLevelStats(int newbones) {
-        endLevelStats.text = "You have found " + newbones + " new bones!";
+
+    public void SetEndLevelStats(int newbones)
+    {
+        successMenu.NewBones = newbones;
     }
+
     public void HurtRunner() {
         hurtCounter++;
         Vector2 inTiling = Vector2.one;
@@ -84,82 +101,21 @@ public class UIManager : MonoBehaviour
             HurtIndicator.gameObject.SetActive(false);
         }
     }
-    public void RunOneHitKill()
+
+    public void ActivateWinMenu()
     {
-        DisableGameplayIndicators();
-        FailMenu.SetActive(true);
-        playerObj.gameObject.SetActive(false);
-        FailText.text = "You are no more.\nMaybe don't touch that again!";
-    }
-    public void RunNoFuel() {
-        FailMenu.SetActive(true);
-        FailText.text = "You ran out of fuel!\nTry upgrading your fuel in the store!";
-    }
-    public void ActivateWinMenu() {
-        DisableGameplayIndicators();
-        WinMenu.SetActive(true);
-    }
-    public void ActivateFailMenu() {
-        DisableGameplayIndicators();
-        FailMenu.SetActive(true);
-    }
-    public void PauseGame() {
-        DisableGameplayIndicators();
-        Time.timeScale = 0.0f;
-    }
-    public void UnpauseGame() {
-        saveManager.Save();
-        EnableGameplayIndicators();
-        Time.timeScale = 1.0f;
+        CurrentState = GameplayUIState.Success;
     }
 
-    public void EnableGameplayIndicators()
+    public void ActivateFailMenu()
     {
-        GameplayIndicators.SetActive(true);
-    }
-    public void DisableGameplayIndicators()
-    {
-        GameplayIndicators.SetActive(false);
+        failMenu.FailReason = FailReason;
+        CurrentState = GameplayUIState.Fail;
     }
 
-    #region buttonStuff
-    public void FailToLevelSelect()
-    {
-        saveManager.collectibleData.BONES = saveManager.collectibleData.BONES + player.tempBones;
-        saveManager.collectibleData.HASBALL = false;
-        saveManager.Save();
-        //UnpauseGame();
-        Helper.LoadToLevel(Levels.LevelSelect);
-    }
-    public void PauseToLevelSelect() {
-        saveManager.collectibleData.HASBALL = false;
-        saveManager.Save();
-        UnpauseGame();
-        Helper.LoadToLevel(Levels.LevelSelect);
-    }
-    public void WinToLevelSelect() {
-        saveManager.collectibleData.BONES = saveManager.collectibleData.BONES + player.tempBones;
-        saveManager.collectibleData.HASBALL = false;
-        saveManager.collectibleData.LevelBeaten[saveManager.sceneLoadData.LastLoadedLevelInt] = true;
-        saveManager.Save();
-        Helper.LoadToLevel(Levels.LevelSelect);
-
-    }
-    public void ActivatePauseMenu() {
-        PauseButton.SetActive(false);
-        PauseMenu.SetActive(true);
-        PauseGame();
-    }
-    public void DeActivatePauseMenu() {
-        PauseButton.SetActive(true);
-        PauseMenu.SetActive(false);
-        UnpauseGame();
-    }
-    #endregion
     #region fuelStuff
     void fuelManager()
     {
-        
         //fuelGuage.m_FillAmount = player.fuel/player.maxFuel;
         fuelGuage.fillAmount = player.fuel / player.maxFuel;
         if (fuelGuage.fillAmount > 0.5f)
@@ -177,9 +133,7 @@ public class UIManager : MonoBehaviour
         {
             fuelGuage.sprite = FuelGuageColors[2];
             fuelGuage.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, .3f)); // alpha PingPong.
-
         }
-
     }
-#endregion
+    #endregion
 }

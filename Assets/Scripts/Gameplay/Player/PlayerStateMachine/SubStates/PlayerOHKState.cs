@@ -9,12 +9,11 @@ public class PlayerOHKState : PlayerLevelLoseState
 
     }
 
-    public override void enter(){
-        
-        //Old skin-setting code.
-        //player.vfx.Skins[skindex].SetActive(false);
-        player.UI.FailText.text = "You are no more.\nMaybe don't touch that again!";
+    public override void enter()
+    {
         MonoBehaviour.Destroy(player.GetComponent<Rigidbody>());
+
+        player.UI.FailReason = FailReason.OneHitKill;
         base.enter();
     }
 

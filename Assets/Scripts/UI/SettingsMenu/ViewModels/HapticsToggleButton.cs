@@ -3,11 +3,11 @@
     protected override void OnModelChanged()
     {
         base.OnModelChanged();
-        ToggleButton.isOn = Model.CollectibleData.HapticsEnabled;
+        ToggleButton.isOn = Model.HapticsEnabled;
     }
 
     protected override void OnToggleChanged(bool value)
     {
-        Model.ToggleHaptics(value);
+        Model.HapticsEnabled = value;
     }
 }

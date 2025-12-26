@@ -1,63 +1,184 @@
+using System;
 using UnityEngine;
 
 public class SettingsMenuModel : Model
 {
-    [SerializeField] public CollectibleData CollectibleData;
     [SerializeField] public float VolumeMultiplier = 0.9f;
-    [SerializeField] private GameObject OnScreenControlObj;
-    [SerializeField] private UIManager uiManager;
 
     private SaveManager saveManager;
 
-    private void Start()
+    private CollectibleData collectibleData => saveManager.collectibleData;
+
+    #region properties
+
+    private SettingsPage _currentPage = SettingsPage.Base;
+    public SettingsPage CurrentPage
+    {
+        get
+        {
+            return _currentPage;
+        }
+        set
+        {
+            _currentPage = value;
+            Refresh();
+        }
+    }
+
+    public float MasterVolume
+    {
+        get
+        {
+            return collectibleData.MasterVolumeLevel / VolumeMultiplier;
+        }
+        set
+        {
+            collectibleData.MasterVolumeLevel = value * VolumeMultiplier;
+            Save();
+        }
+    }
+
+    public float MusicVolume
+    {
+        get
+        {
+            return collectibleData.MusicVolumeLevel / VolumeMultiplier;
+        }
+        set
+        {
+            collectibleData.MusicVolumeLevel = value * VolumeMultiplier;
+            Save();
+        }
+    }
+
+    public float SfxVolume
+    {
+        get
+        {
+            return collectibleData.SFXVolumeLevel / VolumeMultiplier;
+        }
+        set
+        {
+            collectibleData.SFXVolumeLevel = value * VolumeMultiplier;
+            Save();
+        }
+    }
+
+    public int GraphicsQuality
+    {
+        get
+        {
+            return collectibleData.GraphicsQualityLevel;
+        }
+        set
+        {
+
+            QualitySettings.SetQualityLevel(value);
+            collectibleData.GraphicsQualityLevel = value;
+            Save();
+        }
+    }
+
+    public bool HapticsEnabled
+    {
+        get
+        {
+            return collectibleData.HapticsEnabled;
+        }
+        set
+        {
+            collectibleData.HapticsEnabled = value;
+            Save();
+        }
+    }
+
+    public bool OnScreenControlsEnabled
+    {
+        get
+        {
+            return collectibleData.OnScreenControlsEnabled;
+        }
+        set
+        {
+            collectibleData.OnScreenControlsEnabled = value;
+
+            Save();
+        }
+    }
+
+    public bool LevelSelectAdsEnabled
+    {
+        get
+        {
+            return saveManager.userInfo.LevelSelectBanners;
+        }
+        set
+        {
+            saveManager.userInfo.LevelSelectBanners = value;
+            Save();
+        }
+    }
+
+    public bool PauseMenuAdsEnabled
+    {
+        get
+        {
+            return saveManager.userInfo.PauseMenuBanners;
+        }
+        set
+        {
+            saveManager.userInfo.PauseMenuBanners = value;
+            Save();
+        }
+    }
+
+    public bool PostLevelAdsEnabled
+    {
+        get
+        {
+            return saveManager.userInfo.InterstitialToggle;
+        }
+        set
+        {
+            saveManager.userInfo.InterstitialToggle = value;
+            Save();
+        }
+    }
+
+    public bool BoneDoublerVideoAdsEnabled
+    {
+        get
+        {
+            return saveManager.userInfo.BoneDoublerToggle;
+        }
+        set
+        {
+            saveManager.userInfo.BoneDoublerToggle = value;
+            Save();
+        }
+    }
+
+    #endregion
+
+    private void Awake()
     {
         saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
         saveManager.Load();
     }
 
-    public void SetMasterVolume(float value)
+    public void ShowPrivacyPolicy()
     {
-        CollectibleData.MasterVolumeLevel = value * VolumeMultiplier;
-        Save();
+        Application.OpenURL("https://fatbutters.simeck.com/privacyPolicy.txt");
     }
 
-    public void SetMusicVolume(float value)
+    public void ToLevelSelect()
     {
-        CollectibleData.MusicVolumeLevel = value * VolumeMultiplier;
-        Save();
-    }
+        collectibleData.HASBALL = false;
+        saveManager.Save();
 
-    public void SetSfxVolume(float value)
-    {
-        CollectibleData.SFXVolumeLevel = value * VolumeMultiplier;
-        Save();
-    }
+        Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for pause/resume
 
-    public void ToggleHaptics(bool value)
-    {
-        CollectibleData.HapticsEnabled = value;
-        Save();
-    }
-
-    public void ToggleOnScreenControls(bool value)
-    {
-        CollectibleData.OnScreenControlsEnabled = value;
-
-        if (OnScreenControlObj != null)
-        {
-            // TODO Drake: control this with a hideable controller, requires a higher level UI model on our "UIObject"
-            // This behavior does not belong in the settings model
-            OnScreenControlObj.SetActive(value);
-        }
-
-       Save();
-    }
-
-    public void ResumeGame()
-    {
-        // TODO Drake: this feels like an antipattern.
-        // Maybe the resume button should be a part of the higher level UI model and live outside the settings menu prefab
-        uiManager.DeActivatePauseMenu();
+        Helper.LoadToLevel(Levels.LevelSelect);
     }
 
     private void Save()
@@ -65,4 +186,10 @@ public class SettingsMenuModel : Model
         saveManager.Save();
         Refresh();
     }
+}
+
+public enum SettingsPage
+{
+    Base,
+    Ads
 }

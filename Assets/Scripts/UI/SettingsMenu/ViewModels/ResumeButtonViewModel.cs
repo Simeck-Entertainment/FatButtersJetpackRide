@@ -1,7 +1,7 @@
-﻿public class ResumeButtonViewModel : ButtonViewModel<SettingsMenuModel>
+﻿public class ResumeButtonViewModel : ButtonViewModel<GameplayUIModel>
 {
     protected override void OnClick()
     {
-        Model.ResumeGame();
+        Model.SetPaused(false);
     }
 }
