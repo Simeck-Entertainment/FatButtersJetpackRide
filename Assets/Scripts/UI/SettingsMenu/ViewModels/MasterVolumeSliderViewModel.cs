@@ -3,11 +3,11 @@
     protected override void OnModelChanged()
     {
         base.OnModelChanged();
-        Slider.value = Model.CollectibleData.MasterVolumeLevel / Model.VolumeMultiplier;
+        Slider.value = Model.MasterVolume;
     }
 
     protected override void OnSliderChanged(float value)
     {
-        Model.SetMasterVolume(value);
+        Model.MasterVolume = value;
     }
 }

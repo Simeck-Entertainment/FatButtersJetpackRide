@@ -3,11 +3,11 @@
     protected override void OnModelChanged()
     {
         base.OnModelChanged();
-        Slider.value = Model.CollectibleData.SFXVolumeLevel / Model.VolumeMultiplier;
+        Slider.value = Model.SfxVolume;
     }
 
     protected override void OnSliderChanged(float value)
     {
-        Model.SetSfxVolume(value);
+        Model.SfxVolume = value;
     }
 }
