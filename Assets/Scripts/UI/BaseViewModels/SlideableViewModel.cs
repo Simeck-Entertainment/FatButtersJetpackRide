@@ -5,12 +5,13 @@ public abstract class SlideableViewModel<T> : ViewModel<T> where T : Model
     [SerializeField] private EditorLocalTransform disabledTransform = EditorLocalTransform.Identity;
     [SerializeField] private EditorLocalTransform enabledTransform = EditorLocalTransform.Identity;
 
-    [SerializeField] private float duration = 0.5f;
+    [SerializeField] protected float duration = 0.5f;
 
     [Tooltip("Changes whether this item starts enabled or disabled")]
-    [SerializeField] private bool isActive;
+    [SerializeField] protected bool isActive;
 
-    private EditorLocalTransform targetTransform;
+    private EditorLocalTransform startTransform;
+    private EditorLocalTransform endTransform;
     private float timeSinceMoveStart = float.MaxValue;
 
     public void SetActive(bool active)
@@ -18,11 +19,13 @@ public abstract class SlideableViewModel<T> : ViewModel<T> where T : Model
         isActive = active;
         if (active)
         {
-            targetTransform = enabledTransform;
+            startTransform = disabledTransform;
+            endTransform = enabledTransform;
         }
         else
         {
-            targetTransform = disabledTransform;
+            startTransform = enabledTransform;
+            endTransform = disabledTransform;
         }
         timeSinceMoveStart = 0;
     }
@@ -50,18 +53,21 @@ public abstract class SlideableViewModel<T> : ViewModel<T> where T : Model
         }
     }
 
-    // TODO: This is pretty much done with the movement about halfway through the duration, why?
-    // Might have to do the move manually
     private void FixedUpdate()
     {
-        if (timeSinceMoveStart <= duration)
+        if (timeSinceMoveStart < duration)
         {
             timeSinceMoveStart += Time.deltaTime;
-            var percentComplete = timeSinceMoveStart / duration;
+            if (timeSinceMoveStart > duration)
+            {
+                timeSinceMoveStart = duration;
+            }
 
-            transform.localPosition = Vector3.Lerp(transform.localPosition, targetTransform.Position, percentComplete);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(targetTransform.Rotation), percentComplete);
-            transform.localScale = Vector3.Lerp(transform.localScale, targetTransform.Scale, percentComplete);
+            var percentComplete = timeSinceMoveStart / duration;
+            var nextTransform = GetNextTransform(startTransform, endTransform, percentComplete);
+            nextTransform.UpdateTransform(transform);
         }
     }
+
+    protected abstract EditorLocalTransform GetNextTransform(EditorLocalTransform startTransform, EditorLocalTransform endTransform, float percentComplete);
 }

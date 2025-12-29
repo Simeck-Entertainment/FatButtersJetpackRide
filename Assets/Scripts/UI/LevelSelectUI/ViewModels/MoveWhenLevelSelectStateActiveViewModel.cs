@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveWhenLevelSelectStateActiveViewModel : SlideableViewModel<LevelSelectUIModel>
+public class MoveWhenLevelSelectStateActiveViewModel : SinusoidalSlideableViewModel<LevelSelectUIModel>
 {
     [SerializeField] private LevelSelectUIState uiState;
 

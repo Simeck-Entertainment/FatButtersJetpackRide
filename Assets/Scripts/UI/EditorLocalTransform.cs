@@ -27,4 +27,24 @@ public struct EditorLocalTransform
             };
         }
     }
+
+    public static EditorLocalTransform operator +(EditorLocalTransform a, EditorLocalTransform b)
+    {
+        return new EditorLocalTransform
+        {
+            Position = a.Position + b.Position,
+            Rotation = a.Rotation + b.Rotation,
+            Scale = a.Scale + b.Scale
+        };
+    }
+
+    public static EditorLocalTransform operator -(EditorLocalTransform a, EditorLocalTransform b)
+    {
+        return new EditorLocalTransform
+        {
+            Position = a.Position - b.Position,
+            Rotation = a.Rotation - b.Rotation,
+            Scale = a.Scale - b.Scale
+        };
+    }
 }
