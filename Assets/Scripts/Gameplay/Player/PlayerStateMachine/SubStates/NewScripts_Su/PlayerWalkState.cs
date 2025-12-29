@@ -12,7 +12,8 @@ public class PlayerWalkState : MonoBehaviour
     private float targetSpeed = 0f;       // speed we want to reach
     private float currentSpeed = 0f;      // current smoothed speed
     public bool hasTouchGround = false;
-
+    public  float absZ;
+    public float direction;
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Untagged"))
@@ -40,7 +41,7 @@ public class PlayerWalkState : MonoBehaviour
         if (rotationZ > 180f)
             rotationZ -= 360f;
 
-        float absZ = Mathf.Abs(rotationZ);
+       absZ = Mathf.Abs(rotationZ);
 
         // Determine target speed based on rotation
         if (absZ < 15f)
@@ -56,7 +57,7 @@ public class PlayerWalkState : MonoBehaviour
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * acceleration);
 
         // Determine direction (tilt left/right)
-        float direction = rotationZ > 0 ? -1f : 1f;
+         direction = rotationZ > 0 ? -1f : 1f;
 
         // Apply velocity smoothly
         player.rb.linearVelocity = new Vector3(direction * currentSpeed, player.rb.linearVelocity.y, 0f);
