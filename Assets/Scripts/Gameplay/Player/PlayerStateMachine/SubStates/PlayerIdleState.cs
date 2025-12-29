@@ -41,7 +41,10 @@ public class PlayerIdleState : PlayerAliveState
         {
             PlayAnim(idleAnnoyedAnims[Random.Range(0, 2)]);
         }
-
+        if(player.GetComponent<PlayerWalkState>().absZ > 15)
+        {
+            player.stateMachine.changeState(player.playerWalkState);
+        }
         if (GetCurrentAnimName() == "idleAnnoyed1" & Helper.isWithinMarginOfError(GetNormalizedTime(), 0.5f, 0.025f)){
             PlayOneTimeAudio(player.borks[Random.Range(0,3)]); //play the bork
         }

@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] public SaveManager saveManager;
     public PlayerStateMachine stateMachine;
     public PlayerIdleState playerIdleState { get; set; }
+    public InheritWalkState playerWalkState{get;set;}
+
     public PlayerFallState playerFallState { get; set; }
     public PlayerEnterDangleState playerEnterDangleState { get; set; }
     public PlayerDangleState playerDangleState { get; set; }
@@ -94,6 +96,7 @@ public class Player : MonoBehaviour
         
         ApplyStoreUpgrades();
         playerIdleState = new PlayerIdleState(this, stateMachine);
+        playerWalkState = new InheritWalkState(this,stateMachine);
         playerFallState = new PlayerFallState(this, stateMachine);
         playerEnterDangleState = new PlayerEnterDangleState(this, stateMachine);
         playerDangleState = new PlayerDangleState(this, stateMachine);
