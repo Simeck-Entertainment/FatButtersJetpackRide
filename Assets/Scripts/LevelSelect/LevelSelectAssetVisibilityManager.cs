@@ -57,7 +57,9 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
             FinalCamPos = InitCamPos;
         }
         //set the scrollbar now.
-        scrollbar.value = Helper.RemapToBetweenZeroAndOne(lss.LeftBound.position.x, lss.RightBound.position.x, FinalCamPos.x);
+        // TODO Drake: Make the below work with the new slider...
+        // probably going to require referencing the LevelSelectUIModel here
+        //scrollbar.value = Helper.RemapToBetweenZeroAndOne(lss.LeftBound.position.x, lss.RightBound.position.x, FinalCamPos.x);
         Keyframe[] keys = new Keyframe[2];
         keys[0] = new Keyframe(0f,InitCamPos.x);
         keys[1] = new Keyframe(1f,FinalCamPos.x);
@@ -90,7 +92,7 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
 
         if(CameraInPosition & BoneTimerCounter < BoneTimerThreshold){
             RunBonePopin();
-            uiButtonHolder.SetActive(true);
+            uiButtonHolder.SetActive(true); // TODO Drake: Make visibility based on a view model. Change a value on LevelSelectUIModel to trigger the refresh
         }
 
     }

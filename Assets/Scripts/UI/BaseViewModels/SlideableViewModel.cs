@@ -2,13 +2,15 @@
 
 public abstract class SlideableViewModel<T> : ViewModel<T> where T : Model
 {
-    [SerializeField] private EditorLocalTransform disabledTransform = EditorLocalTransform.Identity;
-    [SerializeField] private EditorLocalTransform enabledTransform = EditorLocalTransform.Identity;
+    [SerializeField] private EditorLocalTransform disabledTransformDifference = EditorLocalTransform.Zero;
 
     [SerializeField] protected float duration = 0.5f;
 
     [Tooltip("Changes whether this item starts enabled or disabled")]
     [SerializeField] protected bool isActive;
+
+    private EditorLocalTransform disabledTransform = EditorLocalTransform.Identity;
+    private EditorLocalTransform enabledTransform = EditorLocalTransform.Identity;
 
     private EditorLocalTransform startTransform;
     private EditorLocalTransform endTransform;
@@ -43,13 +45,16 @@ public abstract class SlideableViewModel<T> : ViewModel<T> where T : Model
 
     private void Start()
     {
+        enabledTransform = new EditorLocalTransform(this.transform);
+        disabledTransform = enabledTransform + disabledTransformDifference;
+
         if (isActive)
         {
-            enabledTransform.UpdateTransform(transform);
+            transform.UpdateFromEditorLocalTransform(enabledTransform);
         }
         else
         {
-            disabledTransform.UpdateTransform(transform);
+            transform.UpdateFromEditorLocalTransform(disabledTransform);
         }
     }
 
@@ -65,7 +70,7 @@ public abstract class SlideableViewModel<T> : ViewModel<T> where T : Model
 
             var percentComplete = timeSinceMoveStart / duration;
             var nextTransform = GetNextTransform(startTransform, endTransform, percentComplete);
-            nextTransform.UpdateTransform(transform);
+            transform.UpdateFromEditorLocalTransform(nextTransform);
         }
     }
 

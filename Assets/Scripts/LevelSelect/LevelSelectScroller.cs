@@ -42,6 +42,8 @@ public class LevelSelectScroller : MonoBehaviour
         //some situations require the rest of the method to not run. These are them. The situations are: 
         //User holding a button, user not touching the screen, hold detection not yet being triggered, and user making invalid touches.
 
+        // TODO Drake: Verify the above works after removing the buttons from the list
+
         //Having a menu open
         if (menuOpen) { return; }
         //holding a button

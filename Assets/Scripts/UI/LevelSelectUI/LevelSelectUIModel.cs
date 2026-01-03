@@ -1,5 +1,9 @@
+using UnityEngine;
+
 public class LevelSelectUIModel : Model
 {
+    [SerializeField] private LevelSelectScroller levelSelectScroller;
+
     private LevelSelectUIState _uiState;
     public LevelSelectUIState UIState
     {
@@ -13,10 +17,29 @@ public class LevelSelectUIModel : Model
             Refresh();
         }
     }
+
+    public float LevelSelectScrollValue
+    {
+        get
+        {
+            return levelSelectScroller.GetLeftRightScrollAmount();
+        }
+        set
+        {
+            levelSelectScroller.SetLeftRightScrollAmount(value);
+            Refresh();
+        }
+    }
+
+    public void GoToMainMenu()
+    {
+        Levels.Load(Levels.TitleScreen);
+    }
 }
 
 public enum LevelSelectUIState
 {
     Base,
-    Settings
+    Settings,
+    Shop
 }
