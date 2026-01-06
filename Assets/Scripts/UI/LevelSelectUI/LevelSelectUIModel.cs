@@ -4,7 +4,8 @@ public class LevelSelectUIModel : Model
 {
     [SerializeField] private LevelSelectScroller levelSelectScroller;
 
-    private LevelSelectUIState _uiState;
+    // initialize the UI state to none so that LevelSelectAssetVisibilityManager can enable UI elements when ready
+    private LevelSelectUIState _uiState = LevelSelectUIState.None;
     public LevelSelectUIState UIState
     {
         get
@@ -39,6 +40,7 @@ public class LevelSelectUIModel : Model
 
 public enum LevelSelectUIState
 {
+    None,
     Base,
     Settings,
     Shop

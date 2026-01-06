@@ -21,6 +21,9 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
     [SerializeField] float BonesPercentDone;
     [SerializeField] int firstUnbeatenLevel;
     [SerializeField] MeshRenderer[] PopInBones;
+
+    [SerializeField] LevelSelectUIModel levelSelectUI;
+
     bool PlayerCanMoveCamera;
     public SaveManager saveManager;
     [Header("Dynamic level select obs. 0 is a null placeholder.")] //Js don't work in the header for some reason. Unity bug?
@@ -29,14 +32,11 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
     public GameObject[] LevelButtons;
     bool levelObjsDone;
     [Header("Other effect-based OBs")]
-    public GameObject uiButtonHolder;
     public GameObject boat;
-    [SerializeField] Scrollbar scrollbar;
     [SerializeField] LevelSelectScroller lss;
     // Start is called before the first frame update
     void Start()
     {
-        uiButtonHolder.SetActive(false);
         if(saveManager == null){
             saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
         }
@@ -57,9 +57,8 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
             FinalCamPos = InitCamPos;
         }
         //set the scrollbar now.
-        // TODO Drake: Make the below work with the new slider...
-        // probably going to require referencing the LevelSelectUIModel here
-        //scrollbar.value = Helper.RemapToBetweenZeroAndOne(lss.LeftBound.position.x, lss.RightBound.position.x, FinalCamPos.x);
+        levelSelectUI.LevelSelectScrollValue = Helper.RemapToBetweenZeroAndOne(lss.LeftBound.position.x, lss.RightBound.position.x, FinalCamPos.x);
+
         Keyframe[] keys = new Keyframe[2];
         keys[0] = new Keyframe(0f,InitCamPos.x);
         keys[1] = new Keyframe(1f,FinalCamPos.x);
@@ -92,7 +91,7 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
 
         if(CameraInPosition & BoneTimerCounter < BoneTimerThreshold){
             RunBonePopin();
-            uiButtonHolder.SetActive(true); // TODO Drake: Make visibility based on a view model. Change a value on LevelSelectUIModel to trigger the refresh
+            levelSelectUI.UIState = LevelSelectUIState.Base;
         }
 
     }

@@ -43,7 +43,7 @@ public class LevelSelectButtonManager : MonoBehaviour
     }
 
     #region SettingsMethods
-    void SetSettings() // TODO Drake: Delete
+    void SetSettings() // TODO Drake: Delete after updating the shop menu
     {
         saveManager.Load();
         //shop stuff
@@ -215,16 +215,6 @@ public class LevelSelectButtonManager : MonoBehaviour
         SetSkinButton.gameObject.SetActive(false);
     }
     #endregion
-
-    public void SetUiButtonVisibility(bool visibility) // TODO Drake: Delete
-    {
-        MainMenuButton.SetActive(visibility);
-    }
-    public void GoToTitleScreenButton()
-    {
-        Levels.Load(Levels.TitleScreen);
-
-    }
 
     public void SetLevelScroll()
     {
