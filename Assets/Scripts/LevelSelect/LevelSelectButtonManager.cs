@@ -216,12 +216,6 @@ public class LevelSelectButtonManager : MonoBehaviour
     }
     #endregion
 
-    public void SetLevelScroll()
-    {
-        levelSelectScroller.SetLeftRightScrollAmount(scrollbar.value);
-    }
-
-
     public void DoBark()
     {
         AudioClip thisBark = barks[UnityEngine.Random.Range(0, barks.Length - 1)];
