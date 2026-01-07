@@ -28,7 +28,7 @@ public class LevelSelectButtonManager : MonoBehaviour
     [SerializeField] Image itemImg;
     [SerializeField] Image JetpackImg;
     [SerializeField] Image DoghouseButtersImg;
-    [SerializeField] public ShopItem[] shopItems;
+    [SerializeField] public ShopItem[] shopItems; // TODO: Drake need to transfer this list to the shopMenuModel.
     [SerializeField] public Sprite cantGetRead;
     [SerializeField] Button BuyButton;
     [SerializeField] Button SetSkinButton;
