@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.AdaptivePerformance;
+
 public class CorgiSense : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
@@ -12,6 +10,7 @@ public class CorgiSense : MonoBehaviour
     [SerializeField] Sprite NoFinishSprite;
     [SerializeField] Image SpriteHolder;
     [SerializeField] Transform HolderObj;
+    [SerializeField] Transform sourceTransform;
     [SerializeField] TMP_Text DistanceText;
     int dist;
     [SerializeField] bool haveFinish;
@@ -37,7 +36,7 @@ public class CorgiSense : MonoBehaviour
             haveFinish = true;
             SpriteHolder.sprite = HaveFinishSprite;
         }
-        GoalPos = new Vector3(Finish.transform.position.x,Finish.transform.position.y, playerTransform.position.z);
+        GoalPos = new Vector3(Finish.transform.position.x,Finish.transform.position.y, sourceTransform.position.z);
     }
 
     // Update is called once per frame
@@ -52,7 +51,7 @@ public class CorgiSense : MonoBehaviour
     }
 
     private void AdjustCorgiSense(){
-        float angle = Mathf.Rad2Deg * (Mathf.Atan2(GoalPos.y - playerTransform.position.y, GoalPos.x - playerTransform.position.x));
+        float angle = Mathf.Rad2Deg * (Mathf.Atan2(GoalPos.y - sourceTransform.position.y, GoalPos.x - sourceTransform.position.x));
         HolderObj.rotation = Quaternion.Euler(new Vector3(0,0,angle));
     }
     private void AdjustText(){
