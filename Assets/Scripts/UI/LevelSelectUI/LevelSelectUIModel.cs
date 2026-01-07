@@ -1,6 +1,11 @@
+using UnityEngine;
+
 public class LevelSelectUIModel : Model
 {
-    private LevelSelectUIState _uiState;
+    [SerializeField] private LevelSelectScroller levelSelectScroller;
+
+    // initialize the UI state to none so that LevelSelectAssetVisibilityManager can enable UI elements when ready
+    private LevelSelectUIState _uiState = LevelSelectUIState.None;
     public LevelSelectUIState UIState
     {
         get
@@ -13,10 +18,30 @@ public class LevelSelectUIModel : Model
             Refresh();
         }
     }
+
+    public float LevelSelectScrollValue
+    {
+        get
+        {
+            return levelSelectScroller.GetLeftRightScrollAmount();
+        }
+        set
+        {
+            levelSelectScroller.SetLeftRightScrollAmount(value);
+            Refresh();
+        }
+    }
+
+    public void GoToMainMenu()
+    {
+        Levels.Load(Levels.TitleScreen);
+    }
 }
 
 public enum LevelSelectUIState
 {
+    None,
     Base,
-    Settings
+    Settings,
+    Shop
 }
