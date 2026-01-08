@@ -2,11 +2,11 @@
 {
     protected override bool IsEnabled()
     {
-        return !Model.IsActiveSkinOwned();
+        return !Model.IsActiveSkinOwned() && Model.GetCurrentBoneBalance() > Model.GetCurrentItemCost();
     }
 
     protected override void OnClick()
     {
-        Model.BuyCurrentSkin();
+        Model.BuyCurrentItem();
     }
 }
