@@ -13,7 +13,7 @@ public class ShopMenuModel : Model
     private SaveManager saveManager;
 
     public ShopItem CurrentSelectedShopItem => shopItems[currentSelectedShopItem];
-    public ShopItem CurrentEquippedShopItem => shopItems.First(x => x.isSkin && x.SkinId == collectibleData.CurrentSkin);
+    public ShopItem CurrentEquippedShopItem => shopItems.First(x => x.Type == ShopItemType.Skin && x.SkinId == collectibleData.CurrentSkin);
 
     private bool _treatsVisible;
     public bool TreatsVisible
@@ -54,7 +54,7 @@ public class ShopMenuModel : Model
 
     public bool IsActiveSkinOwned()
     {
-        if (!CurrentSelectedShopItem.isSkin)
+        if (CurrentSelectedShopItem.Type != ShopItemType.Skin)
         {
             return false;
         }
@@ -64,7 +64,7 @@ public class ShopMenuModel : Model
 
     public bool IsActiveSkinEquipped()
     {
-        if (!CurrentSelectedShopItem.isSkin)
+        if (CurrentSelectedShopItem.Type != ShopItemType.Skin)
         {
             return false;
         }
@@ -104,32 +104,16 @@ public class ShopMenuModel : Model
 
     public int GetCurrentItemCost()
     {
-        if (CurrentSelectedShopItem.itemPrice == 0)
+        switch (CurrentSelectedShopItem.Type)
         {
-            // TODO Drake: This is fragile, consider adding an "ItemType" enum to the ShopItem
-
-            // If the price is 0, query the save data and respond accordingly.
-            // There's only 3 dynamically priced items so we can just use a switch.
-            if (Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Tummy.*"))
-            {
-                return collectibleData.treatsUpgradeLevel;
-            }
-            else if (Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Thrust.*"))
-            {
-                return collectibleData.thrustUpgradeLevel;
-            }
-            else if (Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Fuel.*"))
-            {
+            case ShopItemType.Fuel:
                 return collectibleData.fuelUpgradeLevel;
-            }
-            else
-            {
-                throw new ArgumentException($"Shop item: {CurrentSelectedShopItem.itemName} has an invalid price of 0!");
-            }
-        }
-        else
-        {
-            return CurrentSelectedShopItem.itemPrice;
+            case ShopItemType.Thrust:
+                return collectibleData.thrustUpgradeLevel;
+            case ShopItemType.Tummy:
+                return collectibleData.treatsUpgradeLevel;
+            default:
+                return CurrentSelectedShopItem.itemPrice;
         }
     }
 

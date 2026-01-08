@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a7447630823294db87874e62ac0d91, type: 3}
   m_Name: JollyOldSaintButtersSkinItem
   m_EditorClassIdentifier: 
+  Type: 0
   itemName: Jolly Ol' St. Butters
   itemImg: {fileID: 21300000, guid: b00967e14e36f614b99621618710d5db, type: 3}
   JetpackImg: {fileID: 21300000, guid: a05a9d93e9c673c49a5d12dc1978da1b, type: 3}
   dogHouseButtersImg: {fileID: 21300000, guid: 74af54312e49ae9429a001f457ecd644, type: 3}
   itemPrice: 10
-  isSkin: 1
   SkinId: 9
