@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class ShopMenuModel : Model
 {
@@ -53,7 +54,7 @@ public class ShopMenuModel : Model
 
     public bool IsActiveSkinOwned()
     {
-        if (!CurrentEquippedShopItem.isSkin)
+        if (!CurrentSelectedShopItem.isSkin)
         {
             return false;
         }
@@ -63,7 +64,7 @@ public class ShopMenuModel : Model
 
     public bool IsActiveSkinEquipped()
     {
-        if (!CurrentEquippedShopItem.isSkin)
+        if (!CurrentSelectedShopItem.isSkin)
         {
             return false;
         }
@@ -105,18 +106,25 @@ public class ShopMenuModel : Model
     {
         if (CurrentSelectedShopItem.itemPrice == 0)
         {
+            // TODO Drake: This is fragile, consider adding an "ItemType" enum to the ShopItem
+
             // If the price is 0, query the save data and respond accordingly.
             // There's only 3 dynamically priced items so we can just use a switch.
-            switch (true)
+            if (Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Tummy.*"))
             {
-                case bool _ when Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Tummy.*"):
-                    return collectibleData.treatsUpgradeLevel;
-                case bool _ when Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Thrust.*"):
-                    return collectibleData.thrustUpgradeLevel;
-                case bool _ when Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Fuel.*"):
-                    return collectibleData.fuelUpgradeLevel;
-                default:
-                    return -1; // an error has occurred.
+                return collectibleData.treatsUpgradeLevel;
+            }
+            else if (Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Thrust.*"))
+            {
+                return collectibleData.thrustUpgradeLevel;
+            }
+            else if (Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Fuel.*"))
+            {
+                return collectibleData.fuelUpgradeLevel;
+            }
+            else
+            {
+                throw new ArgumentException($"Shop item: {CurrentSelectedShopItem.itemName} has an invalid price of 0!");
             }
         }
         else
