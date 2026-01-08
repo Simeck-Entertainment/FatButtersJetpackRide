@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a7447630823294db87874e62ac0d91, type: 3}
   m_Name: SuperCorgSkinItem
   m_EditorClassIdentifier: 
+  Type: 0
   itemName: SuperCorg
   itemImg: {fileID: 21300000, guid: 7bfe4e4e445147240a2b71c374c14c4c, type: 3}
   JetpackImg: {fileID: 21300000, guid: 318a9dc50004c4040897d8325b4857cd, type: 3}
   dogHouseButtersImg: {fileID: 21300000, guid: 290ee502b4e65d14094e10e2f533d706, type: 3}
   itemPrice: 10
-  isSkin: 1
   SkinId: 12
