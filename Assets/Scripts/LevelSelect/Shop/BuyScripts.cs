@@ -14,66 +14,51 @@ public class BuyScripts : MonoBehaviour
         saveManager.Load();
     }
 
-    public void RunBuy(int item)
+    public void EquipSkin(int skinId)
     {
-        switch(item){
-            case 0: //Will always be fuel
-                UpgradeFuel();
-                break;
-            case 1: //will always be thrust
-                UpgradeThrust();
-                break;
-
-            case 2: //will always be tummy
-                UpgradeTummy();
-                break;
-            default: //everything else
-                BuyCurrentSkin();
-
-                break;
+        if (collectibleData.HaveSkins[skinId])
+        {
+            collectibleData.CurrentSkin = skinId;
+            saveManager.Save();
         }
     }
 
-    void BuyCurrentSkin()
+    public void BuySkin(int itemId, int price)
     {
-        int cost = shopMenu.CurrentSelectedShopItem.itemPrice;
-        if(collectibleData.BONES < cost){return;}
-        ReduceFunds(shopMenu.CurrentSelectedShopItem.itemPrice);
-        int skinNumber = shopMenu.CurrentSelectedShopItem.SkinId;
+        if(collectibleData.BONES < price) { return; }
+        ReduceFunds(price);
+
+        int skinNumber = itemId;
         collectibleData.HaveSkins[skinNumber] = true;
         //lsbm.EnableSetSkinButton();
         saveManager.Save();
     }
 
-    public void EnableCurrentSkin()
+    public void UpgradeFuel(int price)
     {
-        collectibleData.CurrentSkin = shopMenu.CurrentSelectedShopItem.SkinId;
-        saveManager.Save();
-        //lsbm.EnableNoBuyOrSkinButton();
-    }
+        if(collectibleData.BONES < price) { return; }
+        ReduceFunds(price);
 
-    public void UpgradeFuel()
-    {
-        if(collectibleData.BONES < collectibleData.fuelUpgradeLevel){return;}
-        ReduceFunds(collectibleData.fuelUpgradeLevel);
         collectibleData.fuelUpgradeLevel++;
         saveManager.Save();
         //lsbm.SetCurrentItemCostText(collectibleData.fuelUpgradeLevel);
     }
 
-    public void UpgradeThrust()
+    public void UpgradeThrust(int price)
     {
-        if(collectibleData.BONES < collectibleData.thrustUpgradeLevel){return;}
-        ReduceFunds(collectibleData.thrustUpgradeLevel);
+        if(collectibleData.BONES < price) { return; }
+        ReduceFunds(price);
+
         collectibleData.thrustUpgradeLevel++;
         saveManager.Save();
         //lsbm.SetCurrentItemCostText(collectibleData.thrustUpgradeLevel);
     }
 
-    public void UpgradeTummy()
+    public void UpgradeTummy(int price)
     {
-        if(collectibleData.BONES < collectibleData.treatsUpgradeLevel){return;}
-        ReduceFunds(collectibleData.treatsUpgradeLevel);
+        if(collectibleData.BONES < price) { return; }
+        ReduceFunds(price);
+
         collectibleData.treatsUpgradeLevel++;
         saveManager.Save();
         //lsbm.SetCurrentItemCostText(collectibleData.treatsUpgradeLevel);
