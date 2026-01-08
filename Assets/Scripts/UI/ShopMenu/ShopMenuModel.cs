@@ -11,9 +11,8 @@ public class ShopMenuModel : Model
     private int currentSelectedShopItem;
     private SaveManager saveManager;
 
-    public ShopItem[] ShopItems => shopItems;
     public ShopItem CurrentSelectedShopItem => shopItems[currentSelectedShopItem];
-    public ShopItem CurrentEquippedShopItem => shopItems.First(x => x.SkinId == collectibleData.CurrentSkin);
+    public ShopItem CurrentEquippedShopItem => shopItems.First(x => x.isSkin && x.SkinId == collectibleData.CurrentSkin);
 
     private bool _treatsVisible;
     public bool TreatsVisible
@@ -54,11 +53,21 @@ public class ShopMenuModel : Model
 
     public bool IsActiveSkinOwned()
     {
+        if (!CurrentEquippedShopItem.isSkin)
+        {
+            return false;
+        }
+
         return collectibleData.HaveSkins[CurrentSelectedShopItem.SkinId];
     }
 
     public bool IsActiveSkinEquipped()
     {
+        if (!CurrentEquippedShopItem.isSkin)
+        {
+            return false;
+        }
+
         return collectibleData.CurrentSkin == CurrentSelectedShopItem.SkinId;
     }
 
@@ -96,8 +105,8 @@ public class ShopMenuModel : Model
     {
         if (CurrentSelectedShopItem.itemPrice == 0)
         {
-            //If the price is 0, query the save data and respond accordingly.
-            //There's only 3 dynamically priced items so we can just use a switch.
+            // If the price is 0, query the save data and respond accordingly.
+            // There's only 3 dynamically priced items so we can just use a switch.
             switch (true)
             {
                 case bool _ when Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Tummy.*"):
@@ -107,7 +116,7 @@ public class ShopMenuModel : Model
                 case bool _ when Regex.IsMatch(CurrentSelectedShopItem.itemName, ".*Fuel.*"):
                     return collectibleData.fuelUpgradeLevel;
                 default:
-                    return -1; //an error has occurred.
+                    return -1; // an error has occurred.
             }
         }
         else
