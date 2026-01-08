@@ -18,4 +18,4 @@ MonoBehaviour:
   dogHouseButtersImg: {fileID: 0}
   itemPrice: 0
   isSkin: 0
-  SkinId: 0
+  SkinId: -1
