@@ -106,6 +106,19 @@ public class SettingsMenuModel : Model
         }
     }
 
+    public bool CorgiSenseEnabled
+    {
+        get
+        {
+            return collectibleData.CorgiSenseEnabled;
+        }
+        set
+        {
+            collectibleData.CorgiSenseEnabled = value;
+            Save();
+        }
+    }
+
     public bool LevelSelectAdsEnabled
     {
         get

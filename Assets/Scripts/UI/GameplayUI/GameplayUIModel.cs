@@ -27,6 +27,15 @@ public class GameplayUIModel : Model
         }
     }
 
+    public bool CorgiSenseEnabled
+    {
+        get
+        {
+            // We'll refresh this each time we change UIState
+            return saveManager.collectibleData.CorgiSenseEnabled;
+        }
+    }
+
     private void Awake()
     {
         saveManager = Helper.NabSaveData().GetComponent<SaveManager>();

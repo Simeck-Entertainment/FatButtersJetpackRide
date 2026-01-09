@@ -57,6 +57,7 @@ public class SaveManager : MonoBehaviour
         data.SceneToLoad = "";
         data.LastLoadedLevel = "";
         data.OnScreenControlsEnabled = false;
+        data.CorgiSenseEnabled = true;
         data.SceneToLoad = "";
         data.LastLoadedLevel = "";
         data.LastLoadedLevelInt = 0;
@@ -103,6 +104,7 @@ public class SaveManager : MonoBehaviour
             data.SFXVolumeLevel = collectibleData.SFXVolumeLevel;
             data.hapticsEnabled = collectibleData.HapticsEnabled;
             data.OnScreenControlsEnabled = collectibleData.OnScreenControlsEnabled;
+            data.CorgiSenseEnabled = collectibleData.CorgiSenseEnabled;
             data.monthBorn = userInfo.monthBorn;
             data.dayBorn = userInfo.dayBorn;
             data.yearBorn = userInfo.yearBorn;
@@ -152,6 +154,7 @@ public class SaveManager : MonoBehaviour
             collectibleData.SFXVolumeLevel = data.SFXVolumeLevel;
             collectibleData.HapticsEnabled = data.hapticsEnabled;
             collectibleData.OnScreenControlsEnabled = data.OnScreenControlsEnabled;
+            collectibleData.CorgiSenseEnabled = data.CorgiSenseEnabled;
             sceneLoadData.SceneToLoad = data.SceneToLoad;
             sceneLoadData.LastLoadedLevel = data.LastLoadedLevel;
             sceneLoadData.LastLoadedLevelInt = data.LastLoadedLevelInt;
@@ -205,6 +208,7 @@ public class SaveManager : MonoBehaviour
         data.dayBorn = 0;
         data.hapticsEnabled = true;
         data.OnScreenControlsEnabled = false;
+        data.CorgiSenseEnabled = true;
         data.LastMotdRead = true;
         data.LastMotdVersion = 0;
         data.SceneToLoad = "";
