@@ -20,6 +20,7 @@ public class CollectibleData : ScriptableObject
     public float SFXVolumeLevel;
     public bool HapticsEnabled;
     public bool OnScreenControlsEnabled;
+    public bool CorgiSenseEnabled;
     public int GraphicsQualityLevel;
 
     [Header("In-level collectible Counters")]
