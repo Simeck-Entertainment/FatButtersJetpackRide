@@ -47,6 +47,7 @@ public class InputDriver : MonoBehaviour
     public bool GoThrust;
     public bool GoCw;
     public bool GoCcw;
+    public bool GoBoost;  // Boost : Multi-touch (mobile) or Thrust + M key (Pc/Gamepad)
     protected void OnEnable(){
         
     }
@@ -75,6 +76,10 @@ public class InputDriver : MonoBehaviour
         GoCcw = OSCCWPressed | KBCCWPressed ? true : false;
         GoThrust = OSThrustPressed | KBThrustPressed | touchThrust ? true : false;
 
+        // Boost detection: Multi-touch (mobile) or Thrust + M key (Pc/Gamepad)
+        bool isMultiTouchBoost = touchCount > 1;
+        bool isKeyboardBoost = GoThrust && Input.GetKey(KeyCode.M);
+        GoBoost = isMultiTouchBoost || isKeyboardBoost;
     }
 
     public void EnableInput(){

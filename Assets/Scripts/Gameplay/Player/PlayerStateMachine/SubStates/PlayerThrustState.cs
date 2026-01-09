@@ -38,13 +38,26 @@ public class PlayerThrustState : PlayerAliveState
     {
         stateAge++;
         
+        // Handle boost logic within the state machine
+        bool isBoosting = player.input.GoBoost && player.fuel > 0f;
+        
+        // Apply boost thrust modifier (preserves upgrades)
+        if (isBoosting)
+        {
+            player.thrust = player.baseThrustWithUpgrades + 12.5f;
+        }
+        else
+        {
+            player.thrust = player.baseThrustWithUpgrades;
+        }
+        
         if (stateAge == 3)
         {
             if (player.input.GoThrust)
             {
                 player.vfx.StartPrimaryThrusters();
                 thrust();
-                UseFuel();
+                UseFuel(isBoosting);
             }
         }
         if (stateAge > 3)
@@ -52,7 +65,7 @@ public class PlayerThrustState : PlayerAliveState
             if (player.input.GoThrust)
             {
                 thrust();
-                UseFuel();
+                UseFuel(isBoosting);
             }
         }
         if (!player.input.GoThrust)
