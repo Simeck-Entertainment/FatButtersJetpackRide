@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     [SerializeField] public GameObject[] CollidersAndTriggers;
     [Header("Important internal data")]
     public float thrust;
+    [System.NonSerialized] public float baseThrustWithUpgrades; // Base thrust including upgrades (used for boost calculations)
     public float fuel;
     public float maxFuel;
     [System.NonSerialized] public float fuelPercent;
@@ -55,6 +56,14 @@ public class Player : MonoBehaviour
     [System.NonSerialized] public float KeyboardRollOffset;
     public int KeyboardSensitivity;
     public bool corgiTurned;
+
+    [Header("Walk mechanics")]
+    [SerializeField] public float walkSpeed = 2f;
+    [SerializeField] public float walkAcceleration = 5f;
+    [System.NonSerialized] public float walkAbsZ; // Absolute Z rotation for walk detection
+    [System.NonSerialized] public float walkDirection; // Walk direction (-1 or 1)
+    [System.NonSerialized] public float walkTargetSpeed; // Target walk speed
+    [System.NonSerialized] public float walkCurrentSpeed; // Current smoothed walk speed
 
     [Header("Collision bools")]
     public bool GroundTouch;
@@ -138,7 +147,10 @@ public class Player : MonoBehaviour
 
     #region DataStuff
     void ApplyStoreUpgrades(){
-        thrust = baseThrust+saveManager.collectibleData.thrustUpgradeLevel;
+        // Level 1 = base thrust (25), Level 2 = base + 1 (26), etc.
+        // So we subtract 1 from the upgrade level since level 1 is the starting level
+        baseThrustWithUpgrades = baseThrust + (saveManager.collectibleData.thrustUpgradeLevel - 1);
+        thrust = baseThrustWithUpgrades; // Initialize thrust to base upgraded value
         maxFuel = saveManager.collectibleData.fuelUpgradeLevel*20.0f;
         fuel = maxFuel;
         fuelPercent = fuel/maxFuel;

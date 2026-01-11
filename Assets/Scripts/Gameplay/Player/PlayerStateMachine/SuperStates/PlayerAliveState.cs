@@ -171,6 +171,11 @@ public class PlayerAliveState : PlayerState
     }
     public void UseFuel()
     {
+        UseFuel(false);
+    }
+    
+    public void UseFuel(bool isBoosting)
+    {
 
 #if UNITY_EDITOR
         if (player.saveManager.collectibleData.GameplayTestingMode)
@@ -180,7 +185,8 @@ public class PlayerAliveState : PlayerState
 #endif
         if (!BallCheck())
         {
-            player.fuel -= 0.5f;
+            // Boost consumes 1.0 fuel per frame, normal thrust consumes 0.5
+            player.fuel -= isBoosting ? 1.0f : 0.5f;
         }
     }
     bool BallCheck()
