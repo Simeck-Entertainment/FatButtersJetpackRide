@@ -1,7 +1,5 @@
-using System.Text.RegularExpressions;
 using UnityEngine;
 using System.Linq;
-using System;
 
 public class ShopMenuModel : Model
 {
@@ -76,19 +74,18 @@ public class ShopMenuModel : Model
     {
         var price = GetCurrentItemCost();
 
-        switch (currentSelectedShopItem)
+        switch (CurrentSelectedShopItem.Type)
         {
-            case 0: //Will always be fuel
+            case ShopItemType.Fuel:
                 buyer.UpgradeFuel(price);
                 break;
-            case 1: //will always be thrust
+            case ShopItemType.Thrust:
                 buyer.UpgradeThrust(price);
                 break;
-
-            case 2: //will always be tummy
+            case ShopItemType.Tummy:
                 buyer.UpgradeTummy(price);
                 break;
-            default: //everything else
+            default:
                 buyer.BuySkin(CurrentSelectedShopItem.SkinId, price);
                 break;
         }
