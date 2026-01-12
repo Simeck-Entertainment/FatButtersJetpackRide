@@ -1,14 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class InheritWalkState : PlayerAliveState
 {
     int stateAge;
     bool animationSet;
+    float animNormalizedTime; //since we're switching between different animations dynamically, we should handle normalized time tracking here.
     
     string[] forwardMove = { "ForeWalkSlow", "ForeWalkMid", "ForeWalkFast" };
     string[] backwardMove = { "BackWalkSlow", "BackWalkFast" };
     string[] idleAnnoyedAnims = { "idleAnnoyed1", "idleAnnoyed2" };
-    
+
+    WalkSpeed walkSpeedEnum;
     public InheritWalkState(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine)
     {
 
@@ -36,6 +40,10 @@ public class InheritWalkState : PlayerAliveState
     
     public override void FixedUpdate()
     {
+        if(stateAge > 0)
+        {
+            animNormalizedTime = GetNormalizedTime(0);
+        }
         stateAge++;
         base.FixedUpdate();
         
@@ -73,14 +81,19 @@ public class InheritWalkState : PlayerAliveState
         player.walkAbsZ = Mathf.Abs(rotationZ);
 
         // Determine target speed based on rotation
-        if (player.walkAbsZ < 15f)
+        if (player.walkAbsZ < 15f){
+            //If rotation is under 15 degrees, we should be sent to the idle state.
             player.walkTargetSpeed = 0f;
-        else if (player.walkAbsZ < 25f)
+        }else if (player.walkAbsZ < 25f){ //Slow walk
             player.walkTargetSpeed = 0.5f * player.walkSpeed;
-        else if (player.walkAbsZ < 35f)
+            walkSpeedEnum = WalkSpeed.Slow;
+        }else if (player.walkAbsZ < 35f){ //Medium walk
             player.walkTargetSpeed = 0.8f * player.walkSpeed;
-        else
+            walkSpeedEnum = WalkSpeed.Medium;
+        }else{ //fast walk
             player.walkTargetSpeed = 1.2f * player.walkSpeed;
+            walkSpeedEnum = WalkSpeed.Fast;
+        }
 
         // Smoothly approach the target speed
         player.walkCurrentSpeed = Mathf.Lerp(player.walkCurrentSpeed, player.walkTargetSpeed, Time.fixedDeltaTime * player.walkAcceleration);
@@ -91,20 +104,20 @@ public class InheritWalkState : PlayerAliveState
         // Apply velocity smoothly
         player.rb.linearVelocity = new Vector3(player.walkDirection * player.walkCurrentSpeed, player.rb.linearVelocity.y, 0f);
     }
-    
+
     private void PlayerWalkAnimation()
     {
         if (player.walkAbsZ > 15 && animationSet)
         {
-            if(player.walkDirection == 1)
+            if (player.walkDirection == 1)
             {
-               PlayAnim(forwardMove[Random.Range(0, 2)]); 
+                SetForwardWalkAnimWithTime();
             }
             else
             {
-                PlayAnim(backwardMove[Random.Range(0, 2)]);
+                SetBackwardWalkAnimWithTime();
             }
-            
+
             animationSet = false;
         }
         else if (player.walkAbsZ < 15)
@@ -113,4 +126,43 @@ public class InheritWalkState : PlayerAliveState
             player.stateMachine.changeState(player.playerIdleState);
         }
     }
+
+    private void SetForwardWalkAnimWithTime()
+    {
+        switch (walkSpeedEnum)
+        {
+            case WalkSpeed.Slow:
+                PlayAnim(forwardMove[0], animNormalizedTime);
+                break;
+            case WalkSpeed.Medium:
+                PlayAnim(forwardMove[1], animNormalizedTime);
+                break;
+            case WalkSpeed.Fast:
+                PlayAnim(forwardMove[2], animNormalizedTime);
+                break;
+            default: //no need to do anything because we're going to idle state.
+                break;
+        }
+    }
+    
+       private void SetBackwardWalkAnimWithTime()
+    {
+        switch (walkSpeedEnum)
+        {
+            case WalkSpeed.Slow:
+                PlayAnim(backwardMove[0], animNormalizedTime);
+                break;
+            case WalkSpeed.Medium:
+                PlayAnim(backwardMove[1], animNormalizedTime);
+                break;
+            case WalkSpeed.Fast:
+                PlayAnim(backwardMove[1], animNormalizedTime);
+                break;
+            default: //no need to do anything because we're going to idle state.
+                break;
+        }
+    } 
+
+
+    private enum WalkSpeed {Slow, Medium, Fast}
 }
