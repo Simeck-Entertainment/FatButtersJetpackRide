@@ -4,9 +4,7 @@ using UnityEngine.UI;
 
 public class LevelSelectScroller : MonoBehaviour
 {
-    [SerializeField] Scrollbar lssb;
     [SerializeField] LevelSelectButtonManager lsbm;
-    public bool menuOpen;
     [SerializeField] bool buttonHeld;
     [SerializeField] LevelSelectLauncherButton[] LevelSelectButtons;
     [Header("Objects needed to work")]
@@ -14,6 +12,7 @@ public class LevelSelectScroller : MonoBehaviour
     [SerializeField] public Transform LeftBound;
     [SerializeField] public Transform RightBound;
     [SerializeField] GameObject lookShooter;
+    [SerializeField] LevelSelectUIModel levelSelectUI;
     Vector2 OGTouchPos;
     Vector2 CurrentTouchPos;
     [Header("LookShooterStuff")]
@@ -29,7 +28,6 @@ public class LevelSelectScroller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        menuOpen = false;
         buttonHeld = false;
         isBeingHeld = false;
         //LevelSelectButtons = FindObjectsByType<LevelSelectLauncherButton>(FindObjectsSortMode.None);
@@ -42,10 +40,10 @@ public class LevelSelectScroller : MonoBehaviour
         //some situations require the rest of the method to not run. These are them. The situations are: 
         //User holding a button, user not touching the screen, hold detection not yet being triggered, and user making invalid touches.
 
-        //Having a menu open
-        if (menuOpen) { return; }
         //holding a button
         if (buttonHeld) { return; }
+        // prevent scrolling while any menus are open
+        if (levelSelectUI.UIState != LevelSelectUIState.Base) { return; }
         //not touching the screen
         if (Input.touchCount == 0)
         {
@@ -185,9 +183,8 @@ public class LevelSelectScroller : MonoBehaviour
         }
         //Move the camera by the amount we figured out, capped by the max camera speed.
         float xval = cam.transform.position.x + Helper.RemapArbitraryValues(0f, 1280f, 0f, MaxCamSpeed, touchPosDiff);
-        lssb.value = Helper.RemapToBetweenZeroAndOne(LeftBound.position.x, RightBound.position.x, xval);
-        lsbm.SetLevelScroll();
-
+        
+        levelSelectUI.LevelSelectScrollValue = Helper.RemapToBetweenZeroAndOne(LeftBound.position.x, RightBound.position.x, xval);
     }
 
     public void SetLeftRightScrollAmount(float scrollPercent)

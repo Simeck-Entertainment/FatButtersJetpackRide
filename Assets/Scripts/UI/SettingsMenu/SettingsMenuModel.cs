@@ -178,7 +178,7 @@ public class SettingsMenuModel : Model
 
         Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for pause/resume
 
-        Helper.LoadToLevel(Levels.LevelSelect);
+        Levels.Load(Levels.LevelSelect);
     }
 
     private void Save()
