@@ -2,7 +2,7 @@
 {
     protected override bool IsEnabled()
     {
-        return !Model.IsActiveSkinOwned() && Model.GetCurrentBoneBalance() > Model.GetCurrentItemCost();
+        return !Model.IsActiveSkinOwned() && Model.GetCurrentBoneBalance() >= Model.GetCurrentItemCost();
     }
 
     protected override void OnClick()
