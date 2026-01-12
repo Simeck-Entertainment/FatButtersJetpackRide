@@ -30,7 +30,6 @@ public class BuyScripts : MonoBehaviour
 
         int skinNumber = itemId;
         collectibleData.HaveSkins[skinNumber] = true;
-        //lsbm.EnableSetSkinButton();
         saveManager.Save();
     }
 
@@ -41,7 +40,6 @@ public class BuyScripts : MonoBehaviour
 
         collectibleData.fuelUpgradeLevel++;
         saveManager.Save();
-        //lsbm.SetCurrentItemCostText(collectibleData.fuelUpgradeLevel);
     }
 
     public void UpgradeThrust(int price)
@@ -51,7 +49,6 @@ public class BuyScripts : MonoBehaviour
 
         collectibleData.thrustUpgradeLevel++;
         saveManager.Save();
-        //lsbm.SetCurrentItemCostText(collectibleData.thrustUpgradeLevel);
     }
 
     public void UpgradeTummy(int price)
@@ -61,7 +58,6 @@ public class BuyScripts : MonoBehaviour
 
         collectibleData.treatsUpgradeLevel++;
         saveManager.Save();
-        //lsbm.SetCurrentItemCostText(collectibleData.treatsUpgradeLevel);
     }
 
     public void ReduceFunds(int amount)
