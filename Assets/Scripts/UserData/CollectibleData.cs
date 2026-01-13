@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName ="newCollectibleData", menuName ="Data/Collectible Data")] //
 public class CollectibleData : ScriptableObject
 {
-    public int BONES; 
+    [SerializeField] private int bones; 
     [Header("Store purchases")]
     public int fuelUpgradeLevel;
     public int thrustUpgradeLevel;
@@ -29,4 +30,19 @@ public class CollectibleData : ScriptableObject
     [Header("Dev Options")]
     public bool GameplayTestingMode;
     public bool ignoreSaveData;
+
+    public int BONES
+    {
+        get
+        {
+            return bones;
+        }
+        set
+        {
+            bones = value;
+            OnBonesChanged.Invoke();
+        }
+    }
+
+    public UnityEvent OnBonesChanged { get; set; } = new UnityEvent();
 }

@@ -7,7 +7,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] SaveManager saveManager;
     public GameObject playerObj;
     [SerializeField] Player player;
-    [SerializeField] public TMP_Text bonesText;
     [SerializeField] Image fuelGuage;
     [SerializeField] Sprite[] FuelGuageColors;
 
@@ -59,7 +58,6 @@ public class UIManager : MonoBehaviour
     public void SetUIIndicators() // TODO Drake: figure out how to make a view model for this
     {
         fuelManager();
-        bonesText.text = (player.saveManager.collectibleData.BONES + player.tempBones).ToString();
         if (runningHurt)
         {
             HurtIndicator.gameObject.SetActive(true);
