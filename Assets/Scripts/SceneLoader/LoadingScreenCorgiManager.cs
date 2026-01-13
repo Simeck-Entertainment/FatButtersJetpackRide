@@ -43,8 +43,8 @@ public class LoadingScreenCorgiManager : MonoBehaviour
     }
 
     private bool FilterTouchInput(){
-        if(Input.touchCount == 0){return false;} //if untouched
-        if(Time.timeScale == 0.0f){return false;} //if paused
+        if (Input.touchCount == 0) { return false; } //if untouched
+        if (PauseUtility.IsPaused) { return false; }
         return true;
     }
     private void TrackRollData(){

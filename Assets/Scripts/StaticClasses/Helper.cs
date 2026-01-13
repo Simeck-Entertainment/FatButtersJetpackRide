@@ -82,18 +82,6 @@ public class Helper
         return (finish + start) / 2.0f;
     }
 
-    public static void LoadToLevel(string levelName)
-    {
-        SaveManager sM = GameObject.FindAnyObjectByType<SaveManager>();
-        SceneLoadData sld = sM.sceneLoadData;
-        sld.SceneToLoad = levelName;
-        sld.LastLoadedLevelInt = 0;
-        sld.LastLoadedLevel = "";
-        sM.Save();
-        //IronSource.Agent.hideBanner();
-        SceneManager.LoadScene(Levels.SceneLoader);
-
-    }
     public static GameObject NabSaveData()
     {
         return MonoBehaviour.FindAnyObjectByType<SaveManager>().gameObject;

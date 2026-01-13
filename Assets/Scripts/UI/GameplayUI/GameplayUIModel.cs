@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class GameplayUIModel : Model
 {
     private SaveManager saveManager;
@@ -47,12 +45,12 @@ public class GameplayUIModel : Model
         if (paused)
         {
             UIState = GameplayUIState.Settings;
-            Time.timeScale = 0.0f; // TODO Drake: Consider a global utility for pause/resume
+            PauseUtility.Pause();
         }
         else
         {
             UIState = GameplayUIState.Base;
-            Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for pause/resume
+            PauseUtility.Resume();
         }
     }
 }
