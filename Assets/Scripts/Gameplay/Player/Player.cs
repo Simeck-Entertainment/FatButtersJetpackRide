@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
     [SerializeField] public AudioSource sfx;
     [SerializeField] public CorgiEffectHolder vfx;
     [SerializeField] public UIManager UI;
-    [SerializeField] public Button PauseButton;
 
     [Header("Skin stuff")]
     public int skindex; //A    cheeky way of saying "The active skin index number"

@@ -30,6 +30,6 @@ public abstract class EndLevelMenuModel : Model
         saveManager.Save();
 
         Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for pause/resume
-        Helper.LoadToLevel(Levels.LevelSelect);
+        Levels.Load(Levels.LevelSelect);
     }
 }
