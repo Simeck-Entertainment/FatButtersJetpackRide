@@ -85,7 +85,7 @@ public class PlayerAliveState : PlayerState
     {
         if (player.BoneTouch)
         {
-            player.tempBones += 1;
+            player.AddBones(1);
             player.BoneTouch = false;
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -85,6 +86,8 @@ public class Player : MonoBehaviour
     public PlayerDirection playerDirection;
     public bool LowGravMode;
 
+    public UnityEvent OnBonesCollected { get; set; } = new UnityEvent();
+
     // Start is called before the first frame update
 
     void Awake()
@@ -143,6 +146,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void AddBones(int newBones)
+    {
+        tempBones += newBones;
+        OnBonesCollected.Invoke();
+    }
 
     #region DataStuff
     void ApplyStoreUpgrades(){
