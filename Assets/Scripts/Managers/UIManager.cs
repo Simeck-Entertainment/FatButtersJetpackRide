@@ -10,17 +10,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TMP_Text bonesText;
     [SerializeField] Image fuelGuage;
     [SerializeField] Sprite[] FuelGuageColors;
-    [Header("Pause menu Stuff")]
-    [SerializeField] GameObject PauseButton;
-    [SerializeField] GameObject PauseMenu;
-
-    [Header("Failure Menu Stuff")]
-    [SerializeField] public TMP_Text FailText;
-    [SerializeField] public GameObject FailMenu;
-    [SerializeField] public GameObject savedBonesText;
-    [Header("Success Menu Stuff")]
-    [SerializeField] public GameObject WinMenu;
-    [SerializeField] public TMP_Text endLevelStats;
 
     [Header("Damage Indicator stuff")]
     [SerializeField] Renderer HurtIndicator;
