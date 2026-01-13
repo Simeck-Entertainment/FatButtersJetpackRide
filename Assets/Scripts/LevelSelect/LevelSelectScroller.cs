@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class LevelSelectScroller : MonoBehaviour
 {
-    [SerializeField] LevelSelectButtonManager lsbm;
     [SerializeField] bool buttonHeld;
     [SerializeField] LevelSelectLauncherButton[] LevelSelectButtons;
     [Header("Objects needed to work")]

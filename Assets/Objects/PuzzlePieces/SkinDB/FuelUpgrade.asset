@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a7447630823294db87874e62ac0d91, type: 3}
   m_Name: FuelUpgrade
   m_EditorClassIdentifier: 
+  Type: 1
   itemName: Upgrade Fuel Capacity
   itemImg: {fileID: 21300000, guid: cdfd73e546b26da439c270f99ee87b88, type: 3}
   JetpackImg: {fileID: 21300000, guid: 72f5141b86768f642ac0b3a2d4a5a6d0, type: 3}
   dogHouseButtersImg: {fileID: 0}
   itemPrice: 0
-  isSkin: 0
-  SkinId: 0
+  SkinId: -1

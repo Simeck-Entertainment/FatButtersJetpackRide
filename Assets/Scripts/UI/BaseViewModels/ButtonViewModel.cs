@@ -27,7 +27,7 @@ public abstract class ButtonViewModel<T> : ViewModel<T> where T : Model
 
     protected override void OnModelChanged()
     {
-        Button.enabled = IsEnabled();
+        Button.interactable = IsEnabled();
     }
 
     protected virtual bool IsEnabled()
