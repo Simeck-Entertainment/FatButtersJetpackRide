@@ -1,11 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
-
-
 
 public class Player : MonoBehaviour
 {
@@ -31,7 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] public UIManager UI;
 
     [Header("Skin stuff")]
-    public int skindex; //A    cheeky way of saying "The active skin index number"
+    public int skindex; //A cheeky way of saying "The active skin index number"
     public Animator anim;
     [Header("Skin-Specific fields")]
     public Animator secondaryAnim;
@@ -43,7 +37,19 @@ public class Player : MonoBehaviour
     [Header("Important internal data")]
     public float thrust;
     [System.NonSerialized] public float baseThrustWithUpgrades; // Base thrust including upgrades (used for boost calculations)
-    public float fuel;
+    private float _fuel;
+    public float Fuel
+    {
+        get
+        {
+            return _fuel;
+        }
+        set
+        {
+            _fuel = value;
+            OnFuelUpdated.Invoke();
+        }
+    }
     public float maxFuel;
     [System.NonSerialized] public float fuelPercent;
     [System.NonSerialized] public float tummyPercent;
@@ -87,6 +93,7 @@ public class Player : MonoBehaviour
     public bool LowGravMode;
 
     public UnityEvent OnBonesCollected { get; set; } = new UnityEvent();
+    public UnityEvent OnFuelUpdated { get; set; } = new UnityEvent();
 
     // Start is called before the first frame update
 
@@ -159,8 +166,8 @@ public class Player : MonoBehaviour
         baseThrustWithUpgrades = baseThrust + (saveManager.collectibleData.thrustUpgradeLevel - 1);
         thrust = baseThrustWithUpgrades; // Initialize thrust to base upgraded value
         maxFuel = saveManager.collectibleData.fuelUpgradeLevel*20.0f;
-        fuel = maxFuel;
-        fuelPercent = fuel/maxFuel;
+        Fuel = maxFuel;
+        fuelPercent = Fuel/maxFuel;
         maxTummy = saveManager.collectibleData.treatsUpgradeLevel;
         tummy = maxTummy;
         tummyPercent = tummy/maxTummy;

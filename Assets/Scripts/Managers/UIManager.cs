@@ -7,8 +7,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] SaveManager saveManager;
     public GameObject playerObj;
     [SerializeField] Player player;
-    [SerializeField] Image fuelGuage;
-    [SerializeField] Sprite[] FuelGuageColors;
 
     [Header("Damage Indicator stuff")]
     [SerializeField] Renderer HurtIndicator;
@@ -57,7 +55,6 @@ public class UIManager : MonoBehaviour
 
     public void SetUIIndicators() // TODO Drake: figure out how to make a view model for this
     {
-        fuelManager();
         if (runningHurt)
         {
             HurtIndicator.gameObject.SetActive(true);
@@ -99,28 +96,4 @@ public class UIManager : MonoBehaviour
         failMenu.FailReason = FailReason;
         CurrentState = GameplayUIState.Fail;
     }
-
-    #region fuelStuff
-    void fuelManager()
-    {
-        //fuelGuage.m_FillAmount = player.fuel/player.maxFuel;
-        fuelGuage.fillAmount = player.fuel / player.maxFuel;
-        if (fuelGuage.fillAmount > 0.5f)
-        {
-            fuelGuage.color = Color.Lerp(Color.white, Color.black, 0); // alpha PingPong.
-
-            fuelGuage.sprite = FuelGuageColors[0];
-        }
-        if (fuelGuage.fillAmount <= 0.5f & fuelGuage.fillAmount > 0.25f)
-        {
-             fuelGuage.color = Color.Lerp(Color.white, Color.black, 0); // alpha PingPong.
-            fuelGuage.sprite = FuelGuageColors[1];
-        }
-        if (fuelGuage.fillAmount <= 0.25f)
-        {
-            fuelGuage.sprite = FuelGuageColors[2];
-            fuelGuage.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, .3f)); // alpha PingPong.
-        }
-    }
-    #endregion
 }

@@ -1,5 +1,9 @@
+using UnityEngine;
+
 public class GameplayUIModel : Model
 {
+    [SerializeField] private Player player;
+
     private SaveManager saveManager;
 
     private GameplayUIState _uiState;
@@ -15,6 +19,8 @@ public class GameplayUIModel : Model
             Refresh();
         }
     }
+
+    public float FuelPercent => player.Fuel / player.maxFuel;
 
     public bool OnScreenControlsEnabled
     {
@@ -38,6 +44,13 @@ public class GameplayUIModel : Model
     {
         saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
         saveManager.Load();
+
+        player.OnFuelUpdated.AddListener(Refresh);
+    }
+
+    private void OnDestroy()
+    {
+        player.OnFuelUpdated.RemoveListener(Refresh);
     }
 
     public void SetPaused(bool paused)

@@ -93,7 +93,7 @@ public class PlayerAliveState : PlayerState
     {
         if (player.JerryCanTouch)
         {
-            player.fuel += player.FuelAdditionAmount;
+            player.Fuel += player.FuelAdditionAmount;
             player.JerryCanTouch = false;
         }
         if (player.FoodTouch)
@@ -186,7 +186,7 @@ public class PlayerAliveState : PlayerState
         if (!BallCheck())
         {
             // Boost consumes 1.0 fuel per frame, normal thrust consumes 0.5
-            player.fuel -= isBoosting ? 1.0f : 0.5f;
+            player.Fuel -= isBoosting ? 1.0f : 0.5f;
         }
     }
     bool BallCheck()
