@@ -1,20 +1,7 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] SaveManager saveManager;
-    public GameObject playerObj;
-    [SerializeField] Player player;
-
-    [Header("Damage Indicator stuff")]
-    [SerializeField] Renderer HurtIndicator;
-    [SerializeField] public bool runningHurt;
-    [SerializeField] public int hurtCounter = 0;
-    int hurtCounterThreshold = 20;
-    [SerializeField] GameObject GameplayIndicators;
-
     [SerializeField] private GameplayUIModel gameplayUI;
     [SerializeField] private FailMenuModel failMenu;
     [SerializeField] private SuccessMenuModel successMenu;
@@ -33,57 +20,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (saveManager == null) {
-            saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        }
-        HurtIndicator.gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        SetUIIndicators();
-    }
-
     public void ActivateHurt()
     {
-        runningHurt = true;
-    }
-
-    public void SetUIIndicators() // TODO Drake: figure out how to make a view model for this
-    {
-        if (runningHurt)
-        {
-            HurtIndicator.gameObject.SetActive(true);
-            HurtRunner();
-        }
+        gameplayUI.IsRunningHurt = true;
     }
 
     public void SetEndLevelStats(int newbones)
     {
         successMenu.NewBones = newbones;
-    }
-
-    public void HurtRunner() {
-        hurtCounter++;
-        Vector2 inTiling = Vector2.one;
-        Vector2 outTiling = new Vector2(0.1f, 0.1f);
-        Vector2 inOffset = Vector2.zero;
-        Vector2 outOffset = new Vector2(0.5f, 0.5f);
-        if (hurtCounter <= hurtCounterThreshold * 0.5f) {
-            HurtIndicator.material.mainTextureScale = Vector2.Lerp(outTiling, inTiling, Helper.RemapToBetweenZeroAndOne(0.0f, hurtCounterThreshold * 0.5f, hurtCounter));
-            HurtIndicator.material.mainTextureOffset = Vector2.Lerp(outOffset, inOffset, Helper.RemapToBetweenZeroAndOne(0.0f, hurtCounterThreshold * 0.5f, hurtCounter));
-        } else if (hurtCounter > hurtCounterThreshold * 0.5f && hurtCounter < hurtCounterThreshold) {
-            HurtIndicator.material.mainTextureScale = Vector2.Lerp(inTiling, outTiling, Helper.RemapToBetweenZeroAndOne(hurtCounterThreshold * 0.5f, hurtCounterThreshold, hurtCounter));
-            HurtIndicator.material.mainTextureOffset = Vector2.Lerp(inOffset, outOffset, Helper.RemapToBetweenZeroAndOne(hurtCounterThreshold * 0.5f, hurtCounterThreshold, hurtCounter));
-        } else {
-            hurtCounter = 0;
-            runningHurt = false;
-            HurtIndicator.gameObject.SetActive(false);
-        }
     }
 
     public void ActivateWinMenu()

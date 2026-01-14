@@ -20,6 +20,20 @@ public class GameplayUIModel : Model
         }
     }
 
+    private bool _isRunningHurt;
+    public bool IsRunningHurt
+    {
+        get
+        {
+            return _isRunningHurt;
+        }
+        set
+        {
+            _isRunningHurt = value;
+            Refresh();
+        }
+    }
+
     public float FuelPercent => player.Fuel / player.maxFuel;
 
     public bool OnScreenControlsEnabled
