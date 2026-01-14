@@ -5,59 +5,84 @@ using UnityEngine;
 public class BatSpawner : MonoBehaviour
 {
 
-    [SerializeField] GameObject bat;
-    [SerializeField] Transform SpawnLocation;
-    [SerializeField] Transform EndLocation;
+   
+     
+   
+  [Header("Bat Settings")]
+    [SerializeField] GameObject batPrefab;
+    [SerializeField] int maxBats = 5;
+    [SerializeField] float spawnCooldown = 1.5f;
+    [SerializeField] float batSpeed = 4f;
+
+    [Header("Path")]
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] Transform[] flightPath;
     [SerializeField]public Transform UpperOffset;
     [SerializeField]public Transform LowerOffset;
-    [SerializeField]public Transform[] FlightPath;
-    [SerializeField] Collider ActivationTrigger;
-    [SerializeField] public int spawnLength;
-    [SerializeField] public int spawnAmount;
-    [SerializeField] bool triggered;
-    int spawnTimer;
-    [SerializeField] public int BatSpeed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        triggered = false;
-        spawnTimer = 0;
-    }
 
-    // Update is called once per frame
+    private bool activated;
+    private float spawnTimer;
+    private int spawnedCount;
+
+    #region  Fields
+    [HideInInspector]public Transform[] FlightPath;
+    [HideInInspector] public int spawnLength;
+     [HideInInspector] public int spawnAmount;
+    [HideInInspector] public int BatSpeed;
+    #endregion
+
     void Update()
     {
-        if(triggered && spawnTimer < spawnLength){
-            float offset = BatOffset();
-            Vector3 spawnLoc = new Vector3(SpawnLocation.position.x,SpawnLocation.position.y+offset,SpawnLocation.position.z);
-            Vector3 endLoc = new Vector3(EndLocation.position.x,EndLocation.position.y+offset,EndLocation.position.z);
-            GameObject spawnedBat = Instantiate(bat,spawnLoc,Quaternion.identity);
-            spawnedBat.GetComponent<BatRunner>().path = GetPath(offset);
-            spawnedBat.GetComponent<BatRunner>().endPoint = endLoc;
-            spawnedBat.GetComponent<BatRunner>().timerEnd = BatSpeed;
-            spawnedBat.GetComponent<BatRunner>().screech.clip = spawnedBat.GetComponent<BatRunner>().BatSounds[Random.Range(0,2)];
-            spawnedBat.GetComponent<BatRunner>().screech.time = Random.Range(0.0f,spawnedBat.GetComponent<BatRunner>().screech.clip.length);
-            spawnedBat.GetComponent<BatRunner>().screech.Play();
-            spawnTimer +=1;
+        if (!activated) return;
+
+        spawnTimer -= Time.deltaTime;
+
+        if (spawnTimer <= 0 && spawnedCount < maxBats)
+        {
+            SpawnBat();
+            spawnTimer = spawnCooldown;
         }
-        if(!triggered) spawnTimer = 0;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.tag == "Player") {
-            triggered = true;
-        }
+    void SpawnBat()
+    {
+        float offset = Random.Range(
+            LowerOffset.localPosition.y,
+            UpperOffset.localPosition.y
+        );
+
+        Vector3 spawnPos = spawnPoint.position + Vector3.up * offset;
+        GameObject bat = Instantiate(batPrefab, spawnPos, Quaternion.identity);
+
+        BatRunner runner = bat.GetComponent<BatRunner>();
+        runner.speed = batSpeed;
+        runner.path = BuildPath(offset);
+        bat.SetActive(true);
+        spawnedCount++;
     }
-    float BatOffset(){
-        return Random.Range(Vector3.Distance(SpawnLocation.position,LowerOffset.position)*-1,Vector3.Distance(SpawnLocation.position,UpperOffset.position));
-    }
-    List<Vector3> GetPath(float offset){
+
+    List<Vector3> BuildPath(float offset)
+    {
         List<Vector3> path = new List<Vector3>();
-        foreach (Transform pathPoint in FlightPath){
-            path.Add(new Vector3(pathPoint.position.x,pathPoint.position.y+offset,pathPoint.position.z));
+
+        foreach (Transform p in flightPath)
+        {
+            path.Add(p.position + Vector3.up * offset);
         }
+
         return path;
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            activated = true;
+        }
+    }
+   
+   
+  
 }
 
 
