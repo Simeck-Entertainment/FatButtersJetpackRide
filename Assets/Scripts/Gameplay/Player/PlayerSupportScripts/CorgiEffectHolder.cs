@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using Unity.Services.CloudSave.Models.Data.Player;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 
 [System.Serializable]
 public class CorgiEffectHolder : MonoBehaviour
@@ -236,7 +229,7 @@ public class CorgiEffectHolder : MonoBehaviour
 
         BodyReverseRot brr = GameObject.FindAnyObjectByType<BodyReverseRot>();
         brr.affectAxis = BodyReverseRot.AffectAxis.X;
-        if (player.saveManager.collectibleData.CurrentSkin == 24) //ferret is different.
+        if (SaveManager.Instance.collectibleData.CurrentSkin == 24) //ferret is different.
         {
             brr.offset = -90f;
         } else {

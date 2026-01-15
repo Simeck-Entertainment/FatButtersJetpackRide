@@ -12,10 +12,7 @@ public class LevelButtonIDHolder : MonoBehaviour
     public bool IsBossLevel;
     public GameObject fireball;
     [SerializeField] public MeshRenderer[] balls;
-    [System.NonSerialized] SaveManager saveManager;
-    void Start(){
-        saveManager = FindFirstObjectByType<SaveManager>();
-    }
+
     public void SetButtonAesthetics(int level,bool ThisLevelBeaten, bool PreviousLevelBeaten){
         if (IsBossLevel){
             fireball.SetActive(true);

@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScreamBubble : MonoBehaviour
 {
-
     [SerializeField] public ScreamBubbleStateMachine stateMachine;
-    [SerializeField] SaveManager saveManager;
     [SerializeField] public Rigidbody rb;
     [SerializeField] public Collider attackCollider;
     public bool hitWall;
@@ -29,16 +25,10 @@ public class ScreamBubble : MonoBehaviour
     public SBChasePlayerState sBChasePlayerState { get; private set;}
     public SBPopState sBPopState { get; private set;}
 
-
-
     // Start is called before the first frame update
     void Start()
     {
         PlayerInSightDistance = false;
-        if (saveManager == null)
-        {
-            saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        }
         sBIdleState = new SBIdleState(this, stateMachine);
         sBNoticePlayerState = new SBNoticePlayerState(this,stateMachine);
         sBChasePlayerState = new SBChasePlayerState(this,stateMachine);
@@ -50,14 +40,18 @@ public class ScreamBubble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bubbleAudio.volume = saveManager.collectibleData.SFXVolumeLevel;
-        if (popped){
+        bubbleAudio.volume = SaveManager.Instance.collectibleData.SFXVolumeLevel;
+        if (popped)
+        {
             stateMachine.changeState(sBPopState);
         }
     }
-    private void OnCollisionEnter(Collision other) {
 
-        switch(other.gameObject.tag){
+    private void OnCollisionEnter(Collision other)
+    {
+
+        switch(other.gameObject.tag)
+        {
             case "Player":
                 popped = true;
                 break;
@@ -69,7 +63,9 @@ public class ScreamBubble : MonoBehaviour
             break;
         }
     }
-    public void PlayAudio(AudioClip clip){
+
+    public void PlayAudio(AudioClip clip)
+    {
         bubbleAudio.clip = clip;
         bubbleAudio.Play();
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWinState : PlayerLevelWinState
@@ -12,17 +10,18 @@ public class PlayerWinState : PlayerLevelWinState
     float KeyboardOffsetStartingValue;
     int FixRollTimer;
     int FixRollTimerMax = 60;
+
     public override void enter()
     {
-        player.saveManager.collectibleData.LevelBeaten[player.saveManager.sceneLoadData.LastLoadedLevelInt] = true;
-        player.saveManager.collectibleData.HASBALL = false;
+        collectibleData.LevelBeaten[SaveManager.Instance.sceneLoadData.LastLoadedLevelInt] = true;
+        collectibleData.HASBALL = false;
         FixRollTimer = 0;
         PlayOneTimeAudio(player.vfx.successSound);
         player.vfx.StopPrimaryThrusters();
         rollStartingValue = player.input.roll;
         KeyboardOffsetStartingValue = player.KeyboardRollOffset;
         player.UI.SetEndLevelStats(player.tempBones);
-        player.saveManager.Save();
+        SaveManager.Instance.Save();
         player.input.DisableInput();
         player.UI.ActivateWinMenu();
         base.enter();
@@ -32,6 +31,7 @@ public class PlayerWinState : PlayerLevelWinState
     {
         base.Update();
     }
+
     public override void FixedUpdate()
     {
         if (FixRollTimer < FixRollTimerMax)

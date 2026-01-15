@@ -30,6 +30,7 @@ public class SaveData{
     public int LastMotdVersion;
     public bool LastMotdRead;
     public bool OnScreenControlsEnabled;
+    public bool CorgiSenseEnabled;
     public string SceneToLoad;
     public string LastLoadedLevel;
     public int LastLoadedLevelInt;

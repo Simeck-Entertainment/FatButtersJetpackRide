@@ -8,7 +8,6 @@ public class ShopMenuModel : Model
     [SerializeField] private ShopItem[] shopItems;
 
     private int currentSelectedShopItem;
-    private SaveManager saveManager;
 
     public ShopItem CurrentSelectedShopItem => shopItems[currentSelectedShopItem];
     public ShopItem CurrentEquippedShopItem => shopItems.First(x => x.Type == ShopItemType.Skin && x.SkinId == collectibleData.CurrentSkin);
@@ -27,13 +26,7 @@ public class ShopMenuModel : Model
         }
     }
 
-    private CollectibleData collectibleData => saveManager.collectibleData;
-
-    private void Awake()
-    {
-        saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        saveManager.Load();
-    }
+    private CollectibleData collectibleData => SaveManager.Instance.collectibleData;
 
     public void IncrementShopItem(int incrementAmount)
     {

@@ -91,7 +91,7 @@ public class InputDriver : MonoBehaviour
     private bool FilterTouchInput(){
         touchCount = Input.touchCount;
         if(touchCount == 0){return false;} //Don't run thrust if untouched
-        if(Time.timeScale == 0.0f){return false;} //Don't run thrust if paused
+        if(PauseUtility.IsPaused){return false;} //Don't run thrust if paused
         //if (OSthrustAction.ReadValue<float>() == 1.0f){ return false;} //Don't run Thrust if on screen thrust is touched
         if (OSCWAction.ReadValue<float>() == 1.0f & Input.touchCount == 1){return false;} //Don't run thrust if only on screen CW is touched
         if (OSCCWAction.ReadValue<float>() == 1.0f & Input.touchCount == 1){return false;} //Don't run thrust if if only on screen CCW is touched

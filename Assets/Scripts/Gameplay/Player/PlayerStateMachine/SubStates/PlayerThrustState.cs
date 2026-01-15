@@ -39,7 +39,7 @@ public class PlayerThrustState : PlayerAliveState
         stateAge++;
         
         // Handle boost logic within the state machine
-        bool isBoosting = player.input.GoBoost && player.fuel > 0f;
+        bool isBoosting = player.input.GoBoost && player.Fuel > 0f;
         
         // Apply boost thrust modifier (preserves upgrades)
         if (isBoosting)
@@ -72,7 +72,7 @@ public class PlayerThrustState : PlayerAliveState
         {
             player.stateMachine.changeState(player.playerFallState);
         }
-        if (player.fuel <= 0.0f)
+        if (player.Fuel <= 0.0f)
         {
             player.stateMachine.changeState(player.playerNoFuelState);
         }

@@ -1,15 +1,10 @@
-using UnityEditor;
 using UnityEngine;
-
-
 
 //The Level 20 boss.
 //Boss can be beaten by touching his helmet three times.
 //Boss can hurt you with any of his attacks, or his rocket.
 public class CowboyBoss : MonoBehaviour
 {
-
-
     [System.NonSerialized] public CowboyBossStateMachine stateMachine; //This gets set at start.
     public Role role;
 
@@ -84,7 +79,7 @@ public class CowboyBoss : MonoBehaviour
         {
             hitThisFrame = false;
         }
-        if (player.saveManager.collectibleData.HASBALL)
+        if (SaveManager.Instance.collectibleData.HASBALL)
         {
             Health = 0;
         }

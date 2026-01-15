@@ -36,6 +36,7 @@ public class OtherFatButtersTools
             data.SFXVolumeLevel = workingData.SFXVolumeLevel;
             data.hapticsEnabled = workingData.HapticsEnabled;
             data.OnScreenControlsEnabled = workingData.OnScreenControlsEnabled;
+            data.CorgiSenseEnabled = workingData.CorgiSenseEnabled;
             data.monthBorn = workingInfo.monthBorn;
             data.dayBorn = workingInfo.dayBorn;
             data.yearBorn = workingInfo.yearBorn;
@@ -130,6 +131,7 @@ public class OtherFatButtersTools
             prebuildData.SFXVolumeLevel = 1;
             prebuildData.HapticsEnabled = true;
             prebuildData.OnScreenControlsEnabled = false;
+            prebuildData.CorgiSenseEnabled = true;
             prebuildData.GameplayTestingMode = false;
             prebuildData.ignoreSaveData = false;
             prebuildInfo.analyticsConsentAnswered = false;

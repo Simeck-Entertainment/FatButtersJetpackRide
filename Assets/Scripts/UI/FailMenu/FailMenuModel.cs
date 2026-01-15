@@ -16,7 +16,7 @@ public class FailMenuModel : EndLevelMenuModel
 
     public override void ToLevelSelect()
     {
-        saveManager.collectibleData.BONES = saveManager.collectibleData.BONES + NewBones;
+        collectibleData.BONES = collectibleData.BONES + NewBones;
         
         base.ToLevelSelect();
     }

@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelSelectAssetVisibilityManager : MonoBehaviour
 {
@@ -25,7 +21,6 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
     [SerializeField] LevelSelectUIModel levelSelectUI;
 
     bool PlayerCanMoveCamera;
-    public SaveManager saveManager;
     [Header("Dynamic level select obs. 0 is a null placeholder.")] //Js don't work in the header for some reason. Unity bug?
     public Transform[] LevelPathHolders;
     bool pathsDone;
@@ -34,13 +29,14 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
     [Header("Other effect-based OBs")]
     public GameObject boat;
     [SerializeField] LevelSelectScroller lss;
+
+    private CollectibleData collectibleData => SaveManager.Instance.collectibleData;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(saveManager == null){
-            saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        }
-        if (cam == null){
+        if (cam == null)
+        {
             cam = FindFirstObjectByType<Camera>().gameObject;
         }
         CameraInPosition = false;
@@ -49,10 +45,13 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
         PlayerCanMoveCamera = false;
         firstUnbeatenLevel = GetIndexForFirstUnbeatenLevel();
         
-        if(firstUnbeatenLevel > 3){
+        if(firstUnbeatenLevel > 3)
+        {
             InitCamPos = GetCamPosForLastBeatenLevel();
             FinalCamPos = GetCamPosForFirstUnbeatenLevel();
-        } else {
+        }
+        else
+        {
             InitCamPos = FindFirstObjectByType<LevelSelectScroller>().LeftBound.position;
             FinalCamPos = InitCamPos;
         }
@@ -66,10 +65,13 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
         keys[0].inTangent = -1f;
         animCurve = new AnimationCurve(keys);
         cam.transform.position = InitCamPos;
-        if(firstUnbeatenLevel > 1){
+        if(firstUnbeatenLevel > 1)
+        {
             PopInBones = LevelPathHolders[firstUnbeatenLevel-1].GetComponentsInChildren<MeshRenderer>();
             SetRegularPathBoneVisibility();
-        } else {
+        }
+        else
+        {
             DisableAllPathBones();
         }
         //Turn off all the dynamics for unbeaten levels.
@@ -78,51 +80,68 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
         SetLevelButtonAesthetics();
     }
 
-    void Update(){
-        if(firstUnbeatenLevel < 1){return;}
-        if(camMoveCounter < InitialCameraMoveFrameThreshold){
+    void Update()
+    {
+        if(firstUnbeatenLevel < 1) { return; }
+        if(camMoveCounter < InitialCameraMoveFrameThreshold)
+        {
             camMoveCounter++;
             float CurrentTimeIndex = (float)camMoveCounter / (float)InitialCameraMoveFrameThreshold;
             float currentCurveValue = animCurve.Evaluate(CurrentTimeIndex);
             cam.transform.position = new Vector3(currentCurveValue,cam.transform.position.y,cam.transform.position.z);
-        } else {
+        }
+        else
+        {
             CameraInPosition = true;
         }
 
-        if(CameraInPosition & BoneTimerCounter < BoneTimerThreshold){
+        if(CameraInPosition & BoneTimerCounter < BoneTimerThreshold)
+        {
             RunBonePopin();
             levelSelectUI.UIState = LevelSelectUIState.Base;
         }
 
     }
-    private void SetLevelButtonAesthetics(){
+
+    private void SetLevelButtonAesthetics()
+    {
         for (int i = 1; i < LevelButtons.Length; i++){
             LevelButtonIDHolder buttonData = LevelButtons[i].GetComponent<LevelButtonIDHolder>();
-            buttonData.SetButtonAesthetics(i, saveManager.collectibleData.LevelBeaten[i], saveManager.collectibleData.LevelBeaten[i - 1]);
+            buttonData.SetButtonAesthetics(i, collectibleData.LevelBeaten[i], collectibleData.LevelBeaten[i - 1]);
         }
     }
-    void DisableAllPathBones(){
+
+    void DisableAllPathBones()
+    {
         for (int i = 1; i < LevelPathHolders.Length; i++){ //starting at 1 because 0 is always null.
             MeshRenderer[] pathBones = LevelPathHolders[i].GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer pathBone in pathBones){
                 pathBone.transform.parent.gameObject.SetActive(false);
             }
         }
-
-
     }
-    void SetRegularPathBoneVisibility(){
-        for (int i = 1; i < LevelPathHolders.Length; i++){ //starting at 1 because 0 is always null.
+
+    void SetRegularPathBoneVisibility()
+    {
+        for (int i = 1; i < LevelPathHolders.Length; i++) //starting at 1 because 0 is always null.
+        {
             MeshRenderer[] pathBones = LevelPathHolders[i].GetComponentsInChildren<MeshRenderer>();
-            if (saveManager.collectibleData.LevelBeaten[i]){
-                foreach (MeshRenderer pathBone in pathBones){
-                    if(pathBone.transform.parent.parent != LevelPathHolders[firstUnbeatenLevel-1].transform){
+            if (collectibleData.LevelBeaten[i])
+            {
+                foreach (MeshRenderer pathBone in pathBones)
+                {
+                    if(pathBone.transform.parent.parent != LevelPathHolders[firstUnbeatenLevel-1].transform)
+                    {
                         pathBone.transform.parent.gameObject.SetActive(true);
-                    } else {
+                    }
+                    else
+                    {
                         pathBone.transform.parent.gameObject.SetActive(false);
                     }
                 }
-            }else{
+            }
+            else
+            {
                 foreach (MeshRenderer pathBone in pathBones){
                     pathBone.transform.parent.gameObject.SetActive(false);
                 }
@@ -130,27 +149,37 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
         }
     }
 
-    Vector3 GetCamPosForFirstUnbeatenLevel(){
-        firstUnbeatenLevel = FindFirstFalseIndex(saveManager.collectibleData.LevelBeaten);
+    Vector3 GetCamPosForFirstUnbeatenLevel()
+    {
+        firstUnbeatenLevel = FindFirstFalseIndex(collectibleData.LevelBeaten);
         return new Vector3(LevelButtons[firstUnbeatenLevel].transform.position.x,cam.transform.position.y,cam.transform.position.z);
     }
-    Vector3 GetCamPosForLastBeatenLevel(){
+
+    Vector3 GetCamPosForLastBeatenLevel()
+    {
         int lastBeatenLevel = firstUnbeatenLevel-1;
         return new Vector3(LevelButtons[lastBeatenLevel].transform.position.x,cam.transform.position.y,cam.transform.position.z);
     }
-    int GetIndexForFirstUnbeatenLevel(){
-        return FindFirstFalseIndex(saveManager.collectibleData.LevelBeaten);
+
+    int GetIndexForFirstUnbeatenLevel()
+    {
+        return FindFirstFalseIndex(collectibleData.LevelBeaten);
     }
-    int FindFirstFalseIndex(bool[] LevelsComplete){
-        for (int i = 0; i<saveManager.collectibleData.LevelBeaten.Length; i++){
-            if(!saveManager.collectibleData.LevelBeaten[i]){
+
+    int FindFirstFalseIndex(bool[] LevelsComplete)
+    {
+        for (int i = 0; i< collectibleData.LevelBeaten.Length; i++)
+        {
+            if(!collectibleData.LevelBeaten[i])
+            {
                 return i;
             }
         }
-        return saveManager.collectibleData.LevelBeaten.Length-1;
+        return collectibleData.LevelBeaten.Length-1;
     }
 
-    void RunBonePopin(){
+    void RunBonePopin()
+    {
         BoneTimerCounter++;
         if(NumberOfBonesVisible() == PopInBones.Length){return;} //If we're done, don't worry about it.
         //Bones pop in at fractional intervals between 0 and BoneTimerThreshold frames, starting from when the camera finishes moving.
@@ -158,26 +187,31 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
         BonesPercentDone = ((float)NumberOfBonesVisible()) / ((float)PopInBones.Length); //may not need this.
         IndividualBonePercentage = 1f/((float)PopInBones.Length);
         NextBoneMilestonePercentage = ((float)NumberOfBonesVisible()+1f) / ((float)PopInBones.Length);
-        if(BoneTimerPercent >= NextBoneMilestonePercentage){
+        if(BoneTimerPercent >= NextBoneMilestonePercentage)
+        {
             EnableGameObjectAndAllChildren(PopInBones[NumberOfBonesVisible()].transform.parent.gameObject);
             NextBoneMilestonePercentage += IndividualBonePercentage;
         }
-        
-        
-
     }
-    private void EnableGameObjectAndAllChildren(GameObject obj){
+
+    private void EnableGameObjectAndAllChildren(GameObject obj)
+    {
         // Enable the GameObject
         obj.SetActive(true);
         // Recursively enable all children
-        foreach (Transform child in obj.transform){
+        foreach (Transform child in obj.transform)
+        {
             EnableGameObjectAndAllChildren(child.gameObject);
         }
     }
-    int NumberOfBonesVisible(){
+
+    int NumberOfBonesVisible()
+    {
         int visibleBoneCounter = 0;
-        foreach (MeshRenderer bone in PopInBones){
-            if(bone.transform.parent.gameObject.activeSelf){
+        foreach (MeshRenderer bone in PopInBones)
+        {
+            if(bone.transform.parent.gameObject.activeSelf)
+            {
                 visibleBoneCounter++;
             }
         }

@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class PlayerAliveState : PlayerState
 {
     AudioSource[] thrusterSoundHolders;
     public float thrusterVolumeCounter = 0f;
+
     public PlayerAliveState(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine)
     {
 
@@ -64,7 +61,7 @@ public class PlayerAliveState : PlayerState
     private void HarmfulInteractionRunner()
     {
 #if UNITY_EDITOR
-        if (player.saveManager.collectibleData.GameplayTestingMode)
+        if (collectibleData.GameplayTestingMode)
         {
             return;
         }
@@ -85,7 +82,7 @@ public class PlayerAliveState : PlayerState
     {
         if (player.BoneTouch)
         {
-            player.tempBones += 1;
+            player.AddBones(1);
             player.BoneTouch = false;
         }
     }
@@ -93,7 +90,7 @@ public class PlayerAliveState : PlayerState
     {
         if (player.JerryCanTouch)
         {
-            player.fuel += player.FuelAdditionAmount;
+            player.Fuel += player.FuelAdditionAmount;
             player.JerryCanTouch = false;
         }
         if (player.FoodTouch)
@@ -178,7 +175,7 @@ public class PlayerAliveState : PlayerState
     {
 
 #if UNITY_EDITOR
-        if (player.saveManager.collectibleData.GameplayTestingMode)
+        if (collectibleData.GameplayTestingMode)
         {
             return;
         }
@@ -186,7 +183,7 @@ public class PlayerAliveState : PlayerState
         if (!BallCheck())
         {
             // Boost consumes 1.0 fuel per frame, normal thrust consumes 0.5
-            player.fuel -= isBoosting ? 1.0f : 0.5f;
+            player.Fuel -= isBoosting ? 1.0f : 0.5f;
         }
     }
     bool BallCheck()
@@ -208,7 +205,7 @@ public class PlayerAliveState : PlayerState
             if (thrusterVolumeCounter < 0f) { thrusterVolumeCounter = 0f; }
         }
 
-        float volVal = thrusterVolumeCounter / 30f * player.saveManager.collectibleData.SFXVolumeLevel;
+        float volVal = thrusterVolumeCounter / 30f * collectibleData.SFXVolumeLevel;
         player.vfx.SetThrusterVolume(volVal);
     }
     #endregion

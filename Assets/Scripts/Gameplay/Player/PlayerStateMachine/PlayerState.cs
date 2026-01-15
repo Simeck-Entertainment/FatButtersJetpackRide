@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerState
 {
@@ -9,6 +6,9 @@ public class PlayerState
     protected PlayerStateMachine playerStateMachine;
     protected int durationOfState = 0;
     protected int skindex;
+
+    protected CollectibleData collectibleData => SaveManager.Instance.collectibleData;
+
     public PlayerState(Player player, PlayerStateMachine playerStateMachine)
     {
         this.player = player;
@@ -56,7 +56,7 @@ public class PlayerState
     public void PlayOneTimeAudio(AudioClip clip)
     {
         player.sfx.loop = false;
-        player.sfx.volume = player.saveManager.collectibleData.SFXVolumeLevel;
+        player.sfx.volume = collectibleData.SFXVolumeLevel;
         player.sfx.clip = clip;
         player.sfx.Play();
     }
