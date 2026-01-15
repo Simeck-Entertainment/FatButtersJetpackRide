@@ -3,7 +3,6 @@ using UnityEngine;
 public class TummyMeterManager : MonoBehaviour
 {
     [SerializeField] Player player;
-    SaveManager saveManager;
     public Sprite tum100;
     public Sprite tum75;
     public Sprite tum50;
@@ -19,10 +18,7 @@ public class TummyMeterManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(saveManager == null){
-            saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        }
-        maxTummy = saveManager.collectibleData.treatsUpgradeLevel;
+        maxTummy = SaveManager.Instance.collectibleData.treatsUpgradeLevel;
         currentTummy = maxTummy;
     }
 

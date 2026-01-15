@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public SaveManager saveManager;
     public PlayerStateMachine stateMachine;
     public PlayerIdleState playerIdleState { get; set; }
     public InheritWalkState playerWalkState{get;set;}
@@ -37,19 +36,7 @@ public class Player : MonoBehaviour
     [Header("Important internal data")]
     public float thrust;
     [System.NonSerialized] public float baseThrustWithUpgrades; // Base thrust including upgrades (used for boost calculations)
-    private float _fuel;
-    public float Fuel
-    {
-        get
-        {
-            return _fuel;
-        }
-        set
-        {
-            _fuel = value;
-            OnFuelUpdated.Invoke();
-        }
-    }
+    
     public float maxFuel;
     [System.NonSerialized] public float fuelPercent;
     [System.NonSerialized] public float tummyPercent;
@@ -95,21 +82,32 @@ public class Player : MonoBehaviour
     public UnityEvent OnBonesCollected { get; set; } = new UnityEvent();
     public UnityEvent OnFuelUpdated { get; set; } = new UnityEvent();
 
-    // Start is called before the first frame update
+    private CollectibleData collectibleData => SaveManager.Instance.collectibleData;
+
+    private float _fuel;
+    public float Fuel
+    {
+        get
+        {
+            return _fuel;
+        }
+        set
+        {
+            _fuel = value;
+            OnFuelUpdated.Invoke();
+        }
+    }
 
     void Awake()
     {
-        if (saveManager == null)
-        {
-            saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        }
         vfx.StopRocketSounds();
     }
+
     void Start()
     {
         //transform.Rotate(Vector3.back * 0.1f);
         corgiTurned = false;
-        skindex = saveManager.collectibleData.CurrentSkin;
+        skindex = collectibleData.CurrentSkin;
         vfx.ApplySkin(skindex);
         
         ApplyStoreUpgrades();
@@ -125,11 +123,6 @@ public class Player : MonoBehaviour
         playerTummyDeathState = new PlayerTummyDeathState(this, stateMachine);
         playerWinState = new PlayerWinState(this, stateMachine);
         stateMachine.Initialize(playerIdleState);
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -160,18 +153,20 @@ public class Player : MonoBehaviour
     }
 
     #region DataStuff
-    void ApplyStoreUpgrades(){
+    void ApplyStoreUpgrades()
+    {
         // Level 1 = base thrust (25), Level 2 = base + 1 (26), etc.
         // So we subtract 1 from the upgrade level since level 1 is the starting level
-        baseThrustWithUpgrades = baseThrust + (saveManager.collectibleData.thrustUpgradeLevel - 1);
+        baseThrustWithUpgrades = baseThrust + (collectibleData.thrustUpgradeLevel - 1);
         thrust = baseThrustWithUpgrades; // Initialize thrust to base upgraded value
-        maxFuel = saveManager.collectibleData.fuelUpgradeLevel*20.0f;
+        maxFuel = collectibleData.fuelUpgradeLevel*20.0f;
         Fuel = maxFuel;
         fuelPercent = Fuel/maxFuel;
-        maxTummy = saveManager.collectibleData.treatsUpgradeLevel;
+        maxTummy = collectibleData.treatsUpgradeLevel;
         tummy = maxTummy;
         tummyPercent = tummy/maxTummy;
-        if(saveManager.collectibleData.HASBALL){
+        if(collectibleData.HASBALL)
+        {
             hasPermaBall = true;
         }
     }

@@ -4,9 +4,8 @@ public class SettingsMenuModel : Model
 {
     [SerializeField] public float VolumeMultiplier = 0.9f;
 
-    private SaveManager saveManager;
-
-    private CollectibleData collectibleData => saveManager.collectibleData;
+    private CollectibleData collectibleData => SaveManager.Instance.collectibleData;
+    private UserInfo userInfo => SaveManager.Instance.userInfo;
 
     #region properties
 
@@ -122,11 +121,11 @@ public class SettingsMenuModel : Model
     {
         get
         {
-            return saveManager.userInfo.LevelSelectBanners;
+            return userInfo.LevelSelectBanners;
         }
         set
         {
-            saveManager.userInfo.LevelSelectBanners = value;
+            userInfo.LevelSelectBanners = value;
             Save();
         }
     }
@@ -135,11 +134,11 @@ public class SettingsMenuModel : Model
     {
         get
         {
-            return saveManager.userInfo.PauseMenuBanners;
+            return userInfo.PauseMenuBanners;
         }
         set
         {
-            saveManager.userInfo.PauseMenuBanners = value;
+            userInfo.PauseMenuBanners = value;
             Save();
         }
     }
@@ -148,11 +147,11 @@ public class SettingsMenuModel : Model
     {
         get
         {
-            return saveManager.userInfo.InterstitialToggle;
+            return userInfo.InterstitialToggle;
         }
         set
         {
-            saveManager.userInfo.InterstitialToggle = value;
+            userInfo.InterstitialToggle = value;
             Save();
         }
     }
@@ -161,22 +160,16 @@ public class SettingsMenuModel : Model
     {
         get
         {
-            return saveManager.userInfo.BoneDoublerToggle;
+            return userInfo.BoneDoublerToggle;
         }
         set
         {
-            saveManager.userInfo.BoneDoublerToggle = value;
+            userInfo.BoneDoublerToggle = value;
             Save();
         }
     }
 
     #endregion
-
-    private void Awake()
-    {
-        saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        saveManager.Load();
-    }
 
     public void ShowPrivacyPolicy()
     {
@@ -186,7 +179,7 @@ public class SettingsMenuModel : Model
     public void ToLevelSelect()
     {
         collectibleData.HASBALL = false;
-        saveManager.Save();
+        SaveManager.Instance.Save();
 
         PauseUtility.Resume();
 
@@ -195,7 +188,7 @@ public class SettingsMenuModel : Model
 
     private void Save()
     {
-        saveManager.Save();
+        SaveManager.Instance.Save();
         Refresh();
     }
 }

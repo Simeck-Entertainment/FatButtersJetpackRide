@@ -82,11 +82,6 @@ public class Helper
         return (finish + start) / 2.0f;
     }
 
-    public static GameObject NabSaveData()
-    {
-        return MonoBehaviour.FindAnyObjectByType<SaveManager>().gameObject;
-    }
-
     public static GameObject getRandomItemFromArray(GameObject[] a)
     {
         int randnum = UnityEngine.Random.Range(0, a.Length);
