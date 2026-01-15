@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerLevelLoseState : PlayerState
 {
     public PlayerLevelLoseState(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine){
@@ -11,7 +7,7 @@ public class PlayerLevelLoseState : PlayerState
     public override void enter(){
         //player.UI.PauseGame();
         player.input.DisableInput();
-        player.saveManager.collectibleData.HASBALL = false;
+        collectibleData.HASBALL = false;
         PlayOneTimeAudio(player.vfx.deathSound);
         player.sfx.Play();
         player.vfx.StopPrimaryThrusters();

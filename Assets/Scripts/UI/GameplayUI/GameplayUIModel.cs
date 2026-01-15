@@ -4,7 +4,7 @@ public class GameplayUIModel : Model
 {
     [SerializeField] private Player player;
 
-    private SaveManager saveManager;
+    private CollectibleData collectibleData => SaveManager.Instance.collectibleData;
 
     private GameplayUIState _uiState;
     public GameplayUIState UIState
@@ -41,7 +41,7 @@ public class GameplayUIModel : Model
         get
         {
             // We'll refresh this each time we change UIState
-            return saveManager.collectibleData.OnScreenControlsEnabled;
+            return collectibleData.OnScreenControlsEnabled;
         }
     }
 
@@ -50,15 +50,12 @@ public class GameplayUIModel : Model
         get
         {
             // We'll refresh this each time we change UIState
-            return saveManager.collectibleData.CorgiSenseEnabled;
+            return collectibleData.CorgiSenseEnabled;
         }
     }
 
     private void Awake()
     {
-        saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        saveManager.Load();
-
         player.OnFuelUpdated.AddListener(Refresh);
     }
 

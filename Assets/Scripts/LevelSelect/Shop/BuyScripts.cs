@@ -4,22 +4,14 @@ public class BuyScripts : MonoBehaviour
 {
     [SerializeField] private ShopMenuModel shopMenu;
 
-    private SaveManager saveManager;
-
-    private CollectibleData collectibleData => saveManager.collectibleData;
-
-    private void Start()
-    {
-        saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        saveManager.Load();
-    }
+    private CollectibleData collectibleData => SaveManager.Instance.collectibleData;
 
     public void EquipSkin(int skinId)
     {
         if (collectibleData.HaveSkins[skinId])
         {
             collectibleData.CurrentSkin = skinId;
-            saveManager.Save();
+            SaveManager.Instance.Save();
         }
     }
 
@@ -30,7 +22,7 @@ public class BuyScripts : MonoBehaviour
 
         int skinNumber = itemId;
         collectibleData.HaveSkins[skinNumber] = true;
-        saveManager.Save();
+        SaveManager.Instance.Save();
     }
 
     public void UpgradeFuel(int price)
@@ -39,7 +31,7 @@ public class BuyScripts : MonoBehaviour
         ReduceFunds(price);
 
         collectibleData.fuelUpgradeLevel++;
-        saveManager.Save();
+        SaveManager.Instance.Save();
     }
 
     public void UpgradeThrust(int price)
@@ -48,7 +40,7 @@ public class BuyScripts : MonoBehaviour
         ReduceFunds(price);
 
         collectibleData.thrustUpgradeLevel++;
-        saveManager.Save();
+        SaveManager.Instance.Save();
     }
 
     public void UpgradeTummy(int price)
@@ -57,7 +49,7 @@ public class BuyScripts : MonoBehaviour
         ReduceFunds(price);
 
         collectibleData.treatsUpgradeLevel++;
-        saveManager.Save();
+        SaveManager.Instance.Save();
     }
 
     public void ReduceFunds(int amount)

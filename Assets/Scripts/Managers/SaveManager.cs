@@ -1,39 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using System;
 
-using UnityEngine.SocialPlatforms;
 public class SaveManager : MonoBehaviour
 {
     [SerializeField] public CollectibleData collectibleData;
     [SerializeField] public UserInfo userInfo;
     [SerializeField] public SceneLoadData sceneLoadData;
-    public string SaveFilename = "/ButtersSaveData.dat";
 
+    private string saveFilename = "/ButtersSaveData.dat";
 
-    private void Awake(){
+    private static SaveManager _instance;
+    public static SaveManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<SaveManager>();
+                _instance.EnsureSaveFileExists();
+                _instance.Load();
+            }
+
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
         
         if(!collectibleData.ignoreSaveData){
             EnsureSaveFileExists();
         }
     }
 
-    public void EnsureSaveFileExists(){
-        if (File.Exists(Application.persistentDataPath + SaveFilename)){
+    private void OnDestroy()
+    {
+        _instance = null;
+    }
+
+    public void EnsureSaveFileExists()
+    {
+        if (File.Exists(Application.persistentDataPath + saveFilename))
+        {
             Load();
-        }else{
+        }
+        else
+        {
             CreateNewSave();
         }
     }
-    public void CreateNewSave(){
-        if(File.Exists(Application.persistentDataPath + SaveFilename)){
-            File.Delete(Application.persistentDataPath + SaveFilename);
+
+    public void CreateNewSave()
+    {
+        if(File.Exists(Application.persistentDataPath + saveFilename))
+        {
+            File.Delete(Application.persistentDataPath + saveFilename);
         }
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream saveFile = File.Create(Application.persistentDataPath + SaveFilename);
+        FileStream saveFile = File.Create(Application.persistentDataPath + saveFilename);
         SaveData data = new SaveData();
         data.bones = 0;
         data.fuelUpgrade = 1;
@@ -71,20 +96,24 @@ public class SaveManager : MonoBehaviour
 
         //These are permanent IAP purchases and should be treated with care.
         data.killAds = false;
-        data.haveSkins = new bool[7] {true,false,false,false,false,false,false};
+        data.haveSkins = new bool[7] {true,false,false,false,false,false,false}; // TODO: Test this, likely broken
 
         binaryFormatter.Serialize(saveFile,data);
         saveFile.Close();
         //Debug.Log("new save file created.");
         Load();
     }
-    public void Save(){
-        if(!collectibleData.ignoreSaveData){
+
+    public void Save()
+    {
+        if(!collectibleData.ignoreSaveData)
+        {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            if(File.Exists(Application.persistentDataPath + SaveFilename)){
-                File.Delete(Application.persistentDataPath + SaveFilename);
+            if(File.Exists(Application.persistentDataPath + saveFilename))
+            {
+                File.Delete(Application.persistentDataPath + saveFilename);
             }
-            FileStream saveFile = File.Create(Application.persistentDataPath + SaveFilename);
+            FileStream saveFile = File.Create(Application.persistentDataPath + saveFilename);
             SaveData data = new SaveData();
             data.bones = collectibleData.BONES;
             data.fuelUpgrade = collectibleData.fuelUpgradeLevel;
@@ -125,10 +154,13 @@ public class SaveManager : MonoBehaviour
             saveFile.Close();
         }
     }
-    public void Load(){
-        if(!collectibleData.ignoreSaveData){
+
+    public void Load()
+    {
+        if(!collectibleData.ignoreSaveData)
+        {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + SaveFilename, FileMode.Open, FileAccess.Read);
+            FileStream file = File.Open(Application.persistentDataPath + saveFilename, FileMode.Open, FileAccess.Read);
             SaveData data = (SaveData)bf.Deserialize(file);
             file.Close();
             collectibleData.BONES = data.bones;
@@ -167,26 +199,36 @@ public class SaveManager : MonoBehaviour
             collectibleData.GraphicsQualityLevel = data.GraphicsQualityLevel;
         }
     }
-    public void ResetSave(){
-        if(!collectibleData.ignoreSaveData){
-            File.Delete(Application.persistentDataPath + SaveFilename);
+
+    public void ResetSave()
+    {
+        if(!collectibleData.ignoreSaveData)
+        {
+            File.Delete(Application.persistentDataPath + saveFilename);
             CreateNewSave();
         }
     }
-    public void DeleteSave(){
-        if(!collectibleData.ignoreSaveData){
-            File.Delete(Application.persistentDataPath + SaveFilename);
+
+    public void DeleteSave()
+    {
+        if(!collectibleData.ignoreSaveData)
+        {
+            File.Delete(Application.persistentDataPath + saveFilename);
         }
     }
-    public void CreateCompletedSave(){
-        if(File.Exists(Application.persistentDataPath + SaveFilename)){
-            File.Delete(Application.persistentDataPath + SaveFilename);
+
+    public void CreateCompletedSave()
+    {
+        if(File.Exists(Application.persistentDataPath + saveFilename))
+        {
+            File.Delete(Application.persistentDataPath + saveFilename);
         }
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        if(File.Exists(Application.persistentDataPath + SaveFilename)){
-            File.Delete(Application.persistentDataPath + SaveFilename);
+        if(File.Exists(Application.persistentDataPath + saveFilename))
+        {
+            File.Delete(Application.persistentDataPath + saveFilename);
         }
-        FileStream saveFile = File.Create(Application.persistentDataPath + SaveFilename);
+        FileStream saveFile = File.Create(Application.persistentDataPath + saveFilename);
         SaveData data = new SaveData();
         data.bones = 999;
         data.fuelUpgrade = 999;
@@ -195,7 +237,7 @@ public class SaveManager : MonoBehaviour
         data.StartWithBall = false;
         data.killAds = true;
         data.currentSkin = 0;
-        data.haveSkins = new bool[7] {true,true,true,true,true,true,true};
+        data.haveSkins = new bool[7] {true,true,true,true,true,true,true}; // TODO: Test this, likely broken
         data.analyticsConsentAnswered = true;
         data.ageGateQuestionAnswered = true;
         data.dataCollectionConsent = true;

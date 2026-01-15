@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class Levels
 {
     public const string AnalyticsChecker = "Scenes/P18_AnalyticsChecker_SCN_V001_RSS";
@@ -12,21 +10,23 @@ public class Levels
     public const string SaveDataInitializer = "Scenes/P18_SaveDataInitializer_SCN_V001_RSS";
     public const string LevelPrefix = "Scenes/puzzleLevels/";
 
-    public static void Load(string levelName){
-        SaveManager sm = Helper.NabSaveData().GetComponent<SaveManager>();
-        sm.sceneLoadData.SceneToLoad = levelName;
-        sm.sceneLoadData.LastLoadedLevelInt = 0;
-        sm.sceneLoadData.LastLoadedLevel = SceneManager.GetActiveScene().name;
-        sm.Save();
+    private static SceneLoadData sceneLoadData => SaveManager.Instance.sceneLoadData;
+
+    public static void Load(string levelName)
+    {
+        sceneLoadData.SceneToLoad = levelName;
+        sceneLoadData.LastLoadedLevelInt = 0;
+        sceneLoadData.LastLoadedLevel = SceneManager.GetActiveScene().name;
+        SaveManager.Instance.Save();
         SceneManager.LoadScene(Levels.SceneLoader);
     }
-    public static void Load (int levelNumber){
-        SaveManager sm = Helper.NabSaveData().GetComponent<SaveManager>();
-        sm.sceneLoadData.SceneToLoad = LevelPrefix + "P18_Level" + levelNumber.ToString() + "_SCN_V001_RSS";
-        sm.sceneLoadData.LastLoadedLevelInt = levelNumber;
-        sm.sceneLoadData.LastLoadedLevel = "";
-        sm.Save();
-        SceneManager.LoadScene(SceneLoader);
 
+    public static void Load (int levelNumber)
+    {
+        sceneLoadData.SceneToLoad = LevelPrefix + "P18_Level" + levelNumber.ToString() + "_SCN_V001_RSS";
+        sceneLoadData.LastLoadedLevelInt = levelNumber;
+        sceneLoadData.LastLoadedLevel = "";
+        SaveManager.Instance.Save();
+        SceneManager.LoadScene(SceneLoader);
     }
 }

@@ -1,6 +1,6 @@
 ﻿public abstract class EndLevelMenuModel : Model
 {
-    protected SaveManager saveManager;
+    protected CollectibleData collectibleData => SaveManager.Instance.collectibleData;
 
     private int _newBones;
     public int NewBones
@@ -16,16 +16,10 @@
         }
     }
 
-    private void Awake()
-    {
-        saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        saveManager.Load();
-    }
-
     public virtual void ToLevelSelect()
     {
-        saveManager.collectibleData.HASBALL = false;
-        saveManager.Save();
+        collectibleData.HASBALL = false;
+        SaveManager.Instance.Save();
 
         PauseUtility.Resume();
         Levels.Load(Levels.LevelSelect);

@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class PlayerAliveState : PlayerState
 {
     AudioSource[] thrusterSoundHolders;
     public float thrusterVolumeCounter = 0f;
+
     public PlayerAliveState(Player player, PlayerStateMachine playerStateMachine) : base(player, playerStateMachine)
     {
 
@@ -64,7 +61,7 @@ public class PlayerAliveState : PlayerState
     private void HarmfulInteractionRunner()
     {
 #if UNITY_EDITOR
-        if (player.saveManager.collectibleData.GameplayTestingMode)
+        if (collectibleData.GameplayTestingMode)
         {
             return;
         }
@@ -178,7 +175,7 @@ public class PlayerAliveState : PlayerState
     {
 
 #if UNITY_EDITOR
-        if (player.saveManager.collectibleData.GameplayTestingMode)
+        if (collectibleData.GameplayTestingMode)
         {
             return;
         }
@@ -208,7 +205,7 @@ public class PlayerAliveState : PlayerState
             if (thrusterVolumeCounter < 0f) { thrusterVolumeCounter = 0f; }
         }
 
-        float volVal = thrusterVolumeCounter / 30f * player.saveManager.collectibleData.SFXVolumeLevel;
+        float volVal = thrusterVolumeCounter / 30f * collectibleData.SFXVolumeLevel;
         player.vfx.SetThrusterVolume(volVal);
     }
     #endregion
