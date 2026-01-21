@@ -35,6 +35,7 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 30;
         if (cam == null)
         {
             cam = FindFirstObjectByType<Camera>().gameObject;
@@ -93,14 +94,17 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
         else
         {
             CameraInPosition = true;
+            if (levelSelectUI.UIState == LevelSelectUIState.None)
+            {
+                // make sure we don't repeatedly set this back to base
+                levelSelectUI.UIState = LevelSelectUIState.Base;
+            }
         }
 
-        if(CameraInPosition & BoneTimerCounter < BoneTimerThreshold)
+        if (CameraInPosition && BoneTimerCounter < BoneTimerThreshold)
         {
             RunBonePopin();
-            levelSelectUI.UIState = LevelSelectUIState.Base;
         }
-
     }
 
     private void SetLevelButtonAesthetics()
