@@ -1,31 +1,17 @@
 using UnityEngine;
 
-public class FramerateManager : MonoBehaviour
+public class FramerateManager : Singleton<FramerateManager>
 {
     public const int TargetFramerate = 60;
-    private static FramerateManager _instance;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (_instance != null)
+        base.Awake();
+
+        if (!markedToDestroy)
         {
-            Destroy(gameObject);
-            return;
-        }
-
-        _instance = this;
-        gameObject.transform.parent = null;
-        DontDestroyOnLoad(gameObject);
-
-        Application.targetFrameRate = TargetFramerate;
-        Debug.Log($"Frame rate set to {TargetFramerate} FPS");
-    }
-
-    private void OnDestroy()
-    {
-        if (_instance == this)
-        {
-            _instance = null;
+            Application.targetFrameRate = TargetFramerate;
+            Debug.Log($"Frame rate set to {TargetFramerate} FPS");
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : Singleton<SaveManager>
 {
     [SerializeField] public CollectibleData collectibleData;
     [SerializeField] public UserInfo userInfo;
@@ -10,38 +10,13 @@ public class SaveManager : MonoBehaviour
 
     private string saveFilename = "/ButtersSaveData.dat";
 
-    private static SaveManager _instance;
-    public static SaveManager Instance
+    protected override void Awake()
     {
-        get
-        {
-            return _instance;
-        }
-    }
+        base.Awake();
 
-    private void Awake()
-    {
-        if (_instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        _instance = this;
-        gameObject.transform.parent = null;
-        DontDestroyOnLoad(gameObject);
-
-        if (!collectibleData.ignoreSaveData)
+        if (!markedToDestroy && !collectibleData.ignoreSaveData)
         {
             EnsureSaveFileExists();
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (_instance == this)
-        {
-            _instance = null;
         }
     }
 
