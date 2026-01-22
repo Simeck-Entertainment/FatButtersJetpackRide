@@ -15,28 +15,34 @@ public class SaveManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = FindFirstObjectByType<SaveManager>();
-                _instance.EnsureSaveFileExists();
-                _instance.Load();
-            }
-
             return _instance;
         }
     }
 
     private void Awake()
     {
-        
-        if(!collectibleData.ignoreSaveData){
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+        gameObject.transform.parent = null;
+        DontDestroyOnLoad(gameObject);
+
+        if (!collectibleData.ignoreSaveData)
+        {
             EnsureSaveFileExists();
         }
     }
 
     private void OnDestroy()
     {
-        _instance = null;
+        if (_instance == this)
+        {
+            _instance = null;
+        }
     }
 
     public void EnsureSaveFileExists()
