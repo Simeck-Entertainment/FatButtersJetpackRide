@@ -96,7 +96,8 @@ public class SaveManager : MonoBehaviour
 
         //These are permanent IAP purchases and should be treated with care.
         data.killAds = false;
-        data.haveSkins = new bool[7] {true,false,false,false,false,false,false}; // TODO: Test this, likely broken
+        data.haveSkins = new bool[collectibleData.HaveSkins.Length];
+        data.haveSkins[0] = true;
 
         binaryFormatter.Serialize(saveFile,data);
         saveFile.Close();
@@ -237,7 +238,11 @@ public class SaveManager : MonoBehaviour
         data.StartWithBall = false;
         data.killAds = true;
         data.currentSkin = 0;
-        data.haveSkins = new bool[7] {true,true,true,true,true,true,true}; // TODO: Test this, likely broken
+        data.haveSkins = new bool[collectibleData.HaveSkins.Length];
+        for (int i = 0; i < data.haveSkins.Length; i++)
+        {
+            data.haveSkins[i] = true;
+        }
         data.analyticsConsentAnswered = true;
         data.ageGateQuestionAnswered = true;
         data.dataCollectionConsent = true;
