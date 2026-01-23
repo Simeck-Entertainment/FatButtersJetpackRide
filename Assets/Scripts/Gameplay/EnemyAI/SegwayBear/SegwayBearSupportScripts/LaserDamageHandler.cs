@@ -1,48 +1,57 @@
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles laser particle collision damage for SegwayBear.
+/// Attach this to a ParticleSystem with Collision enabled and "Send Collision Messages" checked.
+/// Works with non-trigger colliders since OnParticleCollision doesn't work with triggers.
+/// </summary>
 public class LaserDamageHandler : MonoBehaviour
 {
+    [Header("Damage Settings")]
     [SerializeField] private float damageAmount = 2.0f;
-    [SerializeField] private float damageCooldown = 1.0f; // Seconds between damage
+    [SerializeField] private float damageCooldown = 1.0f;
     
-    private ParticleSystem laserParticleSystem;
-    private List<ParticleCollisionEvent> collisionEvents;
     private float lastDamageTime = -999f;
-
-    void Start()
-    {
-        laserParticleSystem = GetComponent<ParticleSystem>();
-        collisionEvents = new List<ParticleCollisionEvent>();
-    }
 
     void OnParticleCollision(GameObject other)
     {
-        // Check if we hit something with a Player component or PlayerCollisionReporter
-        Player player = other.GetComponentInParent<Player>();
+        Player player = FindPlayer(other);
+        
+        if (player != null && CanApplyDamage())
+        {
+            ApplyDamage(player);
+        }
+    }
+
+    private Player FindPlayer(GameObject hitObject)
+    {
+        // Try to find Player component in parent hierarchy
+        Player player = hitObject.GetComponentInParent<Player>();
+        
+        // Fallback: check for PlayerCollisionReporter
         if (player == null)
         {
-            PlayerCollisionReporter reporter = other.GetComponent<PlayerCollisionReporter>();
+            PlayerCollisionReporter reporter = hitObject.GetComponent<PlayerCollisionReporter>();
             if (reporter != null)
             {
                 player = reporter.player;
             }
         }
+        
+        return player;
+    }
 
-        if (player != null)
-        {
-            // Check cooldown to prevent multiple damage from same laser burst
-            if (Time.time - lastDamageTime < damageCooldown)
-            {
-                return; // Still on cooldown, skip damage
-            }
-            
-            lastDamageTime = Time.time;
-            Debug.Log($"[LASER DAMAGE] Dealing {damageAmount} damage to player!");
-            player.HarmfulTouch = true;
-            player.HarmfulDamageAmount = damageAmount;
-            player.HarmfulTouchObjectPosition = transform.position;
-        }
+    private bool CanApplyDamage()
+    {
+        return Time.time - lastDamageTime >= damageCooldown;
+    }
+
+    private void ApplyDamage(Player player)
+    {
+        lastDamageTime = Time.time;
+        
+        player.HarmfulTouch = true;
+        player.HarmfulDamageAmount = damageAmount;
+        player.HarmfulTouchObjectPosition = transform.position;
     }
 }
-
