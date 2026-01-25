@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     [System.NonSerialized] public float animationPercentage;
     [Header("Rotation stuff")]
     [System.NonSerialized] public float GravityRoll;
-    [System.NonSerialized] public float KeyboardRollOffset;
+    [SerializeField] public float KeyboardRollOffset;
     public int KeyboardSensitivity;
     public bool corgiTurned;
 
