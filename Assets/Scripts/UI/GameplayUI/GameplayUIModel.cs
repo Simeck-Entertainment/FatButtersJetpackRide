@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class GameplayUIModel : Model
 {
-    private SaveManager saveManager;
+    [SerializeField] private Player player;
+
+    private CollectibleData collectibleData => SaveManager.Instance.collectibleData;
 
     private GameplayUIState _uiState;
     public GameplayUIState UIState
@@ -18,19 +20,48 @@ public class GameplayUIModel : Model
         }
     }
 
+    private bool _isRunningHurt;
+    public bool IsRunningHurt
+    {
+        get
+        {
+            return _isRunningHurt;
+        }
+        set
+        {
+            _isRunningHurt = value;
+            Refresh();
+        }
+    }
+
+    public float FuelPercent => player.Fuel / player.maxFuel;
+
     public bool OnScreenControlsEnabled
     {
         get
         {
             // We'll refresh this each time we change UIState
-            return saveManager.collectibleData.OnScreenControlsEnabled;
+            return collectibleData.OnScreenControlsEnabled;
+        }
+    }
+
+    public bool CorgiSenseEnabled
+    {
+        get
+        {
+            // We'll refresh this each time we change UIState
+            return collectibleData.CorgiSenseEnabled;
         }
     }
 
     private void Awake()
     {
-        saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        saveManager.Load();
+        player.OnFuelUpdated.AddListener(Refresh);
+    }
+
+    private void OnDestroy()
+    {
+        player.OnFuelUpdated.RemoveListener(Refresh);
     }
 
     public void SetPaused(bool paused)
@@ -38,12 +69,12 @@ public class GameplayUIModel : Model
         if (paused)
         {
             UIState = GameplayUIState.Settings;
-            Time.timeScale = 0.0f; // TODO Drake: Consider a global utility for pause/resume
+            PauseUtility.Pause();
         }
         else
         {
             UIState = GameplayUIState.Base;
-            Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for pause/resume
+            PauseUtility.Resume();
         }
     }
 }

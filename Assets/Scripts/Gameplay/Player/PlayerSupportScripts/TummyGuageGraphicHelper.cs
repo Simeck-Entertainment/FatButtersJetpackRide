@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class TummyGuageGraphicHelper : MonoBehaviour
 {
-    SaveManager saveManager;
     [SerializeField] Player player;
     [SerializeField] Image image;
     public int emptyAmount;
@@ -22,10 +21,7 @@ public class TummyGuageGraphicHelper : MonoBehaviour
 
     void Start()
     {
-        if(saveManager == null){
-            saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        }
-        maxTummy = saveManager.collectibleData.treatsUpgradeLevel;
+        maxTummy = SaveManager.Instance.collectibleData.treatsUpgradeLevel;
         if(maxTummy == 0){maxTummy++;}
         currentTummy = maxTummy;
         SetMaxTummyGraphics();
@@ -39,42 +35,52 @@ public class TummyGuageGraphicHelper : MonoBehaviour
 
     void SetCurrentTummyGraphics()
     {
-        if(currentTummy <= emptyAmount){
+        if(currentTummy <= emptyAmount)
+        {
             image.sprite = tum0;
         }
-        if(currentTummy == quarterAmount){
+        if(currentTummy == quarterAmount)
+        {
             image.sprite = tum25;
         }
-        if(currentTummy == halfAmount){
+        if(currentTummy == halfAmount)
+        {
             image.sprite = tum50;
         }
-        if(currentTummy == threeQuarterAmount){
+        if(currentTummy == threeQuarterAmount)
+        {
             image.sprite = tum75;
         }
-        if(currentTummy >= fullAmount){
+        if(currentTummy >= fullAmount)
+        {
             image.sprite = tum100;
         }
     }
 
     void SetMaxTummyGraphics()
     {
-        if(maxTummy<=emptyAmount){
+        if(maxTummy<=emptyAmount)
+        {
             image.sprite = tumnull;
             image.enabled = false;
         }
-        if(maxTummy == quarterAmount){
+        if(maxTummy == quarterAmount)
+        {
             image.sprite = tum25;
             image.enabled = true;
         }
-        if(maxTummy == halfAmount){
+        if(maxTummy == halfAmount)
+        {
             image.sprite = tum50;
             image.enabled = true;
         }
-        if(maxTummy == threeQuarterAmount){
+        if(maxTummy == threeQuarterAmount)
+        {
             image.sprite = tum75;
             image.enabled = true;
         }
-        if(maxTummy >= fullAmount){
+        if(maxTummy >= fullAmount)
+        {
             image.sprite = tum100;
             image.enabled = true;
         }
