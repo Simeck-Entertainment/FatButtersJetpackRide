@@ -80,7 +80,7 @@ public class SeBFireLaserState : SeBProvokedState
             Laser.Stop();
             ExcessParticleRunoff.Stop();
 
-            // Unfreeze X rotation befpre recoil
+            // Unfreeze X rotation before recoil
             Debug.Log($"[FIRE] Before recoil: " +
                 $"Constraints={segwayBear.rb.constraints}, " +
                 $"Rotation={segwayBear.transform.rotation.eulerAngles}");
