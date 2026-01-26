@@ -51,12 +51,12 @@ public class Player : MonoBehaviour
     public bool corgiTurned;
 
     [Header("Walk mechanics")]
-    [SerializeField] public float walkSpeed = 2f;
-    [SerializeField] public float walkAcceleration = 5f;
-    [System.NonSerialized] public float walkAbsZ; // Absolute Z rotation for walk detection
-    [System.NonSerialized] public float walkDirection; // Walk direction (-1 or 1)
-    [System.NonSerialized] public float walkTargetSpeed; // Target walk speed
+    [SerializeField] public float walkDirection; // Walk direction (-1 or 1)
     [System.NonSerialized] public float walkCurrentSpeed; // Current smoothed walk speed
+
+    [SerializeField] public float slowWalkSpeed;
+    [SerializeField] public float mediumWalkSpeed;
+    [SerializeField] public float fastWalkSpeed;
 
     [Header("Collision bools")]
     public bool GroundTouch;
