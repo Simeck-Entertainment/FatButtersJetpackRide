@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FriendlyObjectDestroyer : MonoBehaviour
@@ -17,6 +15,7 @@ public class FriendlyObjectDestroyer : MonoBehaviour
     {
         
     }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Friendly")
@@ -30,13 +29,14 @@ public class FriendlyObjectDestroyer : MonoBehaviour
         }
         if (other.gameObject.tag == "Player")
         {
-            if (player.saveManager.collectibleData.HASBALL)
+            if (SaveManager.Instance.collectibleData.HASBALL)
             {
                 lavaMonster.ActivateHitWithBallPowerup();
             }
         }
     }
-private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Friendly")
         {

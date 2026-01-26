@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class LevelSelectLightManager : MonoBehaviour
 {
-    [System.NonSerialized] SaveManager saveManager;
     [SerializeField] Light sun;
     [SerializeField] Camera cam;
     [SerializeField] GameObject camFollower;
@@ -38,59 +33,84 @@ public class LevelSelectLightManager : MonoBehaviour
     [Header("Locked Episode Stuff")]
     [SerializeField] public Material LockedEpisodeSkybox;
 
-
+    private CollectibleData collectibleData => SaveManager.Instance.collectibleData;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(saveManager == null){
-            saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        }
         cam = FindAnyObjectByType<Camera>();
     }
+
     // Update is called once per frame
     void Update()
     {
         camFollower.transform.position = cam.transform.position;
-        if(Episode1){
+        if(Episode1)
+        {
             e1Lights.SetActive(true);
             SetLightsAndEnv(e1Skybox);
-        } else {
+        }
+        else
+        {
             e1Lights.SetActive(false);
         }
-        if(Episode2){
-            if(saveManager.collectibleData.LevelBeaten[firstE2Level]){
+
+        if(Episode2)
+        {
+            if(collectibleData.LevelBeaten[firstE2Level])
+            {
                 SetLightsAndEnv(e2Skybox);
-            } else {
+            }
+            else
+            {
                 SetLightsAndEnv(LockedEpisodeSkybox);
             }
         }
-        if(Episode3){
-            if(saveManager.collectibleData.LevelBeaten[firstE3Level]){
+
+        if(Episode3)
+        {
+            if(collectibleData.LevelBeaten[firstE3Level])
+            {
                 e3Lights.SetActive(true);
                 SetLightsAndEnv(e3Skybox);
-            } else {
+            }
+            else
+            {
                 e3Lights.SetActive(false);
                 SetLightsAndEnv(LockedEpisodeSkybox);
             }
-        } else {
+        }
+        else
+        {
             e3Lights.SetActive(false);
         }
-        if(Episode4){
-            if(saveManager.collectibleData.LevelBeaten[firstE4Level]){
+
+        if(Episode4)
+        {
+            if(collectibleData.LevelBeaten[firstE4Level])
+            {
                 e4Lights.SetActive(true);
                 SetLightsAndEnv(e4Skybox);
-            } else {
+            }
+            else
+            {
                 e4Lights.SetActive(false);
                 SetLightsAndEnv(LockedEpisodeSkybox);
             }
-        } else {
+        }
+        else
+        {
             e4Lights.SetActive(false);
         }
-        if(Episode5){
-            if(saveManager.collectibleData.LevelBeaten[firstE5Level]){
+
+        if(Episode5)
+        {
+            if(collectibleData.LevelBeaten[firstE5Level])
+            {
                 SetLightsAndEnv(e5Skybox);
-            } else {
+            }
+            else
+            {
                 SetLightsAndEnv(LockedEpisodeSkybox);
             }
         }

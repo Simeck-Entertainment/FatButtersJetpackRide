@@ -52,7 +52,7 @@ public class GasMeter : MonoBehaviour
             if (idleTimer >= idleTimeLimit)// && isMoving)
             {
                 Debug.Log("No movement");
-                playerRigidbody.GetComponent<Player>().fuel += 0.5f;
+                playerRigidbody.GetComponent<Player>().Fuel += 0.5f;
                 if (isMoving)
                 {
                     growlAudioSource.clip = growlAudioClip;

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Networking;
 using System;
@@ -13,7 +12,6 @@ using GooglePlayGames.BasicApi;
 */
 public class MainMenuButtonManager : MainMenuCommonData
 {
-
     [SerializeField] GameObject[] environments;
     [Header("Stuff for the credits menu")]
     [SerializeField] creditsScroller CreditsScroller;
@@ -26,14 +24,7 @@ public class MainMenuButtonManager : MainMenuCommonData
     void Start()
     {
         //environments[UnityEngine.Random.Range(0, environments.Length)].SetActive(true);
-        if(saveManager == null){
-            saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        }
-        saveManager.EnsureSaveFileExists();
-        saveManager.Load();
         StartCoroutine(CoroutineHome());
-
- 
     }
 
     // Update is called once per frame
@@ -73,14 +64,19 @@ public class MainMenuButtonManager : MainMenuCommonData
         Dictionary<string, string> output = new Dictionary<string, string>();
         foreach(string data in dataArray)
         {
-            try{
-            string[] splitLine = data.Split(":");
-            output.Add(splitLine[0], splitLine[1]);
-            } catch { }
+            try
+            {
+                string[] splitLine = data.Split(":");
+                output.Add(splitLine[0], splitLine[1]);
+            }
+            catch { }
         }
-        if(userInfo.LastMoTDVersion == Int32.Parse(output["version"]) & userInfo.LastMoTDRead){
+        if(userInfo.LastMoTDVersion == Int32.Parse(output["version"]) & userInfo.LastMoTDRead)
+        {
             HideMOTD();
-        } else{
+        }
+        else
+        {
             userInfo.LastMoTDVersion = Int32.Parse(output["version"]);
             MoTDCanvas.SetActive(true);
             string[] messageTextFull = output["message"].Split("--");
@@ -93,14 +89,17 @@ public class MainMenuButtonManager : MainMenuCommonData
         }
         yield return null;
     }
+
     public void HideMOTD()
     {
         MoTDCanvas.SetActive(false);
     }
-    public void HideMOTDButtonMethod(){
+
+    public void HideMOTDButtonMethod()
+    {
         userInfo.LastMoTDRead = true;
         MoTDCanvas.SetActive(false);
-        saveManager.Save();
+        SaveManager.Instance.Save();
     }
 
     public void GoToLevelSelectScene(){

@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-public abstract class EndLevelMenuModel : Model
+﻿public abstract class EndLevelMenuModel : Model
 {
-    protected SaveManager saveManager;
+    protected CollectibleData collectibleData => SaveManager.Instance.collectibleData;
 
     private int _newBones;
     public int NewBones
@@ -18,18 +16,12 @@ public abstract class EndLevelMenuModel : Model
         }
     }
 
-    private void Awake()
-    {
-        saveManager = Helper.NabSaveData().GetComponent<SaveManager>();
-        saveManager.Load();
-    }
-
     public virtual void ToLevelSelect()
     {
-        saveManager.collectibleData.HASBALL = false;
-        saveManager.Save();
+        collectibleData.HASBALL = false;
+        SaveManager.Instance.Save();
 
-        Time.timeScale = 1.0f; // TODO Drake: Consider a global utility for pause/resume
-        Helper.LoadToLevel(Levels.LevelSelect);
+        PauseUtility.Resume();
+        Levels.Load(Levels.LevelSelect);
     }
 }
