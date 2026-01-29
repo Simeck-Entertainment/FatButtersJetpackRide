@@ -44,7 +44,7 @@ public class InputDriver : MonoBehaviour
     [Header("Gamepad/Keyboard input variables")]
     //Keyboard variables
     [SerializeField] private float KeyboardRollOffset;
-    [System.NonSerialized] private float KeyboardSensitivity;
+    [SerializeField] private float KeyboardSensitivity;
 
     [System.NonSerialized] private bool KBCWPressed;
     [System.NonSerialized] private bool KBCCWPressed;
@@ -56,7 +56,7 @@ public class InputDriver : MonoBehaviour
     [SerializeField] private InputAction KBBoostAction;
     [Header("On Screen Control stuff")]
     [SerializeField] private float OSRollOffset;
-    [System.NonSerialized] private float OSRollSensitivity;
+    [SerializeField] private float OSRollSensitivity;
 
     [System.NonSerialized] private bool OSCWPressed;
     [System.NonSerialized] private bool OSCCWPressed;
