@@ -354,7 +354,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4600595185857230939, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 6213650166107539347, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 5532365187973511928, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 5894513801138621930, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 4467718338890643701, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 442716255165675290, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 8850732510044381293, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 3791484119639595485, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 3127037961922405084, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 6755328159781753837, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 4090673185567906224, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 1851529976702938097, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 8510777923563628520, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 8295131778119895322, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 5826861273603682137, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 2265214501510561304, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 4958887941429403154, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 2549851342104579953, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 471281561225683636, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 3729447540641932185, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 4472763652387784690, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 8594126885224180498, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 8352983866001960214, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 75669690155077065, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 5804411052276093509, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 5054502794555657897, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
+    - {fileID: 4942079732661507066, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 052c4b031fd9a2e4c910dad429279636, type: 3}
@@ -568,7 +595,7 @@ Light:
   m_BounceIntensity: 2
   m_ColorTemperature: 5485
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 9.1835e-41, y: 1.2519018e-36, z: 9.78048e-39, w: NaN}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0

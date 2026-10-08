@@ -177,7 +177,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 0.20.0'
+    - line: '|   bundleVersion: 0.21.0'
     - line: '|   preloadedAssets:'
     - line: '|   - {fileID: 11400000, guid: ed7e84776d799de4b9b47f946a0f1801, type:
         2}'
@@ -922,7 +922,7 @@ MonoBehaviour:
     - line: '|     ReservedCFE: UNITY_POST_PROCESSING_STACK_V2'
     - line: '|     Server: ENABLE_JSON_CATALOG'
     - line: '|     Stadia: UNITY_POST_PROCESSING_STACK_V2'
-    - line: '|     Standalone: UNITY_POST_PROCESSING_STACK_V2'
+    - line: '|     Standalone: UNITY_POST_PROCESSING_STACK_V2;STEAMWORKS_NET'
     - line: '|     VisionOS: UNITY_POST_PROCESSING_STACK_V2'
     - line: '|     WebGL: ENABLE_JSON_CATALOG;UNITY_POST_PROCESSING_STACK_V2'
     - line: '|     Windows Store Apps: ENABLE_JSON_CATALOG;UNITY_POST_PROCESSING_STACK_V2'
