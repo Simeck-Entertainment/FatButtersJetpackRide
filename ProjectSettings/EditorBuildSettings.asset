@@ -90,6 +90,8 @@ EditorBuildSettings:
     path: Assets/Scenes/puzzleLevels/GameOnExpoDemoLevel.unity
     guid: 4fa85f8cd0a451c4a96f487e9302b245
   m_configObjects:
+    Unity.Microsoft.GDK.Editor.Settings: {fileID: 11400000, guid: f05def016488c1d4eacbdf3e205c1e40, type: 2}
+    com.unity.adaptivePerformance.basic.provider_settings: {fileID: 11400000, guid: 382909d269143ea4c86e6b24fa49b26f, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 5e63bff7e81b86e4face721a51746c4d, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: fd04fd035b074a94788ee4d8ab92f4f2, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 8b0428dbab2e2f3489b0009f114c8620, type: 2}

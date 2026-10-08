@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: 23e515df13e30db478e3334761355045
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2762582578526884986
+    second: Fat_Butters_Skins_-_Stick_OButter_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,7 +150,29 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Fat_Butters_Skins_-_Stick_OButter_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1485
+        height: 1485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68be83818c559a9d0800000000000000
+      internalID: -2762582578526884986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []

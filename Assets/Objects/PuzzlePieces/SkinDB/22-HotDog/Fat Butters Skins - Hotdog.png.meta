@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: a8a7a2177674c2e4cbb540c5e91cb311
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -4461162248522545502
+    second: Fat Butters Skins - Hotdog_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,7 +150,29 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Fat Butters Skins - Hotdog_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1485
+        height: 1485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a64e6b3294c612c0800000000000000
+      internalID: -4461162248522545502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
