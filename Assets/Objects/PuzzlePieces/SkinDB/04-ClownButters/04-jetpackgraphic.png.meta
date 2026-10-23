@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: 17fa80c0017fbb749badc30385439a15
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 598448794743688232
+    second: 04-jetpackgraphic_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,7 +150,29 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 04-jetpackgraphic_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82c45f2120e1e4800800000000000000
+      internalID: 598448794743688232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []

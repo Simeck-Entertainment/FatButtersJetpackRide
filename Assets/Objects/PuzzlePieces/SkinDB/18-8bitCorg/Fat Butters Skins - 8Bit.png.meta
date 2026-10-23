@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: e0648f09de1019e4b8b12caa93889689
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2208940095974755678
+    second: Fat Butters Skins - 8Bit_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -147,7 +150,29 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Fat Butters Skins - 8Bit_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1485
+        height: 1485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5d41b6505bb7ae10800000000000000
+      internalID: 2208940095974755678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
