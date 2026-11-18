@@ -1885,11 +1885,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 13201c3c65ba14e418208d352e5c8cc7
-    m_Address: Assets/Objects/PuzzlePieces/prefabs/powerups/BoneHolder.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 132ed930e4ca54b46983985008b8245a
     m_Address: Assets/Objects/UI/Prefabs/Base Settings.prefab
     m_ReadOnly: 0
