@@ -1,4 +1,3 @@
-using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 
 public class ColorRandomizer: MonoBehaviour
