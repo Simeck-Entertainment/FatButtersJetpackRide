@@ -306,6 +306,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fb2c15ede9b5784b96b91ee36e77623
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/single-instance/tennisBall/tennisBall.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a4a47a7c0fd7fa848ae38ed08c26841e
     m_Address: Assets/Objects/PuzzlePieces/AssetModels/enemies/RumbaWithKnife/rumba_mat.mat
     m_ReadOnly: 0
