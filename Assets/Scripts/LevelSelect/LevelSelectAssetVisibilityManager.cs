@@ -107,7 +107,7 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
     {
         for (int i = 1; i < LevelButtons.Length; i++){
             LevelButtonIDHolder buttonData = LevelButtons[i].GetComponent<LevelButtonIDHolder>();
-            buttonData.SetButtonAesthetics(i, collectibleData.LevelBeaten[i], collectibleData.LevelBeaten[i - 1]);
+            buttonData.SetButtonAesthetics(i, collectibleData.LevelBeaten[i], collectibleData.LevelBeaten[i - 1], LevelProductionCompleted);
         }
     }
 
@@ -126,7 +126,7 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
         for (int i = 1; i < LevelPathHolders.Length; i++) //starting at 1 because 0 is always null.
         {
             MeshRenderer[] pathBones = LevelPathHolders[i].GetComponentsInChildren<MeshRenderer>();
-            if (collectibleData.LevelBeaten[i])
+            if (collectibleData.LevelBeaten[i] & i < LevelProductionCompleted)
             {
                 foreach (MeshRenderer pathBone in pathBones)
                 {
@@ -163,8 +163,11 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
 
     int GetIndexForFirstUnbeatenLevel()
     {
-        if(FindFirstFalseIndex(collectibleData.LevelBeaten) >= LevelProductionCompleted) return LevelProductionCompleted;
-        return FindFirstFalseIndex(collectibleData.LevelBeaten);
+        if(FindFirstFalseIndex(collectibleData.LevelBeaten) >= LevelProductionCompleted) {
+            return LevelProductionCompleted;
+        } else {
+            return FindFirstFalseIndex(collectibleData.LevelBeaten);
+        }
     }
 
     int FindFirstFalseIndex(bool[] LevelsComplete)
