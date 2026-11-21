@@ -4767,7 +4767,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &6492534063526092298
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4783,6 +4783,11 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4804,9 +4809,11 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4838,7 +4845,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1001 &5655073374073716618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4849,63 +4855,63 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 10.429721
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 10.429721
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 10.429721
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -78.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7834622
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.28140935
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.40912524
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.37364727
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -7.771
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 59.233
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -55.417
       objectReference: {fileID: 0}
     - target: {fileID: -4929363789341574723, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 43bfa92267d39dd41bc5d28cef0595e0, type: 2}
     - target: {fileID: 919132149155446097, guid: 23dd5c90e64c47743b7affe9ed19c5ca, type: 3}
       propertyPath: m_Name
-      value: LS_Pathbone
+      value: P18_LS_Pathbone_UPFB_V001_RSS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

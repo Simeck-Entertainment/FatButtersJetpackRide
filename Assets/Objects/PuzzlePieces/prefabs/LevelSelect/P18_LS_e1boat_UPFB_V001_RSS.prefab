@@ -124,4 +124,5 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 3eb2fab313466eb4a97abd14dd86d00c, type: 2}
   OgPos: {x: 99.48, y: -4.699982, z: 6.672623}
   SailedPos: {x: 225.7, y: -4.699982, z: 6.672623}
+  TriggerWhenLevelBeaten: 3
   sailTimeThreshold: 5

@@ -7,6 +7,7 @@ public class BoatSailOut : MonoBehaviour
     [SerializeField] CollectibleData data;
     [SerializeField] Vector3 OgPos;
     [SerializeField] Vector3 SailedPos;
+    [SerializeField] int TriggerWhenLevelBeaten;
     float sailTimeCounter;
     [SerializeField, Tooltip("Measured in seconds")] float sailTimeThreshold;
     bool doISail;
@@ -16,11 +17,11 @@ public class BoatSailOut : MonoBehaviour
         //The only time the boat sails is when it is appropriate to.
         sailTimeCounter = 0;
         doISail = false;
-        if(data.LevelBeaten[4] & !data.LevelBeaten[5]){
+        if(data.LevelBeaten[TriggerWhenLevelBeaten] & !data.LevelBeaten[TriggerWhenLevelBeaten+1]){
             doISail = true;
         }
 
-        if(data.LevelBeaten[5]){
+        if(data.LevelBeaten[TriggerWhenLevelBeaten+1]){
             transform.position = SailedPos;
         }
     }

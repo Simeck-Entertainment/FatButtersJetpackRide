@@ -12,7 +12,7 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
     [SerializeField, Tooltip("Measured in seconds")] float BoneTimerThreshold;
     [SerializeField] int firstUnbeatenLevel;
     [SerializeField] MeshRenderer[] PopInBones;
-
+    [SerializeField] public int LevelProductionCompleted;
     private float boneTimer = 0;
 
     [SerializeField] LevelSelectUIModel levelSelectUI;
@@ -163,6 +163,7 @@ public class LevelSelectAssetVisibilityManager : MonoBehaviour
 
     int GetIndexForFirstUnbeatenLevel()
     {
+        if(FindFirstFalseIndex(collectibleData.LevelBeaten) >= LevelProductionCompleted) return LevelProductionCompleted;
         return FindFirstFalseIndex(collectibleData.LevelBeaten);
     }
 
