@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Duplicate Asset Isolation
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Duplicate Asset Isolation
+  m_GUID: e13ac549634bf5246bb3a20d8e953be9
+  m_SerializeEntries:
+  - m_GUID: 08b8a63f9f6fcdb44b4ecce8ff4e1aa5
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/TexturesCom_SolarCells_2K_albedo.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c47725938aaf78449b05d5b47930e91
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/enemies/ScreamBubble/bubble_lips_texture.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e9d5a909a1f7e84882a534d0d11e49f
+    m_Address: Packages/com.unity.render-pipelines.universal/Shaders/AutodeskInteractive/AutodeskInteractive.shadergraph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0fa9aca141a7eeb429a446e57e5f223d
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/Bark3-2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16e6edc08fd0e8344aa2c22bf01c85dc
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/chmodRocket_occ.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e6c9e86728aa5b4f96e4b20f5c4071d
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/TexturesCom_AirDuctRectangular_1K_albedo.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ab7dc4b79f9d304494bfb5792d44bde
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/chmodCorgi_nor.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53183f2752bcde040a107e0d72b41296
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/TexturesCom_Asphalt10Cracked_2x2_1K_albedo.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b10f652e6674ae4f8c3aef08dc7e6a3
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/chmodRocket_base.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d15dda8d3efe7e4185ec62261067b4a
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/chmodCorgi_occ.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e6bbe8755195c84c86cb91106c64a71
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/enemies/ScreamBubble/bubble_eyebrow_alpha_texture.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f35faa6941b48e4a9a538410c31a307
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/TexturesCom_Metal_PipeRusted9_1.4x0.35_512_albedo.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 602d889b6f2626946812e7b61ce48b01
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/B04610_08_10.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61874c1cb5a8efd4eb9f3c70d91940d8
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/stars-png-634.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6af4c26b6e345c847929a7eee06befdd
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/enemies/ScreamBubble/bubble_eye_texture.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70fdfe7e3e43d5c40bb70ba465c6c5d4
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/TexturesCom_Concrete_Base3_1.5x1.5_512_albedo.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7cf5ac61ec6d0e9489ec44a9751ade1f
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/concrete_floor_normal.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 906cd3a5ced535a4a8b6696ca147c911
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/shelf_a.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ce6583935388804781e8f883a588852
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/chmodCorgi_base.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5d28b02fb2627442ab04901d5e442a0
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/shelf_n.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afd31462bdb48a448aef33dace735692
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/TexturesCom_WornMetal_512_albedo.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1a6b708fd5b5ee4e8a78d91420f936b
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/concrete_floor_albedo.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1bea5361a5b7b942a88620378af112e
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Misc/TexturesCom_Wall_BrickIndustrial4_3.25x3.25_512_albedo.tif
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3765c01f4d312741bb9baf97c72a574
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/chmodRocketBalls_base.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6dafded098e39047b4a62aa1dccc6bd
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/Cedar_branch_big.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcbb2e27d3770e040b595735bb25c71f
+    m_Address: Assets/Objects/PuzzlePieces/AssetModels/PreAlphaAssets/Textures/chmodRocketBalls_occ.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 688ce2d51185d19489a5c75bf2019ce5, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0e8463b5410c8b442a46be3c9eaa43be, type: 2}
+    - {fileID: 11400000, guid: 5a1e57440a9254e4bbd1aadee1fff715, type: 2}

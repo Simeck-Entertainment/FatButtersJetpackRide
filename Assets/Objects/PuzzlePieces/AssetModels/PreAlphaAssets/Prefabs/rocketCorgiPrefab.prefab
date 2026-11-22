@@ -86,10 +86,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6008152724435843207}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_LinearDamping: 1
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -230,19 +230,25 @@ MonoBehaviour:
   gbr2: {fileID: 0}
   borks: []
   CollidersAndTriggers: []
+  jetpackTransform: {fileID: 0}
   thrust: 0
+  jumpForce: 12
+  hurtJumpForce: 100
   maxFuel: 0
   tummy: 0
   maxTummy: 0
-  CollidersInJetpackKillZone: []
+  InJetpackKillZone: 0
+  thrusterRechargeDelay: 0
+  thrusterRechargeRate: 0
   KeyboardRollOffset: 0
   KeyboardSensitivity: 5
-  corgiTurned: 0
   walkDirection: 0
   slowWalkSpeed: 0
   mediumWalkSpeed: 0
   fastWalkSpeed: 0
-  GroundTouch: 0
+  SlowWalkMinAngle: 0
+  MediumWalkMinAngle: 0
+  FastWalkMinAngle: 0
   HarmfulTouch: 0
   HarmfulDamageAmount: 0
   HarmfulTouchObjectPosition: {x: 0, y: 0, z: 0}
@@ -255,9 +261,8 @@ MonoBehaviour:
   hasPermaBall: 0
   ballTimerMax: 600
   killThrustTriggerTouch: 0
-  OtherObjectTouch: 0
-  playerDirection: 1
   LowGravMode: 0
+  fallDelayThreshold: 0
 --- !u!114 &1337452942717703031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,8 +277,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputEnabled: 1
   deviceRoll: 0
-  KeyboardRollOffset: 0
-  KeyboardSensitivity: 0
+  motionControlSmoothing: 0.1
+  cameraRot: {fileID: 0}
+  KBCWPressed: 0
+  KBCCWPressed: 0
+  KBThrustPressed: 0
+  KBBoostPressed: 0
+  KBMinAngle: 0
+  KBMaxAngle: 0
+  KBAccelerationTimer: 0
+  KBMaxSpeedFrame: 0
   KBthrustAction:
     m_Name: K Bthrust
     m_Type: 0
@@ -283,6 +296,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+    m_Priority: 0
   KBCWAction:
     m_Name: KBCW
     m_Type: 0
@@ -292,6 +306,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+    m_Priority: 0
   KBCCWAction:
     m_Name: KBCCW
     m_Type: 0
@@ -301,6 +316,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+    m_Priority: 0
   KBBoostAction:
     m_Name: KB Boost
     m_Type: 0
@@ -310,8 +326,50 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  OSRollOffset: 0
-  OSRollSensitivity: 0
+    m_Priority: 0
+  TriggerActivationMinimum: 0
+  JoystickActivationMinimum: 0
+  GPAimVal: 0
+  GPThrustPressed: 0
+  GPBoostPressed: 0
+  GPThrustAction:
+    m_Name: GP Thrust
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dec2e2a5-66de-4a29-8f59-0bbd40b4e7de
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  GPAimAction:
+    m_Name: GP Aim
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dc1bd7a2-0028-49a4-901e-81e31543c9f2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  GPBoostAction:
+    m_Name: GP Boost
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f8fd7b21-0e05-447d-ad78-6c939f672c37
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  OnScreenControlsEnabled: 0
+  OSCAimAngle: 0
+  OSAccelSensitivity: 0
+  OSCWPressed: 0
+  OSCCWPressed: 0
+  OSThrustPressed: 0
+  OSBoostDelayThreshold: 0
+  OSBoostPressed: 0
   OSthrustAction:
     m_Name: O Sthrust
     m_Type: 0
@@ -329,6 +387,7 @@ MonoBehaviour:
       m_Action: O Sthrust
       m_Flags: 0
     m_Flags: 0
+    m_Priority: 0
   OSCWAction:
     m_Name: OSCW
     m_Type: 0
@@ -346,6 +405,7 @@ MonoBehaviour:
       m_Action: OSCW
       m_Flags: 0
     m_Flags: 0
+    m_Priority: 0
   OSCCWAction:
     m_Name: OSCCW
     m_Type: 0
@@ -363,6 +423,7 @@ MonoBehaviour:
       m_Action: OSCCW
       m_Flags: 0
     m_Flags: 0
+    m_Priority: 0
   OSBoostAction:
     m_Name: OS Boost
     m_Type: 0
@@ -372,6 +433,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+    m_Priority: 0
   GoThrust: 0
   GoCw: 0
   GoCcw: 0
@@ -417,14 +479,16 @@ MonoBehaviour:
   deathParticles: {fileID: 0}
   deathSound: {fileID: 0}
   chosenSkin: {fileID: 0}
-  butterySkinnedMeshRenderers: []
   borks: []
   Grrs: []
+  nonColoredMeshes: []
+  musicManager: {fileID: 0}
   leftPlus: {fileID: 0}
   rightPlus: {fileID: 0}
   leftMinus: {fileID: 0}
   rightMinus: {fileID: 0}
   nullParticleSystem: {fileID: 0}
+  powerupFlashingSpeed: 0.2
 --- !u!114 &1224633196630071953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,9 +1058,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7da35312114f64fac10c0302edd1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OGButtersTrans: {fileID: 6353153826282496573}
+  input: {fileID: 0}
   offset: 0
+  aimAngleSensitivity: 0
   affectAxis: 0
+  invert: 0
+  dynamicSensitivity: 0
 --- !u!4 &8572170444253535875 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7080829351655861458, guid: 32e06c143e0c7484cb855a01382931c0, type: 3}
@@ -1332,17 +1399,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 3
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
   m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!4 &4274355482411170169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6689017081008275652, guid: b84df62040f11bf4fbceedbdc32e87a6, type: 3}
@@ -1365,17 +1438,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 3
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
   m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1001 &8183714019198139993
 PrefabInstance:
   m_ObjectHideFlags: 0
