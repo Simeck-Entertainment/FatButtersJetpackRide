@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Video
   m_GUID: 3ae41f334a129644abf1bbe9dd84d580
-  m_SerializeEntries:
-  - m_GUID: bbed92322a460864384c0c83e447b483
-    m_Address: Assets/Objects/Video/Fbjrmarch2026teasertrailer.mp4
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 688ce2d51185d19489a5c75bf2019ce5, type: 2}
   m_SchemaSet:
